@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang>
+<html class="theme-next muse use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.9.0">
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -81,9 +81,9 @@
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="From OI To CS">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://ljt12138.github.io/index.html">
 <meta property="og:site_name" content="From OI To CS">
-<meta property="og:locale" content="default">
+<meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="From OI To CS">
 
@@ -101,7 +101,7 @@
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
       userId: '0',
-      author: 'Author'
+      author: '博主'
     },
     algolia: {
       applicationID: '',
@@ -115,7 +115,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/">
+  <link rel="canonical" href="http://ljt12138.github.io/">
 
 
 
@@ -133,7 +133,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
@@ -182,7 +182,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
-            Home
+            首页
           </a>
         </li>
       
@@ -192,7 +192,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
-            Archives
+            归档
           </a>
         </li>
       
@@ -229,7 +229,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/03/2019春操作系统大实验：Hyper-OS/">
+    <link itemprop="mainEntityOfPage" href="http://ljt12138.github.io/2019/08/03/2018-秋：编译原理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ljt12138">
@@ -248,7 +248,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/08/03/2019春操作系统大实验：Hyper-OS/" itemprop="url">2019春操作系统大实验：Hyper OS</a></h1>
+                <a class="post-title-link" href="/2019/08/03/2018-秋：编译原理/" itemprop="url">2018 秋：编译原理</a></h1>
         
 
         <div class="post-meta">
@@ -258,9 +258,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-03T17:23:50+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-03T21:26:11+08:00">
                 2019-08-03
               </time>
             
@@ -300,10 +300,160 @@
       
         
           
-            <h1 id="Hyper-OS-实验报告"><a href="#Hyper-OS-实验报告" class="headerlink" title="Hyper OS 实验报告"></a>Hyper OS 实验报告</h1><blockquote>
-<p>github: <a href="https://github.com/ljt12138/Hyper-OS/">https://github.com/ljt12138/Hyper-OS/</a></p>
+            <h2 id="课程介绍"><a href="#课程介绍" class="headerlink" title="课程介绍"></a>课程介绍</h2><p>编译原理课程的核心内容是编译器的原理和构造，前置课程包括形式语言与自动机、数理逻辑和数据结构，后续课程包括操作系统等。一方面，编译器和程序设计语言是大多数软件的基础，是数学理论应用于工程实践的典范；另一方面，编译器是重要的大型软件，可以展示许多软件工程中有用的技巧。</p>
+<p>一个完整的编译器一般包括多个部分：</p>
+<ul>
+<li><strong>词法分析：</strong>将字符流变为单词流，通常由文法分析器调用</li>
+<li><strong>文法分析：</strong>将单词流转化为更底层的中间表示，通常是抽象文法树（AST），但也可以直接变为三地址码（TAC）。文法分析通常利用形式语言与自动机中讨论的<strong>上下文无关语言（CFL）</strong>，利用下推自动机的若干近似来实现分析。常用的技术有 LL(1)、LR(1)、LALR(1) 等等。</li>
+<li><strong>类型检查和中间代码生成：</strong>对于静态类型语言来说，我们需要利用 AST 对代码做类型检查，并同时完成变量表的建立查询，生成更底层次的目标代码。事实上，这两步也可以整合在文法分析中。</li>
+<li><strong>代码优化：</strong>利用三地址码（TAC）可以做许多平台无关优化，例如提取公共子表达式，归纳变量提取等等。代码优化的有力工具是基于图论算法的数据流分析。</li>
+<li><strong>目标代码生成：</strong>由三地址码生成平台相关的目标代码。对于一般的堆栈-寄存器机来说，需要考虑寄存器分配和指令选择的问题。</li>
+</ul>
+<p>课程的主体部分在于文法分析，此外对于词法分析、类型检查、代码生成等均有讨论。</p>
+<h2 id="实验报告"><a href="#实验报告" class="headerlink" title="实验报告"></a>实验报告</h2><p>课程实验的主要内容是给面向对象的静态类型语言 Decaf 增加功能。</p>
+<ul>
+<li>PA1-A：Yacc 和 Lex 的使用，文法表示 <a href="/files/compiler-report/PA1-A.pdf">Report</a></li>
+<li>PA1-B：LL(1) 分析 <a href="/files/compiler-report/PA1-B.pdf">Report</a></li>
+<li>PA2：符号表和类型检查 <a href="/files/compiler-report/PA2.pdf">Report</a></li>
+<li>PA3：中间代码生成 <a href="/files/compiler-report/PA3.pdf">Report</a></li>
+<li>PA4：数据流分析 <a href="/files/compiler-report/PA4.pdf">Report</a></li>
+<li>PA5：寄存器选择 <a href="/files/compiler-report/PA5.pdf">Report</a></li>
+</ul>
+<h2 id="大实验：Cqq-解释器"><a href="#大实验：Cqq-解释器" class="headerlink" title="大实验：Cqq 解释器"></a>大实验：Cqq 解释器</h2><p>Cqq 是一个很小的 C++ 语言子集，事实上未来程序改 $\subseteq Cqq\subseteq C++$。由于当时写的比较匆忙，文件结构很混乱orz</p>
+<ul>
+<li>Github: <a href="https://github.com/ljt12138/Cqq-Project">https://github.com/ljt12138/Cqq-Project</a></li>
+<li><a href="/files/cqq-project/report.pdf">Report</a>，<a href="/files/cqq-project/slide.pptx">Slide</a></li>
+</ul>
+<h2 id="WC-2018-营员交流"><a href="#WC-2018-营员交流" class="headerlink" title="WC 2018 营员交流"></a>WC 2018 营员交流</h2><p>我、tqyaaaaang 和 WerkeyTom_FTD 在 WC 2018 营员交流中介绍了编译原理相关知识，由于时间所限讲述比较匆忙。<a href="/files/compiler-report/elephant.pptx">Slide</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+	<div>
+		
+	</div>
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://ljt12138.github.io/2019/08/03/2019-春操作系统大实验：Hyper-OS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ljt12138">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="From OI To CS">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/03/2019-春操作系统大实验：Hyper-OS/" itemprop="url">2019 春操作系统大实验：Hyper OS</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-03T17:23:50+08:00">
+                2019-08-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>Github：<a href="https://github.com/ljt12138/Hyper-OS/">https://github.com/ljt12138/Hyper-OS/</a></p>
+<p>中期答辩：<a href="/files/hyper-os/report1.pptx">Slide</a></p>
+<p>结题答辩：<a href="/files/hyper-os/report2.pptx">Slide</a></p>
 </blockquote>
-<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h4 id="实验目标"><a href="#实验目标" class="headerlink" title="实验目标"></a>实验目标</h4><p>操作系统是计算机专业的一门综合性课程。实现一个操作系统，不仅需要处理器体系结构、编译原理、汇编语言、算法与数据结构等计算机核心知识作为支撑，还需要很强的文档阅读能力和系统编程能力。正因如此，操作系统课程的难度较大，对于那些不是非常熟悉硬件的同学更是如此。</p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h3 id="实验目标"><a href="#实验目标" class="headerlink" title="实验目标"></a>实验目标</h3><p>操作系统是计算机专业的一门综合性课程。实现一个操作系统，不仅需要处理器体系结构、编译原理、汇编语言、算法与数据结构等计算机核心知识作为支撑，还需要很强的文档阅读能力和系统编程能力。正因如此，操作系统课程的难度较大，对于那些不是非常熟悉硬件的同学更是如此。</p>
 <p>另一方面，对于操作系统原理的教学和研究也经常会需要一个硬件无关的，足够简单的模拟环境。这样的模拟环境应当具有以下的特点：</p>
 <ol>
 <li><p>硬件无关：模拟环境应该反应 OS 协调进程工作的本质原理，屏蔽那些和具体硬件相关的细节问题。考虑以下两个情景。</p>
@@ -328,18 +478,16 @@
 <p>只有能够真实展示这些过程，才能完整展示 OS 在提供系统调用这一机制中的作用。</p>
 </li>
 </ol>
-<h4 id="实验描述"><a href="#实验描述" class="headerlink" title="实验描述"></a>实验描述</h4><p>基于这些目标，我们提出了 Hyper OS：一个运行在用户态，利用线程之间的通信和协调模拟 OS 调度的模拟操作系统。为了实现这个目标，我们解决的主要问题包括：</p>
+<h3 id="实验描述"><a href="#实验描述" class="headerlink" title="实验描述"></a>实验描述</h3><p>基于这些目标，我们提出了 Hyper OS：一个运行在用户态，利用线程之间的通信和协调模拟 OS 调度的模拟操作系统。为了实现这个目标，我们解决的主要问题包括：</p>
 <ol>
 <li>如何提供中断的支持：中断需要被正确的发送给“处理器”，并启动相应的中断处理例程，处理结束后需要返回用户态程序。</li>
 <li>如何提供进程的支持：进程是用户态程序，用户态程序的格式是怎样的？如何从用户态程序的手中抢夺控制权？</li>
 <li>如何提供内存的支持：内存要能和“处理器”通信，要能利用物理地址寻址，实现基本的读、写功能。</li>
 <li>如何提供外部设备支持：外部设备如何在 OS 的调度下与进程协调工作？</li>
 </ol>
-<h4 id="小组分工"><a href="#小组分工" class="headerlink" title="小组分工"></a>小组分工</h4><ul>
-<li><p>杨天祺同学实现了中断机制和外部设备的支持</p>
-</li>
-<li><p>李嘉图同学实现了操作系统内核和用户态程序</p>
-</li>
+<h3 id="小组分工"><a href="#小组分工" class="headerlink" title="小组分工"></a>小组分工</h3><ul>
+<li>杨天祺同学实现了中断机制和外部设备的支持</li>
+<li>李嘉图同学实现了操作系统内核和用户态程序</li>
 </ul>
 <h2 id="设计实现"><a href="#设计实现" class="headerlink" title="设计实现"></a>设计实现</h2><h3 id="基本方式"><a href="#基本方式" class="headerlink" title="基本方式"></a>基本方式</h3><p>Hyper OS 基于线程之间的通信和同步。在 Hyper OS 中，在任何时候，具有独立控制流的设备都拥有一个处于运行状态的线程作为模拟。这些设备包括：</p>
 <ul>
@@ -519,15 +667,15 @@ demo_proc -> shell: (wait finish)
 note over shell: sleeping->runable</pre>
 
 <h3 id="matrix"><a href="#matrix" class="headerlink" title="matrix"></a>matrix</h3><p><code>matrix</code> 是矩阵乘法的例子，用于测试利用 <code>handle</code> 访问内存使用二维数组（<code>handle&lt;handle&lt;int&gt;&gt;</code>）。在这样的例子中，二维数组事实上是指向一维数组指针的数组。</p>
-<h2 id="实验总结"><a href="#实验总结" class="headerlink" title="实验总结"></a>实验总结</h2><h4 id="实验结论"><a href="#实验结论" class="headerlink" title="实验结论"></a>实验结论</h4><p>Hyper OS 验证了在用户态利用线程间同步，模拟操作系统逻辑的可行性。Hyper OS 以软件模拟方式展示了操作系统调度进程协同工作的基本方法，在更抽象的层次上说明了 OS 的基本原理。我们认为，完整实现 Hyper OS 并解决遇到的问题大大加深了我们对中断机制、虚拟内存、进程调度的理解和认识，将实现 Hyper OS 这样的模拟平台作为学习 OS 的途径是行之有效的。</p>
+<h2 id="实验总结"><a href="#实验总结" class="headerlink" title="实验总结"></a>实验总结</h2><h3 id="实验结论"><a href="#实验结论" class="headerlink" title="实验结论"></a>实验结论</h3><p>Hyper OS 验证了在用户态利用线程间同步，模拟操作系统逻辑的可行性。Hyper OS 以软件模拟方式展示了操作系统调度进程协同工作的基本方法，在更抽象的层次上说明了 OS 的基本原理。我们认为，完整实现 Hyper OS 并解决遇到的问题大大加深了我们对中断机制、虚拟内存、进程调度的理解和认识，将实现 Hyper OS 这样的模拟平台作为学习 OS 的途径是行之有效的。</p>
 <p>另外，Hyper OS 也可以作为分析 OS 中实现的实验平台。由于逻辑简单、与平台无关的同时保证了一定的模拟程度和系统完整度，在 Hyper OS 上做实验是方便而有效的。</p>
-<h4 id="后续工作计划"><a href="#后续工作计划" class="headerlink" title="后续工作计划"></a>后续工作计划</h4><p>由于现在 Hyper OS 还相对简陋，我们仍然希望在 16 周最终答辩之前进行更多的工作。</p>
+<h3 id="后续工作计划"><a href="#后续工作计划" class="headerlink" title="后续工作计划"></a>后续工作计划</h3><p>由于现在 Hyper OS 还相对简陋，我们仍然希望在 16 周最终答辩之前进行更多的工作。</p>
 <ul>
 <li>实现更加方便的 screen。优化用户体验的同时，也更好模拟了输入输出设备与 OS 的协同工作；</li>
 <li>实现简易的文件系统。文件系统是 OS 重要的知识点，实现文件系统会让 Hyper OS 的完整性大大增强。</li>
 <li>编写更详细的文档。由于 Hyper OS 为了模拟硬件使用了一些特殊的同步技巧，有必要编写文档来提升代码的可读性。</li>
 </ul>
-<h4 id="未来展望"><a href="#未来展望" class="headerlink" title="未来展望"></a>未来展望</h4><p>我们认为，对于硬件基础比较差（如外系对 OS 感兴趣的同学，今后的高三同学或本科低年级同学）或没有时间独立完成 OS 编写的同学，相比于完成 ucore 实验来说，完整的实现类似 Hyper OS 这样的模拟环境会对理解 OS 原理更有帮助。如果能够将任务划分更精细，配合更加详细的说明文档，也许可以作为替代 ucore lab 的一种新的实验选项。</p>
+<h3 id="未来展望"><a href="#未来展望" class="headerlink" title="未来展望"></a>未来展望</h3><p>我们认为，对于硬件基础比较差（如外系对 OS 感兴趣的同学，今后的高三同学或本科低年级同学）或没有时间独立完成 OS 编写的同学，相比于完成 ucore 实验来说，完整的实现类似 Hyper OS 这样的模拟环境会对理解 OS 原理更有帮助。如果能够将任务划分更精细，配合更加详细的说明文档，也许可以作为替代 ucore lab 的一种新的实验选项。</p>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ol>
 <li>Remzi H. Arpaci-Dusseau and Andrea C. Arpaci-Dusseau. Operating Systems: Three Easy Pieces. 2018. </li>
 <li>Randal E. Bryant and David R. O’Hallaron. Computer Systems: A Programmer’s Perspective. 2016.</li>
@@ -542,6 +690,10 @@ note over shell: sleeping->runable</pre>
     
 
     
+
+	<div>
+		
+	</div>
 
     
 
@@ -613,8 +765,8 @@ note over shell: sleeping->runable</pre>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">1</span>
-                  <span class="site-state-item-name">posts</span>
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">日志</span>
                 </a>
               </div>
             
@@ -626,8 +778,8 @@ note over shell: sleeping->runable</pre>
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">3</span>
-                  <span class="site-state-item-name">tags</span>
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
                 
               </div>
             
@@ -673,7 +825,7 @@ note over shell: sleeping->runable</pre>
 </div>
 
 
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
 
@@ -681,7 +833,7 @@ note over shell: sleeping->runable</pre>
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
 
 
 
