@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="From OI To CS">
 <meta property="og:description" content="Github：https://github.com/ljt12138/Hyper-OS/ 中期答辩：Slide 结题答辩：Slide  概述实验目标操作系统是计算机专业的一门综合性课程。实现一个操作系统，不仅需要处理器体系结构、编译原理、汇编语言、算法与数据结构等计算机核心知识作为支撑，还需要很强的文档阅读能力和系统编程能力。正因如此，操作系统课程的难度较大，对于那些不是非常熟悉硬件的同学更是如">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-03T14:47:47.317Z">
+<meta property="og:updated_time" content="2019-08-06T13:27:54.218Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2019 春操作系统大实验：Hyper OS">
 <meta name="twitter:description" content="Github：https://github.com/ljt12138/Hyper-OS/ 中期答辩：Slide 结题答辩：Slide  概述实验目标操作系统是计算机专业的一门综合性课程。实现一个操作系统，不仅需要处理器体系结构、编译原理、汇编语言、算法与数据结构等计算机核心知识作为支撑，还需要很强的文档阅读能力和系统编程能力。正因如此，操作系统课程的难度较大，对于那些不是非常熟悉硬件的同学更是如">
@@ -306,6 +306,7 @@
 <p>结题答辩：<a href="/files/hyper-os/report2.pptx">Slide</a></p>
 </blockquote>
 <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h3 id="实验目标"><a href="#实验目标" class="headerlink" title="实验目标"></a>实验目标</h3><p>操作系统是计算机专业的一门综合性课程。实现一个操作系统，不仅需要处理器体系结构、编译原理、汇编语言、算法与数据结构等计算机核心知识作为支撑，还需要很强的文档阅读能力和系统编程能力。正因如此，操作系统课程的难度较大，对于那些不是非常熟悉硬件的同学更是如此。</p>
+<a id="more"></a>
 <p>另一方面，对于操作系统原理的教学和研究也经常会需要一个硬件无关的，足够简单的模拟环境。这样的模拟环境应当具有以下的特点：</p>
 <ol>
 <li><p>硬件无关：模拟环境应该反应 OS 协调进程工作的本质原理，屏蔽那些和具体硬件相关的细节问题。考虑以下两个情景。</p>
@@ -681,7 +682,7 @@ note over shell: sleeping->runable</pre>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -694,7 +695,7 @@ note over shell: sleeping->runable</pre>
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
@@ -883,7 +884,7 @@ note over shell: sleeping->runable</pre>
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
 
 
 
@@ -936,6 +937,28 @@ note over shell: sleeping->runable</pre>
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
 
   
 
