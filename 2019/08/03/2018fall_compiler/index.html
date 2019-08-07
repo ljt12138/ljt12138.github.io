@@ -83,7 +83,7 @@
 <meta name="keywords" content="THU-Courses">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2018 秋：编译原理">
-<meta property="og:url" content="http://ljt12138.github.io/2019/08/03/2018-秋：编译原理/index.html">
+<meta property="og:url" content="http://ljt12138.github.io/2019/08/03/2018fall_compiler/index.html">
 <meta property="og:site_name" content="From OI To CS">
 <meta property="og:description" content="课程介绍编译原理课程的核心内容是编译器的原理和构造，前置课程包括形式语言与自动机、数理逻辑和数据结构，后续课程包括操作系统等。一方面，编译器和程序设计语言是大多数软件的基础，是数学理论应用于工程实践的典范；另一方面，编译器是重要的大型软件，可以展示许多软件工程中有用的技巧。">
 <meta property="og:locale" content="zh-Hans">
@@ -120,7 +120,7 @@
 
 
 
-  <link rel="canonical" href="http://ljt12138.github.io/2019/08/03/2018-秋：编译原理/">
+  <link rel="canonical" href="http://ljt12138.github.io/2019/08/03/2018fall_compiler/">
 
 
 
@@ -233,7 +233,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ljt12138.github.io/2019/08/03/2018-秋：编译原理/">
+    <link itemprop="mainEntityOfPage" href="http://ljt12138.github.io/2019/08/03/2018fall_compiler/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ljt12138">
@@ -281,8 +281,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/08/03/2018-秋：编译原理/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count gitment-comments-count" data-xid="/2019/08/03/2018-秋：编译原理/" itemprop="commentsCount"></span>
+                <a href="/2019/08/03/2018fall_compiler/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2019/08/03/2018fall_compiler/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -354,10 +354,10 @@
   <!-- JS库 sweetalert 可修改路径 -->
   <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <p><span>本文标题:</span><a href="/2019/08/03/2018-秋：编译原理/">2018 秋：编译原理</a></p>
+  <p><span>本文标题:</span><a href="/2019/08/03/2018fall_compiler/">2018 秋：编译原理</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 ljt12138 的个人博客">ljt12138</a></p>
-  <p><span>原始链接:</span><a href="/2019/08/03/2018-秋：编译原理/" title="2018 秋：编译原理">http://ljt12138.github.io/2019/08/03/2018-秋：编译原理/</a>
-    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://ljt12138.github.io/2019/08/03/2018-秋：编译原理/" aria-label="复制成功！"></i></span>
+  <p><span>原始链接:</span><a href="/2019/08/03/2018fall_compiler/" title="2018 秋：编译原理">http://ljt12138.github.io/2019/08/03/2018fall_compiler/</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://ljt12138.github.io/2019/08/03/2018fall_compiler/" aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
 </div>
@@ -400,7 +400,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/03/2019-春操作系统大实验：Hyper-OS/" rel="next" title="2019 春操作系统大实验：Hyper OS">
+              <a href="/2019/08/03/2019spring_hyper/" rel="next" title="2019 春操作系统大实验：Hyper OS">
                 <i class="fa fa-chevron-left"></i> 2019 春操作系统大实验：Hyper OS
               </a>
             
@@ -410,7 +410,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/08/05/页面置换算法和竞争性分析/" rel="prev" title="页面置换算法和竞争性分析">
+              <a href="/2019/08/05/page_and_competitive/" rel="prev" title="页面置换算法和竞争性分析">
                 页面置换算法和竞争性分析 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -444,7 +444,8 @@
   
     <div class="comments" id="comments">
       
-        <div id="gitment-container"></div>
+        <div onclick="showGitment()" id="gitment-display-button">显示 Gitment 评论</div>
+        <div id="gitment-container" style="display:none"></div>
       
     </div>
 
@@ -791,7 +792,11 @@
       }
 
       
-      renderGitment();
+      function showGitment(){
+        document.getElementById("gitment-display-button").style.display = "none";
+        document.getElementById("gitment-container").style.display = "block";
+        renderGitment();
+      }
       
       </script>
     

@@ -83,7 +83,7 @@
 <meta name="keywords" content="THU-Courses">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2019 春操作系统大实验：Hyper OS">
-<meta property="og:url" content="http://ljt12138.github.io/2019/08/03/2019-春操作系统大实验：Hyper-OS/index.html">
+<meta property="og:url" content="http://ljt12138.github.io/2019/08/03/2019spring_hyper/index.html">
 <meta property="og:site_name" content="From OI To CS">
 <meta property="og:description" content="Github：https://github.com/ljt12138/Hyper-OS/ 中期答辩：Slide 结题答辩：Slide  概述实验目标操作系统是计算机专业的一门综合性课程。实现一个操作系统，不仅需要处理器体系结构、编译原理、汇编语言、算法与数据结构等计算机核心知识作为支撑，还需要很强的文档阅读能力和系统编程能力。正因如此，操作系统课程的难度较大，对于那些不是非常熟悉硬件的同学更是如">
 <meta property="og:locale" content="zh-Hans">
@@ -120,7 +120,7 @@
 
 
 
-  <link rel="canonical" href="http://ljt12138.github.io/2019/08/03/2019-春操作系统大实验：Hyper-OS/">
+  <link rel="canonical" href="http://ljt12138.github.io/2019/08/03/2019spring_hyper/">
 
 
 
@@ -233,7 +233,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ljt12138.github.io/2019/08/03/2019-春操作系统大实验：Hyper-OS/">
+    <link itemprop="mainEntityOfPage" href="http://ljt12138.github.io/2019/08/03/2019spring_hyper/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ljt12138">
@@ -281,8 +281,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/08/03/2019-春操作系统大实验：Hyper-OS/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count gitment-comments-count" data-xid="/2019/08/03/2019-春操作系统大实验：Hyper-OS/" itemprop="commentsCount"></span>
+                <a href="/2019/08/03/2019spring_hyper/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2019/08/03/2019spring_hyper/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -561,10 +561,10 @@ note over shell: sleeping->runable</pre>
   <!-- JS库 sweetalert 可修改路径 -->
   <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <p><span>本文标题:</span><a href="/2019/08/03/2019-春操作系统大实验：Hyper-OS/">2019 春操作系统大实验：Hyper OS</a></p>
+  <p><span>本文标题:</span><a href="/2019/08/03/2019spring_hyper/">2019 春操作系统大实验：Hyper OS</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 ljt12138 的个人博客">ljt12138</a></p>
-  <p><span>原始链接:</span><a href="/2019/08/03/2019-春操作系统大实验：Hyper-OS/" title="2019 春操作系统大实验：Hyper OS">http://ljt12138.github.io/2019/08/03/2019-春操作系统大实验：Hyper-OS/</a>
-    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://ljt12138.github.io/2019/08/03/2019-春操作系统大实验：Hyper-OS/" aria-label="复制成功！"></i></span>
+  <p><span>原始链接:</span><a href="/2019/08/03/2019spring_hyper/" title="2019 春操作系统大实验：Hyper OS">http://ljt12138.github.io/2019/08/03/2019spring_hyper/</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://ljt12138.github.io/2019/08/03/2019spring_hyper/" aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
 </div>
@@ -613,7 +613,7 @@ note over shell: sleeping->runable</pre>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/08/03/2018-秋：编译原理/" rel="prev" title="2018 秋：编译原理">
+              <a href="/2019/08/03/2018fall_compiler/" rel="prev" title="2018 秋：编译原理">
                 2018 秋：编译原理 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -647,7 +647,8 @@ note over shell: sleeping->runable</pre>
   
     <div class="comments" id="comments">
       
-        <div id="gitment-container"></div>
+        <div onclick="showGitment()" id="gitment-display-button">显示 Gitment 评论</div>
+        <div id="gitment-container" style="display:none"></div>
       
     </div>
 
@@ -994,7 +995,11 @@ note over shell: sleeping->runable</pre>
       }
 
       
-      renderGitment();
+      function showGitment(){
+        document.getElementById("gitment-display-button").style.display = "none";
+        document.getElementById("gitment-container").style.display = "block";
+        renderGitment();
+      }
       
       </script>
     
