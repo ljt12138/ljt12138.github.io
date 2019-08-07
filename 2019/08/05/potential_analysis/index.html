@@ -613,12 +613,7 @@ T \le \hat c + \frac{1}{m}\max\Phi = O(\log n)</script><p>只需 $m\ge n$。</p>
           
 
   
-    <div class="comments" id="comments">
-      
-        <div onclick="showGitment()" id="gitment-display-button">显示 Gitment 评论</div>
-        <div id="gitment-container" style="display:none"></div>
-      
-    </div>
+    <div id="gitalk-container"></div>
 
   
 
@@ -932,51 +927,25 @@ T \le \hat c + \frac{1}{m}\max\Phi = O(\log n)</script><p>只需 $m\ge n$。</p>
 
 
 
-<!-- LOCAL: You can save these files to your site and update links -->
-    
-        
-        <!-- <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css"> -->
-        <!-- <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script> -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/default.css">
-        <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.js"></script>
-    
-<!-- END LOCAL -->
-
-    
-
-    
-      <script type="text/javascript">
-      function renderGitment(){
-        var gitment = new Gitment({
-            id: window.location.pathname, 
-            owner: 'ljt12138',
-            repo: 'ljt12138.github.io',
-            
-            oauth: {
-            
-            
-                client_secret: '907b9345301ee9d44b411a1a3c54917684471802',
-            
-                client_id: '023a14ecb0d9640c78ae'
-            }});
-        gitment.render('gitment-container');
-      }
-
-      
-      function showGitment(){
-        document.getElementById("gitment-display-button").style.display = "none";
-        document.getElementById("gitment-container").style.display = "block";
-        renderGitment();
-      }
-      
-      </script>
-    
 
 
 
 
 
-
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: '023a14ecb0d9640c78ae',
+          clientSecret: '907b9345301ee9d44b411a1a3c54917684471802',
+          repo: 'ljt12138.github.io',
+          owner: 'ljt12138',
+          admin: ['ljt12138'],
+          id: location.pathname,
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')           
+       </script>
 
   
 
