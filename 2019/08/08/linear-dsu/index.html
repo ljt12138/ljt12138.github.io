@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="THU-Courses,">
+  <meta name="keywords" content="Algorithm-Analysis,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="竞争性分析竞争性分析（Competitive Analysis）是分析在线算法的有用技术。对于在线算法 $A$，设 $C_A(S)$ 表示算法 $A$ 在输入序列 $S$ 上的开销。如果存在 $k$ 对于任意的序列 $S$ 都满足  C_A(S) \le k\times OPT(S) + O(1)其中 $OPT(S)$ 是离线最优算法的开销，那么称算法 $A$ 是 $k$-Competitive">
-<meta name="keywords" content="THU-Courses">
+<meta name="description" content="Stage0某天深夜水群的时候给小朋友普及 Tarjan 算法求 LCA 的时间复杂度，被老鸽们指正应当是 $O(n+q)$ 而非$O(n\alpha(n)+q)$。最近阅读了一下 wiki 上指出的论文 https://core.ac.uk/download/pdf/82125836.pdf 学习了一下。 先放结论：RMQ 问题和 LCA 问题的最优复杂度都是 $O(n)-O(1)$ 的，线性复">
+<meta name="keywords" content="Algorithm-Analysis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="页面置换算法和竞争性分析">
-<meta property="og:url" content="http://ljt12138.github.io/2019/08/05/page_and_competitive/index.html">
+<meta property="og:title" content="LCA 标准算法和树上线性并查集">
+<meta property="og:url" content="http://ljt12138.github.io/2019/08/08/linear-dsu/index.html">
 <meta property="og:site_name" content="From OI To CS">
-<meta property="og:description" content="竞争性分析竞争性分析（Competitive Analysis）是分析在线算法的有用技术。对于在线算法 $A$，设 $C_A(S)$ 表示算法 $A$ 在输入序列 $S$ 上的开销。如果存在 $k$ 对于任意的序列 $S$ 都满足  C_A(S) \le k\times OPT(S) + O(1)其中 $OPT(S)$ 是离线最优算法的开销，那么称算法 $A$ 是 $k$-Competitive">
+<meta property="og:description" content="Stage0某天深夜水群的时候给小朋友普及 Tarjan 算法求 LCA 的时间复杂度，被老鸽们指正应当是 $O(n+q)$ 而非$O(n\alpha(n)+q)$。最近阅读了一下 wiki 上指出的论文 https://core.ac.uk/download/pdf/82125836.pdf 学习了一下。 先放结论：RMQ 问题和 LCA 问题的最优复杂度都是 $O(n)-O(1)$ 的，线性复">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-06T13:28:21.670Z">
+<meta property="og:updated_time" content="2019-08-08T09:45:01.753Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="页面置换算法和竞争性分析">
-<meta name="twitter:description" content="竞争性分析竞争性分析（Competitive Analysis）是分析在线算法的有用技术。对于在线算法 $A$，设 $C_A(S)$ 表示算法 $A$ 在输入序列 $S$ 上的开销。如果存在 $k$ 对于任意的序列 $S$ 都满足  C_A(S) \le k\times OPT(S) + O(1)其中 $OPT(S)$ 是离线最优算法的开销，那么称算法 $A$ 是 $k$-Competitive">
+<meta name="twitter:title" content="LCA 标准算法和树上线性并查集">
+<meta name="twitter:description" content="Stage0某天深夜水群的时候给小朋友普及 Tarjan 算法求 LCA 的时间复杂度，被老鸽们指正应当是 $O(n+q)$ 而非$O(n\alpha(n)+q)$。最近阅读了一下 wiki 上指出的论文 https://core.ac.uk/download/pdf/82125836.pdf 学习了一下。 先放结论：RMQ 问题和 LCA 问题的最优复杂度都是 $O(n)-O(1)$ 的，线性复">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://ljt12138.github.io/2019/08/05/page_and_competitive/">
+  <link rel="canonical" href="http://ljt12138.github.io/2019/08/08/linear-dsu/">
 
 
 
 
 
-  <title>页面置换算法和竞争性分析 | From OI To CS</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>LCA 标准算法和树上线性并查集 | From OI To CS</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -233,7 +233,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ljt12138.github.io/2019/08/05/page_and_competitive/">
+    <link itemprop="mainEntityOfPage" href="http://ljt12138.github.io/2019/08/08/linear-dsu/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ljt12138">
@@ -250,7 +250,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">页面置换算法和竞争性分析</h1>
+          <h1 class="post-title" itemprop="name headline">LCA 标准算法和树上线性并查集</h1>
         
 
         <div class="post-meta">
@@ -262,8 +262,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-05T08:48:57+08:00">
-                2019-08-05
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-08T09:20:52+08:00">
+                2019-08-08
               </time>
             
 
@@ -300,16 +300,48 @@
       
 
       
-        <h1 id="竞争性分析"><a href="#竞争性分析" class="headerlink" title="竞争性分析"></a>竞争性分析</h1><p>竞争性分析（Competitive Analysis）是分析在线算法的有用技术。对于在线算法 $A$，设 $C_A(S)$ 表示算法 $A$ 在输入序列 $S$ 上的开销。如果存在 $k$ 对于任意的序列 $S$ 都满足</p>
-<script type="math/tex; mode=display">
-C_A(S) \le k\times OPT(S) + O(1)</script><p>其中 $OPT(S)$ 是离线最优算法的开销，那么称算法 $A$ 是 $k$-Competitive 的。</p>
+        <h2 id="Stage0"><a href="#Stage0" class="headerlink" title="Stage0"></a>Stage0</h2><p>某天深夜水群的时候给小朋友普及 Tarjan 算法求 LCA 的时间复杂度，被老鸽们指正应当是 $O(n+q)$ 而非$O(n\alpha(n)+q)$。最近阅读了一下 wiki 上指出的论文 <a href="https://core.ac.uk/download/pdf/82125836.pdf">https://core.ac.uk/download/pdf/82125836.pdf</a> 学习了一下。</p>
+<p>先放结论：RMQ 问题和 LCA 问题的最优复杂度都是 $O(n)-O(1)$ 的，线性复杂度的 Tarjan 需要做一些操作。</p>
 <a id="more"></a>
-<h1 id="页面置换算法"><a href="#页面置换算法" class="headerlink" title="页面置换算法"></a>页面置换算法</h1><p>在 OS 课前期调查中我们简要调查了页面置换算法的内容。</p>
-<ul>
-<li>写到最后肝不下去的 Report：<a href="/files/page-replacement/page_doc.pdf">page_doc.pdf</a></li>
-<li>和陈渝老师交流的 Slide：<a href="/files/page-replacement/slide.pdf">slide.pdf</a></li>
-<li>在 APIO2019 的交流 ppt：<a href="/files/paging.pptx">paging.pptx</a></li>
-</ul>
+<h2 id="Stage1-RMQ标准算法"><a href="#Stage1-RMQ标准算法" class="headerlink" title="Stage1 : RMQ标准算法"></a>Stage1 : RMQ标准算法</h2><p>通常我们所说的 RMQ 问题，即区间最值问题被描述为：给定一个数组和若干询问，每次询问一段区间中最小值/最大值。我们常常使用ST表或线段树来解决这样的问题，复杂度分别是 $O(n\log n)-O(1)$ 和 $O(n)-O(\log n)$。$O(f(n))-O(g(n))$ 表示预处理时间复杂度为 $O(f(n))$，每次询问时间复杂度为 $O(g(n))$。事实上，存在 $O(n)-O(1)$ 的RMQ算法，这样的算法通常称为 RMQ 标准算法。</p>
+<p>RMQ 标准算法有三个步骤:</p>
+<ol>
+<li>建立序列的笛卡尔树，将 RMQ 问题转化成 LCA 问题</li>
+<li>通过树的欧拉序列，将 LCA 问题转化为 ±1 RMQ 问题</li>
+<li>通过分块 ST 表解决 ±1 RMQ 问题</li>
+</ol>
+<p>为了方便，我们之后所有的讨论都为求区间最小值。</p>
+<h3 id="建立笛卡尔树"><a href="#建立笛卡尔树" class="headerlink" title="建立笛卡尔树"></a>建立笛卡尔树</h3><p>序列的笛卡尔树被定义为：最小值所在的位置作为根，其左侧区间的笛卡尔树作为左孩子，右侧区间的笛卡尔树作为右孩子的一棵树。假设我们拥有了一个序列的笛卡尔树，一个很明显的自顶向下寻找 $[u, v]$ 区间最小值的算法如下：</p>
+<ol>
+<li>如果第一个点在当前节点左侧，第二个点在当前节点右侧，则根节点就是区间最小值</li>
+<li>如果在同一侧，则递归到该侧查询</li>
+</ol>
+<p>我们事实上是在求$u,v$在笛卡尔树上的LCA。那么，$[u,v]$ 之间的区间最小值的位置，就是 $u, v$ 在笛卡尔树上 LCA 所表示的位置。</p>
+<p>笛卡尔树可以被线性的建立。我们每次在序列右端新增一个节点，并维护笛卡尔树最右端的点 $rm$。对于每个节点 $u$，我们维护其父亲 $fa[u]$ 和其左右儿子 $lc[u], rc[u]$。新增一个节点 $nd$ 时，我们将其设为 $rm$ 的右孩子。之后，利用平衡树的旋转操作，不断向上旋转，直到 $nd$ 的父亲的值比其小为止，最后将 $rm$ 设为 $nd$。由于将 $nd$ 向上旋转不会破坏序列的左右顺序，也不会破话除 $nd, fa[nd]$ 两个节点之外父子的大小关系，最终得到的一定是原序列合法的笛卡尔树。</p>
+<p>我们称 $nd, rc[nd], rc[rc[nd]], …$ 为笛卡尔树最右端的链，由于最右端的链长每次最多增加 $1$，而每次向上旋转会使得其长度减小 $1$，那么旋转的总次数是 $O(n)$ 的，因而建立笛卡尔树的复杂度也是 $O(n)$ 的。</p>
+<h3 id="转化为-±1-RMQ-问题"><a href="#转化为-±1-RMQ-问题" class="headerlink" title="转化为 ±1 RMQ 问题"></a>转化为 ±1 RMQ 问题</h3><p>一个常见的求 LCA 的算法是转而求解树的欧拉序列上的 RMQ 问题。所谓欧拉序列，就是对树做dfs，每当访问一条边 $(u,v)$ 时，就在序列上加入 $v$。特别的，序列上一开始只有根节点。设每个节点 $nd$ 出现的第一个位置为 $pos[nd]$，那么，两个节点 $u, v$ 的 LCA，就是 $[pos[u], pos[v]]$ 中最浅的节点。</p>
+<p>欧拉序列良好的性质在于，任何两个相邻元素之间深度相差必然为 $1$。那么问题便被转化为了，给定一个序列，任意两个元素之间相差为 $1$，并给定若干个区间，求区间内最小的数。</p>
+<h3 id="±1-RMQ问题的线性解法"><a href="#±1-RMQ问题的线性解法" class="headerlink" title="±1 RMQ问题的线性解法"></a>±1 RMQ问题的线性解法</h3><p>线性解决 ±1 RMQ 问题的关键在于，由于相邻两个元素之差为 $1$，那么长度为 $n$ 的本质不同的数列只有 $2^n$ 个。</p>
+<p>考虑将序列按照长度为 $\frac{\log(n)}{2}$ 分段，我们可以认为 $\log(n)\le w$，$w$ 是计算机的字长（假设我们在随机储存器计算模型下）。长度为 $\frac{\log(n)}{2}$ 的本质不同的数列只有 $O(\sqrt{n})$ 个，我们可以枚举所有可能的情况，并枚举左右端点。这可以在 $O(\sqrt{n}\log^2(n))$ 的时间复杂度内完成。一个数列长度为 $n$ 的数列可以用二进制串编码，其第 $j$ 位为 $[a<em>j &lt; a</em>{j+1}]$。</p>
+<p>对于分成的 $O\left(\frac{n}{\log(n)}\right)$ 段，使用 ST 表维护区间最小值。这样可以做到 $O(n)$ 时间的预处理和 $O(1)$ 时间的询问。</p>
+<p>考虑一个区间询问 $[u, v]$，可以看成一些整块和一些零散部分。对于整块，可以用 ST 表上 $O(1)$ 询问最小值；对于零散部分，通过查表求出答案。这样，总共的询问时间复杂度是 $O(1)$ 的，而所有预处理的复杂度都是 $O(n)$ 的。因此，我们给出了 $O(n)-O(1)$ 求解一般 RMQ 问题的解法。</p>
+<h2 id="Stage2-线性树上并查集"><a href="#Stage2-线性树上并查集" class="headerlink" title="Stage2 : 线性树上并查集"></a>Stage2 : 线性树上并查集</h2><p>将 Tarjan 优化到线性的技术来源于线性树上并查集。树上并查集是并查集的一个特殊情况：给定一棵树，每次操作形如<strong>将一个节点合并到父亲</strong>，每次询问形如查询一个点已合并的祖先。</p>
+<p>其一个更特殊的情景是当树退化成序列的情景：例如经典题目《花神游历各国》<a href="https://www.lydsy.com/JudgeOnline/problem.php?id=3211">https://www.lydsy.com/JudgeOnline/problem.php?id=3211</a> 的一个做法是利用并查集维护向右下一个不是$1$的元素。这可以看成一个以最右端节点为根的链上的并查集。</p>
+<p>树上线性并查集的做法分为三步：</p>
+<ol>
+<li>将树分为大小为 $O(b)$ 的块，且块的个数是 $O(n/b)$ 的</li>
+<li>对于每种本质不同的块的本质不同的状态，预处理每个点的答案</li>
+<li>对块间维护并查集</li>
+</ol>
+<h3 id="将树分块"><a href="#将树分块" class="headerlink" title="将树分块"></a>将树分块</h3><p>正如题目《王室联邦》<a href="https://www.lydsy.com/JudgeOnline/problem.php?id=1086">https://www.lydsy.com/JudgeOnline/problem.php?id=1086</a> 中指出，我们可以对树在线性时间内分块，使得每一个块的大小在 $[b, 3b]$ 之间，且每一个块有一个“根”。满足每个块 $B$ 都与其根联通，且 $B$ 在其根的子树内。</p>
+<p>使用一个 dfs 过程可以将树分块。在 dfs 所有子树后，我们将子树中剩下的节点（$\le b$ 个元素的零散块）合并，剩下至多一个零散块。这样可以保证，除了根节点可能有一个大小为 $2b &lt; size\le 3b$ 的块，其他的块大小都在 $[b, 2b]$ 之间。</p>
+<h3 id="预处理"><a href="#预处理" class="headerlink" title="预处理"></a>预处理</h3><p>考虑本质不同的树至多有多少个，一棵树可以被父亲数组 $parent[nd]$ 唯一确定，而 $parent$ 数组可以被编码到长度 $(b-1)\times \log b$，那么本质不同的树的上界就有 $2^{(b-1)\log b}$ 种。对于每种本质不同的树，每一个节点可以被操作过，也可以没有被操作过，本质不同的状态有 $2^b$ 个，那么每种本质不同的状态中每个节点的答案一共有：</p>
+<script type="math/tex; mode=display">
+2^{(b-1)\log b}\times 2^b\times b</script><p>如果我们取 $b=\log\log n$，那么上式是 $O(n)$ 的。</p>
+<h3 id="对块间维护并查集"><a href="#对块间维护并查集" class="headerlink" title="对块间维护并查集"></a>对块间维护并查集</h3><p>我们对块间，即所有的“根”维护并查集。由于并查集的节点数只有 $O(n/b)$，当我们取 $b=\log\log n$ 时，总复杂度是 $O(n/b\alpha(n)+q)=O(n+q)$ 的。</p>
+<p>对于一个将节点合并到父亲的操作：可以 $O(1)$ 修改块状态完成。</p>
+<p>对于一个查询操作：如果当前块内已经合并到块的根了，向上查询。如果一个节点是某个块的根且合并到了其父亲，使用一个并查集合并上去。</p>
+<p>这样，我们就在 $O(n)-O(1)$ 的时间复杂度内解决了树上并查集问题！自然，Tarjan算法和花神游历各国的并查集部分都被加速到了线性。</p>
 
       
     </div>
@@ -328,10 +360,10 @@ C_A(S) \le k\times OPT(S) + O(1)</script><p>其中 $OPT(S)$ 是离线最优算�
   <!-- JS库 sweetalert 可修改路径 -->
   <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <p><span>本文标题:</span><a href="/2019/08/05/page_and_competitive/">页面置换算法和竞争性分析</a></p>
+  <p><span>本文标题:</span><a href="/2019/08/08/linear-dsu/">LCA 标准算法和树上线性并查集</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 ljt12138 的个人博客">ljt12138</a></p>
-  <p><span>原始链接:</span><a href="/2019/08/05/page_and_competitive/" title="页面置换算法和竞争性分析">http://ljt12138.github.io/2019/08/05/page_and_competitive/</a>
-    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://ljt12138.github.io/2019/08/05/page_and_competitive/" aria-label="复制成功！"></i></span>
+  <p><span>原始链接:</span><a href="/2019/08/08/linear-dsu/" title="LCA 标准算法和树上线性并查集">http://ljt12138.github.io/2019/08/08/linear-dsu/</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://ljt12138.github.io/2019/08/08/linear-dsu/" aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
 </div>
@@ -361,7 +393,7 @@ C_A(S) \le k\times OPT(S) + O(1)</script><p>其中 $OPT(S)$ 是离线最优算�
       
         <div class="post-tags">
           
-            <a href="/tags/THU-Courses/" rel="tag"># THU-Courses</a>
+            <a href="/tags/Algorithm-Analysis/" rel="tag"># Algorithm-Analysis</a>
           
         </div>
       
@@ -374,8 +406,8 @@ C_A(S) \le k\times OPT(S) + O(1)</script><p>其中 $OPT(S)$ 是离线最优算�
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/03/2018fall_compiler/" rel="next" title="2018 秋：编译原理">
-                <i class="fa fa-chevron-left"></i> 2018 秋：编译原理
+              <a href="/2019/08/07/iiis-selection/" rel="next" title="2019 茶园二次招生题目（数学）">
+                <i class="fa fa-chevron-left"></i> 2019 茶园二次招生题目（数学）
               </a>
             
           </div>
@@ -384,8 +416,8 @@ C_A(S) \le k\times OPT(S) + O(1)</script><p>其中 $OPT(S)$ 是离线最优算�
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/08/05/potential_analysis/" rel="prev" title="势能分析法">
-                势能分析法 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/08/08/cache-oblivious-ds/" rel="prev" title="缓存无关数据结构">
+                缓存无关数据结构 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -542,7 +574,7 @@ C_A(S) \le k\times OPT(S) + O(1)</script><p>其中 $OPT(S)$ 是离线最优算�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#竞争性分析"><span class="nav-number">1.</span> <span class="nav-text">竞争性分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#页面置换算法"><span class="nav-number">2.</span> <span class="nav-text">页面置换算法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Stage0"><span class="nav-number">1.</span> <span class="nav-text">Stage0</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stage1-RMQ标准算法"><span class="nav-number">2.</span> <span class="nav-text">Stage1 : RMQ标准算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#建立笛卡尔树"><span class="nav-number">2.1.</span> <span class="nav-text">建立笛卡尔树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#转化为-±1-RMQ-问题"><span class="nav-number">2.2.</span> <span class="nav-text">转化为 ±1 RMQ 问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#±1-RMQ问题的线性解法"><span class="nav-number">2.3.</span> <span class="nav-text">±1 RMQ问题的线性解法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stage2-线性树上并查集"><span class="nav-number">3.</span> <span class="nav-text">Stage2 : 线性树上并查集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#将树分块"><span class="nav-number">3.1.</span> <span class="nav-text">将树分块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#预处理"><span class="nav-number">3.2.</span> <span class="nav-text">预处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对块间维护并查集"><span class="nav-number">3.3.</span> <span class="nav-text">对块间维护并查集</span></a></li></ol></li></ol></div>
             
 
           </div>
