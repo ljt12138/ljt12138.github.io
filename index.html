@@ -299,7 +299,7 @@
 
       
         
-          <h2 id="k-祖先问题"><a href="#k-祖先问题" class="headerlink" title="$k$ 祖先问题"></a>$k$ 祖先问题</h2><p>$k$ 祖先问题（Level Ancestor Problem）静态树结构的重要问题之一，即给定一棵树和若干个询问 $(u, k)$，要求结点 $u$ 的第 $k$ 个祖先结点。</p>
+          <h2 id="k-祖先问题"><a href="#k-祖先问题" class="headerlink" title="$k$ 祖先问题"></a>$k$ 祖先问题</h2><p>$k$ 祖先问题（Level Ancestor Problem）是静态树的重要问题之一。给定一棵树和若干个询问 $(u, k)$，要求结点 $u$ 的第 $k$ 个祖先结点。</p>
 <p>离线情景下的 $k$ 祖先问题存在一个简单的 $O(n+q)$ 的算法：在 dfs 的过程中维护一个记录祖先的栈，然后在每个结点处回答和这个结点有关的所有询问；在线情景下有基于倍增的 $O(n\log n)-O(\log n)$ 算法，基于长链剖分的 $O(n)-O(\log n)$ 算法和 $O(n\log n) - O(1)$ 算法，以及最终的 $O(n) - O(1)$ 算法。</p>
           <!--noindex-->
           <div class="post-button text-center">
