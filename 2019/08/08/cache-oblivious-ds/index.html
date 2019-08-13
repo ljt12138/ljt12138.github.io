@@ -89,7 +89,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.loli.net/2019/08/08/ZNI8sXwvL4gSMUa.png">
 <meta property="og:image" content="https://i.loli.net/2019/08/10/R6UwVY47yhiozak.png">
-<meta property="og:updated_time" content="2019-08-10T09:34:41.239Z">
+<meta property="og:updated_time" content="2019-08-11T00:18:50.708Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="缓存无关数据结构">
 <meta name="twitter:description" content="缓存无关模型在算法层面考虑储存器层次结构时，我们通常使用的是外部储存模型（External Memory Model）。在这样的模型中，储存器具有两级 $L_1, L_2$，且 $|L_1| = M, |L_2| = \infty$。$L_1$ 被看作 $L_2$ 的缓存，当访问的数据不在 $L_1$ 中时，我们将数据从 $L_2$ 中调入 $L_1$，并花费 $T$ 的传输时间。">
@@ -164,7 +164,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle">ljt12138(lijt@mails.tsinghua.edu.cn)</p>
+        <p class="site-subtitle">ljt12138</p>
       
   </div>
 
@@ -329,7 +329,7 @@ load(d)\in \left[\frac{1}{2}-\frac{d}{4h}, \frac{3}{4}+\frac{d}{4h}\right]</scri
 load(b)\in\left[\frac{1}{2}-\frac{l}{4h}, \frac{3}{4}+\frac{l}{4h}\right]</script><p>那么 $g$ 下一次被重构，至少是其左右孩子中某一者违反装载率限制，这至少需要将装载率变化 $1/4h$，而每次操作仅会使装载率变化 $1/2^l\log n$，因此这至少在</p>
 <script type="math/tex; mode=display">
 \frac{1/4h}{1/2^l\log n}=\Omega\left(2^l\right)</script><p>次操作之后，那么 $g$ 贡献的每一次操作的平摊开销就是 $O(\log n)$。注意到每一次操作后将被其所有祖先贡献一个 $O(\log n)$ 的平摊开销，那么每一次操作总的平摊开销就是 $O(\log^2 n)$。由于我们仅仅使用了线性扫描，所需的内存传输次数不会超过 $O(\log^2 n/B)$。</p>
-<h2 id="缓存无关的-BBST"><a href="#缓存无关的-BBST" class="headerlink" title="缓存无关的 BBST"></a>缓存无关的 BBST</h2><p>接下来我们试图构建缓存无关的查找树，核心思路是用有序文件保证元素的有序性。为了平摊掉有序文件所带来的 $O(\log^2 n)$ 的时间开销，我们将 $O(\log n)$ 个相邻的递增元素<strong>分成一组</strong>放入有序文件中。接下来在有序文件数组上建立线段树，每个结点维护区间中的最大值。考察各种 BST 操作：</p>
+<h2 id="缓存无关的-BBST"><a href="#缓存无关的-BBST" class="headerlink" title="缓存无关的 BBST"></a>缓存无关的 BBST</h2><p>接下来我们试图构建缓存无关的查找树，核心思路是用有序文件保证元素的有序性。为了平摊掉有序文件所带来的 $O(\log^2 n)$ 的时间开销，我们将 $O(\log n)​$ 个相邻的递增元素<strong>分成一组</strong>放入有序文件中。接下来在有序文件数组上建立线段树，每个结点维护区间中的最大值。考察各种 BST 操作：</p>
 <ul>
 <li><strong>查找元素：</strong>相当于在线段树上二分，考察当前元素和左边最大值的关系，然后递归查找。查询操作的最坏复杂度为 $O(\log n)$。</li>
 <li><strong>插入元素</strong>：首先找到应当插入的组。取 $S = O(\log n)$，我们希望保证该组的大小在 $[S, 2S)$ 之间，如果元素过多，就将其分解成两个组，而这需要在有序文件中做插入操作。由于每 $O(S)$ 次操作会带来一次有序文件操作，因此平摊时间复杂度为 $O(\log n)$。</li>
@@ -409,6 +409,10 @@ load(b)\in\left[\frac{1}{2}-\frac{l}{4h}, \frac{3}{4}+\frac{l}{4h}\right]</scrip
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/13/level-ancestor/" rel="prev" title="树上 k 祖先问题">
+                树上 k 祖先问题 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -490,7 +494,7 @@ load(b)\in\left[\frac{1}{2}-\frac{l}{4h}, \frac{3}{4}+\frac{l}{4h}\right]</scrip
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -807,14 +811,11 @@ load(b)\in\left[\frac{1}{2}-\frac{l}{4h}, \frac{3}{4}+\frac{l}{4h}\right]</scrip
         }
       });
     </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
   
-  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
-  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-
 
   
 

@@ -157,7 +157,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle">ljt12138(lijt@mails.tsinghua.edu.cn)</p>
+        <p class="site-subtitle">ljt12138</p>
       
   </div>
 
@@ -215,6 +215,135 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://ljt12138.github.io/2019/08/13/level-ancestor/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ljt12138">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="From OI To CS">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/13/level-ancestor/" itemprop="url">树上 k 祖先问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-13T11:11:10+08:00">
+                2019-08-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="k-祖先问题"><a href="#k-祖先问题" class="headerlink" title="$k$ 祖先问题"></a>$k$ 祖先问题</h2><p>$k$ 祖先问题（Level Ancestor Problem）静态树结构的重要问题之一，即给定一棵树和若干个询问 $(u, k)$，要求结点 $u$ 的第 $k$ 个祖先结点。</p>
+<p>离线情景下的 $k$ 祖先问题存在一个简单的 $O(n+q)$ 的算法：在 dfs 的过程中维护一个记录祖先的栈，然后在每个结点处回答和这个结点有关的所有询问；在线情景下有基于倍增的 $O(n\log n)-O(\log n)$ 算法，基于长链剖分的 $O(n)-O(\log n)$ 算法和 $O(n\log n) - O(1)$ 算法，以及最终的 $O(n) - O(1)$ 算法。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/08/13/level-ancestor/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+	<div>
+		
+	</div>
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -558,9 +687,6 @@
         
           <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><h3 id="Info"><a href="#Info" class="headerlink" title="Info"></a>Info</h3><p>数学题面是英文，物理题面是中文。数学可以用中文或英文做答，物理用中文做答。</p>
 <p>数学题是六道组合，感觉相对 OI 友好。</p>
-<h3 id="第一题"><a href="#第一题" class="headerlink" title="第一题"></a>第一题</h3><p>在一个数轴上，你站在 $0$ 点，并按照如下算法寻找 $x(x &gt; 0)$ 点处的牛。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">curpos = <span class="number">0</span>;</span><br><span class="line">curdir = LEFT;</span><br><span class="line">step = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span> (没有找到牛) &#123;</span><br><span class="line">    沿着 curdir 方向，走 step 单位距离，如果找到牛就停止;</span><br><span class="line">    如果没有找到牛，回到原点并将 curdir 设为反方向，step = step * <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>那么，你至多需要走（大约）多少单位长度以找到牛？ $3x, 5x, 7x, 9x$，还是以上都不正确。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/08/07/iiis-selection/#more" rel="contents">
@@ -1172,7 +1298,7 @@ C_A(S) \le k\times OPT(S) + O(1)</script><p>其中 $OPT(S)$ 是离线最优算�
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1454,14 +1580,11 @@ C_A(S) \le k\times OPT(S) + O(1)</script><p>其中 $OPT(S)$ 是离线最优算�
         }
       });
     </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
   
-  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
-  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-
 
   
 
