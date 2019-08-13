@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content=",,,,,,,,,,,,,,,,,,">
+  <meta name="keywords" content="Hexo, NexT">
 
 
 
@@ -79,18 +79,13 @@
 
 
 
-<meta name="description" content="概述静态树链求和问题是指给定一棵点带权树 $T$ 和一系列询问 $Q$，每次询问要求两个点路径的和。这里的和是广义的，我们考察任何满足结合律的运算（即所有半群）并希望得到优秀的算法。在一些特定的情景下我们可以得到 $O(n)-O(1)$ 的最优在线算法，而一般情况下存在 $O(n\alpha(n))-O(1)$ 和 $O(n)-O(\alpha(n))$ 的算法。另外，一个实现上更简单的算法可以得">
-<meta name="keywords" content="Algorithm-Analysis">
 <meta property="og:type" content="website">
-<meta property="og:title" content="静态树链求和问题">
-<meta property="og:url" content="http://ljt12138.github.io/backup/tree-product.html">
+<meta property="og:title" content="From OI To CS">
+<meta property="og:url" content="http://ljt12138.github.io/categories/Combinatorics/index.html">
 <meta property="og:site_name" content="From OI To CS">
-<meta property="og:description" content="概述静态树链求和问题是指给定一棵点带权树 $T$ 和一系列询问 $Q$，每次询问要求两个点路径的和。这里的和是广义的，我们考察任何满足结合律的运算（即所有半群）并希望得到优秀的算法。在一些特定的情景下我们可以得到 $O(n)-O(1)$ 的最优在线算法，而一般情况下存在 $O(n\alpha(n))-O(1)$ 和 $O(n)-O(\alpha(n))$ 的算法。另外，一个实现上更简单的算法可以得">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-08T03:30:15.783Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="静态树链求和问题">
-<meta name="twitter:description" content="概述静态树链求和问题是指给定一棵点带权树 $T$ 和一系列询问 $Q$，每次询问要求两个点路径的和。这里的和是广义的，我们考察任何满足结合律的运算（即所有半群）并希望得到优秀的算法。在一些特定的情景下我们可以得到 $O(n)-O(1)$ 的最优在线算法，而一般情况下存在 $O(n\alpha(n))-O(1)$ 和 $O(n)-O(\alpha(n))$ 的算法。另外，一个实现上更简单的算法可以得">
+<meta name="twitter:title" content="From OI To CS">
 
 
 
@@ -120,13 +115,13 @@
 
 
 
-  <link rel="canonical" href="http://ljt12138.github.io/backup/tree-product.html">
+  <link rel="canonical" href="http://ljt12138.github.io/categories/Combinatorics/">
 
 
 
 
 
-  <title>静态树链求和问题 | From OI To CS</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>分类: Combinatorics | From OI To CS</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -145,7 +140,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -229,65 +224,53 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
-    
-    
-    <div class="post-block page">
-      <header class="post-header">
+  
+  
+  
+  <div class="post-block category">
 
-	<h1 class="post-title" itemprop="name headline">静态树链求和问题</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
-        
-        
-          <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>静态树链求和问题是指给定一棵点带权树 $T$ 和一系列询问 $Q$，每次询问要求两个点路径的和。这里的和是广义的，我们考察任何满足结合律的运算（即所有半群）并希望得到优秀的算法。在一些特定的情景下我们可以得到 $O(n)-O(1)$ 的最优在线算法，而一般情况下存在 $O(n\alpha(n))-O(1)$ 和 $O(n)-O(\alpha(n))$ 的算法。另外，一个实现上更简单的算法可以得到 $O(n\sqrt{\log n})-O(1)$ 的时间复杂度。</p>
-<a id="more"></a>
-<h2 id="静态树链最大值问题"><a href="#静态树链最大值问题" class="headerlink" title="静态树链最大值问题"></a>静态树链最大值问题</h2><h3 id="整数边权"><a href="#整数边权" class="headerlink" title="整数边权"></a>整数边权</h3><p>一个线性时间复杂度的算法包含这样三步：</p>
-<ol>
-<li><p>将点权排序。整数排序可以用基数排序算法做到线性。</p>
-</li>
-<li><p>建立最小值点分树 $T’$，或称为树上笛卡尔树。最小值点分树是这样一种结构：找到全树的最小值 $u$，将树切割成几个连通分量 $C_1, C_2, \dots, C_k$ 并分别递归构建，然后连接有向边 $u\to C_i$。</p>
-<p>那么问题仅剩下构建 $T’$。事实上很容易发现，$T’$ 正是原图的（点权版本） Kruskal 重构树，因此可以按照点权从大到小的顺序依次加点，并将相邻的所有点对应的集合用并查集合并，并查集需要维护这个联通块的根以便构建 $T’$。由于树上并查集可以做到 $O(n) - O(1)$，因此整个构建过程也是 $O(n) - O(1)$ 的。</p>
-</li>
-<li><p>回答询问。容易证明，两点之间的最小值，正是他们在 $T’$ 上的 LCA 对应的权值，而后者拥有 $O(n) - O(1)$ 的算法。</p>
-</li>
-</ol>
-<p>算法的时间瓶颈在于排序。事实上如果我们在<strong>比较模型</strong>下，即仅能通过比较知道两点的权值大小关系，那么很容易说明建立 $T’$ 的时间复杂度是 $\Omega(n\log n)$ 的——一个菊花就可以给所有叶子的权值排序。因此在比较模型下我们需要新的算法计算树链和问题。</p>
-<h3 id="算法的应用"><a href="#算法的应用" class="headerlink" title="算法的应用"></a>算法的应用</h3><p>上述算法一个可能的应用是线性构建最小深度点分树。<a href="https://atcoder.jp/contests/agc009/tasks/agc009_d">AGC009D</a> 给出了一个线性计算最小深度点分树标号的算法，而所有点标号都是 $O(\log n)$ 的，可以线性排序。而根据标号建立的最大值点分树就是最小深度点分树。</p>
-<h2 id="静态树链求和问题"><a href="#静态树链求和问题" class="headerlink" title="静态树链求和问题"></a>静态树链求和问题</h2><h3 id="基础算法"><a href="#基础算法" class="headerlink" title="基础算法"></a>基础算法</h3><p>这次我们考虑一般半群的情景，设点权之间的运算为 $\circ$。为了方便我们可以预先将询问从 LCA 处拆开，变成两个祖先-后代询问，这可以在 $O(n)-O(1)$ 的时间复杂度内完成。 </p>
-<p>作为工具我们需要两个复杂度略差的算法，分别为 $O(n)-O(\log n)$ 和 $O(n\log n) - O(1)$。</p>
-<ul>
-<li>前者的一种实现是树链剖分算法。将树剖分，建立线段树并预处理每一条重链的前缀和，这可以在 $O(n)$ 的时间复杂度内完成。对于每一个祖先-后代询问 $(u, anc)$，其一定是若干个重链前缀和加上至多一个重链区间和，前一步可以在 $O(\log n)$ 次跳轻链的过程中完成，后一步则可以用线段树在 $O(\log n)$ 内完成。</li>
-<li>后者是长链剖分求 $k$ 祖先的扩展版本。利用长链剖分算法顺便维护权值和，很容易得到一个 $O(n\log n)-O(1)$ 时间复杂度并具有 $O(n\log n)$ 空间复杂度的算法。</li>
-</ul>
-<p>降低空间的方法在于分块。</p>
-<ol>
-<li>用经典的方法将树分成 $O(\log n)$ 大小的块并使得块的总数是 $O(n/\log n)$，用 $O(n\log n)$ 的时间复杂度预处理块内两两之间的权值和。<ol>
-<li>设一个块 $B$ 的最高点 $r(B)$ 是块的根，$r(B)$ 即可能在 $B$ 中、也可能在 $B$ 外。若 $r(B)\in B$，则定义 $w’(B)$ 为 $r(B)$ 父亲 $p$ 向上直到块顶端的权值和；否则定义 $w’(B)$ 为 $r(B)$ 向上到达其块内顶端的权值和。同理可以定义块 $B$ 的父亲。因此，块之间构成了一棵新树 $T’$，用 $O(|T’|\log |T’|) = O(n)$ 的时间和空间预处理。</li>
-<li>对于一个询问，将其拆成三部分：最低端的块内部分，最高端的块内部分，块间部分。拆分的过程可以利用每个结点的块标号和 dfs 序快速完成，而这三部分都可以在 $O(1)$ 的时间复杂度内计算。</li>
-</ol>
-</li>
-</ol>
-<h3 id="分块算法"><a href="#分块算法" class="headerlink" title="分块算法"></a>分块算法</h3><p>长链剖分的分块算法启发我们用这种分块降低时间复杂度。一个简单的想法是将</p>
-
-        
+    <div id="posts" class="posts-collapse">
+      <div class="collection-title">
+        <h1>Combinatorics<small>分类</small>
+        </h1>
       </div>
+
       
-      
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2019/08/07/iiis-selection/" itemprop="url">
+              
+                <span itemprop="name">2019 茶园二次招生题目（数学）</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2019-08-07T12:58:32+08:00" content="2019-08-07">
+          08-07
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
       
     </div>
-    
-    
-    
+
   </div>
+  
+  
+  
+
+  
+
 
 
           </div>
@@ -295,13 +278,6 @@
 
 
           
-
-  
-    <div id="gitalk-container"></div>
-
-  
-
-
 
         </div>
         
@@ -322,17 +298,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -422,22 +389,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#静态树链最大值问题"><span class="nav-number">2.</span> <span class="nav-text">静态树链最大值问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#整数边权"><span class="nav-number">2.1.</span> <span class="nav-text">整数边权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法的应用"><span class="nav-number">2.2.</span> <span class="nav-text">算法的应用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#静态树链求和问题"><span class="nav-number">3.</span> <span class="nav-text">静态树链求和问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础算法"><span class="nav-number">3.1.</span> <span class="nav-text">基础算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分块算法"><span class="nav-number">3.2.</span> <span class="nav-text">分块算法</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -580,10 +531,6 @@
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
 
   
 
@@ -624,21 +571,6 @@
 
 
 
-
-  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
-   <script type="text/javascript">
-        var gitalk = new Gitalk({
-          clientID: '023a14ecb0d9640c78ae',
-          clientSecret: '907b9345301ee9d44b411a1a3c54917684471802',
-          repo: 'ljt12138.github.io',
-          owner: 'ljt12138',
-          admin: ['ljt12138'],
-          id: location.pathname,
-          distractionFreeMode: 'true'
-        })
-        gitalk.render('gitalk-container')           
-       </script>
 
   
 

@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="$k$ 祖先问题$k$ 祖先问题（Level Ancestor Problem）是静态树的重要问题之一。给定一棵树和若干个询问 $(u, k)$，要求结点 $u$ 的第 $k$ 个祖先结点。 离线情景下的 $k$ 祖先问题存在一个简单的 $O(n+q)$ 的算法：在 dfs 的过程中维护一个记录祖先的栈，然后在每个结点处回答和这个结点有关的所有询问；在线情景下有基于倍增的 $O(n\log n)-">
+<meta name="description" content="$k$ 祖先问题$k$ 祖先问题（Level Ancestor Problem）是静态树的重要问题之一。给定一棵树和若干个询问 $(u, k)$，要求结点 $u$ 的第 $k​$ 个祖先结点。 离线情景下的 $k$ 祖先问题存在一个简单的 $O(n+q)$ 的算法：在 dfs 的过程中维护一个记录祖先的栈，然后在每个结点处回答和这个结点有关的所有询问；在线情景下有基于倍增的 $O(n\log n)">
 <meta name="keywords" content="Algorithm-Analysis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="树上 k 祖先问题">
 <meta property="og:url" content="http://ljt12138.github.io/2019/08/13/level-ancestor/index.html">
 <meta property="og:site_name" content="From OI To CS">
-<meta property="og:description" content="$k$ 祖先问题$k$ 祖先问题（Level Ancestor Problem）是静态树的重要问题之一。给定一棵树和若干个询问 $(u, k)$，要求结点 $u$ 的第 $k$ 个祖先结点。 离线情景下的 $k$ 祖先问题存在一个简单的 $O(n+q)$ 的算法：在 dfs 的过程中维护一个记录祖先的栈，然后在每个结点处回答和这个结点有关的所有询问；在线情景下有基于倍增的 $O(n\log n)-">
+<meta property="og:description" content="$k$ 祖先问题$k$ 祖先问题（Level Ancestor Problem）是静态树的重要问题之一。给定一棵树和若干个询问 $(u, k)$，要求结点 $u$ 的第 $k​$ 个祖先结点。 离线情景下的 $k$ 祖先问题存在一个简单的 $O(n+q)$ 的算法：在 dfs 的过程中维护一个记录祖先的栈，然后在每个结点处回答和这个结点有关的所有询问；在线情景下有基于倍增的 $O(n\log n)">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.loli.net/2019/08/13/6VR9zwBMXyxITFl.png">
-<meta property="og:updated_time" content="2019-08-13T06:22:30.463Z">
+<meta property="og:updated_time" content="2019-08-13T06:28:57.172Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="树上 k 祖先问题">
-<meta name="twitter:description" content="$k$ 祖先问题$k$ 祖先问题（Level Ancestor Problem）是静态树的重要问题之一。给定一棵树和若干个询问 $(u, k)$，要求结点 $u$ 的第 $k$ 个祖先结点。 离线情景下的 $k$ 祖先问题存在一个简单的 $O(n+q)$ 的算法：在 dfs 的过程中维护一个记录祖先的栈，然后在每个结点处回答和这个结点有关的所有询问；在线情景下有基于倍增的 $O(n\log n)-">
+<meta name="twitter:description" content="$k$ 祖先问题$k$ 祖先问题（Level Ancestor Problem）是静态树的重要问题之一。给定一棵树和若干个询问 $(u, k)$，要求结点 $u$ 的第 $k​$ 个祖先结点。 离线情景下的 $k$ 祖先问题存在一个简单的 $O(n+q)$ 的算法：在 dfs 的过程中维护一个记录祖先的栈，然后在每个结点处回答和这个结点有关的所有询问；在线情景下有基于倍增的 $O(n\log n)">
 <meta name="twitter:image" content="https://i.loli.net/2019/08/13/6VR9zwBMXyxITFl.png">
 
 
@@ -193,6 +193,16 @@
         </li>
       
         
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
@@ -275,6 +285,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -302,7 +334,7 @@
       
 
       
-        <h2 id="k-祖先问题"><a href="#k-祖先问题" class="headerlink" title="$k$ 祖先问题"></a>$k$ 祖先问题</h2><p>$k$ 祖先问题（Level Ancestor Problem）是静态树的重要问题之一。给定一棵树和若干个询问 $(u, k)$，要求结点 $u$ 的第 $k$ 个祖先结点。</p>
+        <h2 id="k-祖先问题"><a href="#k-祖先问题" class="headerlink" title="$k$ 祖先问题"></a>$k$ 祖先问题</h2><p>$k$ 祖先问题（Level Ancestor Problem）是静态树的重要问题之一。给定一棵树和若干个询问 $(u, k)$，要求结点 $u$ 的第 $k​$ 个祖先结点。</p>
 <p>离线情景下的 $k$ 祖先问题存在一个简单的 $O(n+q)$ 的算法：在 dfs 的过程中维护一个记录祖先的栈，然后在每个结点处回答和这个结点有关的所有询问；在线情景下有基于倍增的 $O(n\log n)-O(\log n)$ 算法，基于长链剖分的 $O(n)-O(\log n)$ 算法和 $O(n\log n) - O(1)$ 算法，以及最终的 $O(n) - O(1)$ 算法。</p>
 <a id="more"></a>
 <h2 id="倍增"><a href="#倍增" class="headerlink" title="倍增"></a>倍增</h2><p>倍增法预处理 $f[i][u]$ 表示结点 $u$ 向上 $2^i$ 个祖先结点，其中 $f[0][u]$ 正是父亲，其余部分遵循递推式</p>
@@ -504,6 +536,15 @@ O(\sqrt n)\times b^2 = O(\sqrt n\log^2 n) = o(n)</script><p>对于一个询问 $
               </div>
             
 
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
             
 
             
