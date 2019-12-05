@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="Stage0某天深夜水群的时候给小朋友普及 Tarjan 算法求 LCA 的时间复杂度，被老鸽们指正应当是 $O(n+q)$ 而非$O(n\alpha(n)+q)$。最近阅读了一下 wiki 上指出的论文 https://core.ac.uk/download/pdf/82125836.pdf 学习了一下。 先放结论：RMQ 问题和 LCA 问题的最优复杂度都是 $O(n)-O(1)$ 的，线性复">
+<meta name="description" content="Stage0某天深夜水群的时候给小朋友普及 Tarjan 算法求 LCA 的时间复杂度，被老鸽们指正应当是 $O(n+q)$ 而非$O((n+q)\alpha(n))$。最近阅读了一下 wiki 上指出的论文 1 学习了一下。 先放结论：RMQ 问题和 LCA 问题的最优复杂度都是 $O(n)-O(1)$ 的，线性复杂度的 Tarjan 需要做一些操作。">
 <meta name="keywords" content="Algorithm-Analysis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LCA 标准算法和树上线性并查集">
 <meta property="og:url" content="http://ljt12138.github.io/2019/08/08/linear-dsu/index.html">
 <meta property="og:site_name" content="From OI To CS">
-<meta property="og:description" content="Stage0某天深夜水群的时候给小朋友普及 Tarjan 算法求 LCA 的时间复杂度，被老鸽们指正应当是 $O(n+q)$ 而非$O(n\alpha(n)+q)$。最近阅读了一下 wiki 上指出的论文 https://core.ac.uk/download/pdf/82125836.pdf 学习了一下。 先放结论：RMQ 问题和 LCA 问题的最优复杂度都是 $O(n)-O(1)$ 的，线性复">
+<meta property="og:description" content="Stage0某天深夜水群的时候给小朋友普及 Tarjan 算法求 LCA 的时间复杂度，被老鸽们指正应当是 $O(n+q)$ 而非$O((n+q)\alpha(n))$。最近阅读了一下 wiki 上指出的论文 1 学习了一下。 先放结论：RMQ 问题和 LCA 问题的最优复杂度都是 $O(n)-O(1)$ 的，线性复杂度的 Tarjan 需要做一些操作。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-25T10:57:01.075Z">
+<meta property="og:updated_time" content="2019-12-05T11:47:35.306Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LCA 标准算法和树上线性并查集">
-<meta name="twitter:description" content="Stage0某天深夜水群的时候给小朋友普及 Tarjan 算法求 LCA 的时间复杂度，被老鸽们指正应当是 $O(n+q)$ 而非$O(n\alpha(n)+q)$。最近阅读了一下 wiki 上指出的论文 https://core.ac.uk/download/pdf/82125836.pdf 学习了一下。 先放结论：RMQ 问题和 LCA 问题的最优复杂度都是 $O(n)-O(1)$ 的，线性复">
+<meta name="twitter:description" content="Stage0某天深夜水群的时候给小朋友普及 Tarjan 算法求 LCA 的时间复杂度，被老鸽们指正应当是 $O(n+q)$ 而非$O((n+q)\alpha(n))$。最近阅读了一下 wiki 上指出的论文 1 学习了一下。 先放结论：RMQ 问题和 LCA 问题的最优复杂度都是 $O(n)-O(1)$ 的，线性复杂度的 Tarjan 需要做一些操作。">
 
 
 
@@ -332,7 +332,7 @@
       
 
       
-        <h2 id="Stage0"><a href="#Stage0" class="headerlink" title="Stage0"></a>Stage0</h2><p>某天深夜水群的时候给小朋友普及 Tarjan 算法求 LCA 的时间复杂度，被老鸽们指正应当是 $O(n+q)$ 而非$O(n\alpha(n)+q)$。最近阅读了一下 wiki 上指出的论文 <a href="https://core.ac.uk/download/pdf/82125836.pdf">https://core.ac.uk/download/pdf/82125836.pdf</a> 学习了一下。</p>
+        <h2 id="Stage0"><a href="#Stage0" class="headerlink" title="Stage0"></a>Stage0</h2><p>某天深夜水群的时候给小朋友普及 Tarjan 算法求 LCA 的时间复杂度，被老鸽们指正应当是 $O(n+q)$ 而非$O((n+q)\alpha(n))$。最近阅读了一下 wiki 上指出的论文 <sup><a href="#fn_1" id="reffn_1">1</a></sup> 学习了一下。</p>
 <p>先放结论：RMQ 问题和 LCA 问题的最优复杂度都是 $O(n)-O(1)$ 的，线性复杂度的 Tarjan 需要做一些操作。</p>
 <a id="more"></a>
 <h2 id="Stage1-RMQ标准算法"><a href="#Stage1-RMQ标准算法" class="headerlink" title="Stage1 : RMQ标准算法"></a>Stage1 : RMQ标准算法</h2><p>通常我们所说的 RMQ 问题，即区间最值问题被描述为：给定一个数组和若干询问，每次询问一段区间中最小值/最大值。我们常常使用ST表或线段树来解决这样的问题，复杂度分别是 $O(n\log n)-O(1)$ 和 $O(n)-O(\log n)$。$O(f(n))-O(g(n))$ 表示预处理时间复杂度为 $O(f(n))$，每次询问时间复杂度为 $O(g(n))$。事实上，存在 $O(n)-O(1)$ 的RMQ算法，这样的算法通常称为 RMQ 标准算法。</p>
@@ -358,14 +358,14 @@
 <p>对于分成的 $O\left(\frac{n}{\log(n)}\right)$ 段，使用 ST 表维护区间最小值。这样可以做到 $O(n)$ 时间的预处理和 $O(1)$ 时间的询问。</p>
 <p>考虑一个区间询问 $[u, v]$，可以看成一些整块和一些零散部分。对于整块，可以用 ST 表上 $O(1)$ 询问最小值；对于零散部分，通过查表求出答案。这样，总共的询问时间复杂度是 $O(1)$ 的，而所有预处理的复杂度都是 $O(n)$ 的。因此，我们给出了 $O(n)-O(1)$ 求解一般 RMQ 问题的解法。</p>
 <h2 id="Stage2-线性树上并查集"><a href="#Stage2-线性树上并查集" class="headerlink" title="Stage2 : 线性树上并查集"></a>Stage2 : 线性树上并查集</h2><p>将 Tarjan 优化到线性的技术来源于线性树上并查集。树上并查集是并查集的一个特殊情况：给定一棵树，每次操作形如<strong>将一个节点合并到父亲</strong>，每次询问形如查询一个点已合并的祖先。</p>
-<p>其一个更特殊的情景是当树退化成序列的情景：例如经典题目《花神游历各国》<a href="https://www.lydsy.com/JudgeOnline/problem.php?id=3211">https://www.lydsy.com/JudgeOnline/problem.php?id=3211</a> 的一个做法是利用并查集维护向右下一个不是$1$的元素。这可以看成一个以最右端节点为根的链上的并查集。</p>
+<p>其一个更特殊的情景是当树退化成序列的情景：例如经典题目<sup><a href="#fn_2" id="reffn_2">2</a></sup>的一个做法是利用并查集维护向右下一个不是$1$的元素。这可以看成一个以最右端节点为根的链上的并查集。</p>
 <p>树上线性并查集的做法分为三步：</p>
 <ol>
 <li>将树分为大小为 $O(b)$ 的块，且块的个数是 $O(n/b)$ 的</li>
 <li>对于每种本质不同的块的本质不同的状态，预处理每个点的答案</li>
 <li>对块间维护并查集</li>
 </ol>
-<h3 id="将树分块"><a href="#将树分块" class="headerlink" title="将树分块"></a>将树分块</h3><p>正如题目《王室联邦》<a href="https://www.lydsy.com/JudgeOnline/problem.php?id=1086">https://www.lydsy.com/JudgeOnline/problem.php?id=1086</a> 中指出，我们可以对树在线性时间内分块，使得每一个块的大小在 $[b, 3b]$ 之间，且每一个块有一个“根”。满足每个块 $B$ 都与其根联通，且 $B$ 在其根的子树内。</p>
+<h3 id="将树分块"><a href="#将树分块" class="headerlink" title="将树分块"></a>将树分块</h3><p>正如题目<sup><a href="#fn_3" id="reffn_3">3</a></sup>中指出，我们可以对树在线性时间内分块，使得每一个块的大小在 $[b, 3b]$ 之间，且每一个块有一个“根”。满足每个块 $B$ 都与其根联通，且 $B$ 在其根的子树内。</p>
 <p>使用一个 dfs 过程可以将树分块。在 dfs 所有子树后，我们将子树中剩下的节点（$\le b$ 个元素的零散块）合并，剩下至多一个零散块。这样可以保证，除了根节点可能有一个大小为 $2b &lt; size\le 3b$ 的块，其他的块大小都在 $[b, 2b]$ 之间。</p>
 <h3 id="预处理"><a href="#预处理" class="headerlink" title="预处理"></a>预处理</h3><p>考虑本质不同的树至多有多少个，一棵树可以被父亲数组 $parent[nd]$ 唯一确定，而 $parent$ 数组可以被编码到长度 $(b-1)\times \log b$，那么本质不同的树的上界就有 $2^{(b-1)\log b}$ 种。对于每种本质不同的树，每一个节点可以被操作过，也可以没有被操作过，本质不同的状态有 $2^b$ 个，那么每种本质不同的状态中每个节点的答案一共有：</p>
 <script type="math/tex; mode=display">
@@ -374,6 +374,15 @@
 <p>对于一个将节点合并到父亲的操作：可以 $O(1)$ 修改块状态完成。</p>
 <p>对于一个查询操作：如果当前块内已经合并到块的根了，向上查询。如果一个节点是某个块的根且合并到了其父亲，使用一个并查集合并上去。</p>
 <p>这样，我们就在 $O(n)-O(1)$ 的时间复杂度内解决了树上并查集问题！自然，Tarjan算法和花神游历各国的并查集部分都被加速到了线性。</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><blockquote id="fn_1">
+<sup>1</sup>. Gabow H N, Tarjan R E. A linear-time algorithm for a special case of disjoint set union[J]. Journal of Computer and System Sciences, 1985, 30(2): 209-221.<a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_2">
+<sup>2</sup>. 《花神游历各国》<a href="https://www.lydsy.com/JudgeOnline/problem.php?id=3211">https://www.lydsy.com/JudgeOnline/problem.php?id=3211</a><a href="#reffn_2" title="Jump back to footnote [2] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_3">
+<sup>3</sup>. 《王室联邦》<a href="https://www.lydsy.com/JudgeOnline/problem.php?id=1086">https://www.lydsy.com/JudgeOnline/problem.php?id=1086</a><a href="#reffn_3" title="Jump back to footnote [3] in the text."> &#8617;</a>
+</blockquote>
 
       
     </div>
@@ -532,7 +541,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -543,7 +552,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -554,7 +563,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
@@ -609,7 +618,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Stage0"><span class="nav-number">1.</span> <span class="nav-text">Stage0</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stage1-RMQ标准算法"><span class="nav-number">2.</span> <span class="nav-text">Stage1 : RMQ标准算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#建立笛卡尔树"><span class="nav-number">2.1.</span> <span class="nav-text">建立笛卡尔树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#转化为-±1-RMQ-问题"><span class="nav-number">2.2.</span> <span class="nav-text">转化为 ±1 RMQ 问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#±1-RMQ问题的线性解法"><span class="nav-number">2.3.</span> <span class="nav-text">±1 RMQ问题的线性解法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stage2-线性树上并查集"><span class="nav-number">3.</span> <span class="nav-text">Stage2 : 线性树上并查集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#将树分块"><span class="nav-number">3.1.</span> <span class="nav-text">将树分块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#预处理"><span class="nav-number">3.2.</span> <span class="nav-text">预处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对块间维护并查集"><span class="nav-number">3.3.</span> <span class="nav-text">对块间维护并查集</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Stage0"><span class="nav-number">1.</span> <span class="nav-text">Stage0</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stage1-RMQ标准算法"><span class="nav-number">2.</span> <span class="nav-text">Stage1 : RMQ标准算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#建立笛卡尔树"><span class="nav-number">2.1.</span> <span class="nav-text">建立笛卡尔树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#转化为-±1-RMQ-问题"><span class="nav-number">2.2.</span> <span class="nav-text">转化为 ±1 RMQ 问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#±1-RMQ问题的线性解法"><span class="nav-number">2.3.</span> <span class="nav-text">±1 RMQ问题的线性解法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stage2-线性树上并查集"><span class="nav-number">3.</span> <span class="nav-text">Stage2 : 线性树上并查集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#将树分块"><span class="nav-number">3.1.</span> <span class="nav-text">将树分块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#预处理"><span class="nav-number">3.2.</span> <span class="nav-text">预处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对块间维护并查集"><span class="nav-number">3.3.</span> <span class="nav-text">对块间维护并查集</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>

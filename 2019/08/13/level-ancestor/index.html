@@ -88,7 +88,7 @@
 <meta property="og:description" content="$k$ 祖先问题$k$ 祖先问题（Level Ancestor Problem）是静态树的重要问题之一。给定一棵树和若干个询问 $(u, k)$，要求结点 $u$ 的第 $k​$ 个祖先结点。 离线情景下的 $k$ 祖先问题存在一个简单的 $O(n+q)$ 的算法：在 dfs 的过程中维护一个记录祖先的栈，然后在每个结点处回答和这个结点有关的所有询问；在线情景下有基于倍增的 $O(n\log n)">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.loli.net/2019/08/13/6VR9zwBMXyxITFl.png">
-<meta property="og:updated_time" content="2019-08-13T06:28:57.172Z">
+<meta property="og:updated_time" content="2019-12-05T11:49:55.819Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="树上 k 祖先问题">
 <meta name="twitter:description" content="$k$ 祖先问题$k$ 祖先问题（Level Ancestor Problem）是静态树的重要问题之一。给定一棵树和若干个询问 $(u, k)$，要求结点 $u$ 的第 $k​$ 个祖先结点。 离线情景下的 $k$ 祖先问题存在一个简单的 $O(n+q)$ 的算法：在 dfs 的过程中维护一个记录祖先的栈，然后在每个结点处回答和这个结点有关的所有询问；在线情景下有基于倍增的 $O(n\log n)">
@@ -371,11 +371,15 @@ f[i][u] = f[i-1][f[i-1][u]]</script><p>对于一组询问 $(u, k)$，考察 $k$ 
 2^{2b} = O(\sqrt n)</script><p>表的总大小为</p>
 <script type="math/tex; mode=display">
 O(\sqrt n)\times b^2 = O(\sqrt n\log^2 n) = o(n)</script><p>对于一个询问 $(u, k)$，如果答案在块内则查表计算，否则可以转化为关键点上的询问——这可以用倍增表和长链剖分在 $O(1)$ 的时间复杂度内完成。 </p>
+<p><strong>Note：</strong><sup><a href="#fn_1" id="reffn_1">1</a></sup>中给出了一种更简单的分块方法。</p>
 <h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p><del>事实上我已经两次尝试写树上四毛子了</del>。相比树上并查集实现起来要容易一些，因为并不需要保证联通块个数的界，只需让关键点不太多即可。<a href="/code/ancestor.zip">下载代码</a></p>
 <p>可以使用 CMake 编译运行：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cmake .</span><br><span class="line">$ make</span><br><span class="line">$ ./main</span><br></pre></td></tr></table></figure>
 <p>其中 <code>src/tree</code> 是树的实现，<code>src/brute</code> 是作为对照的倍增算法，<code>src/std/jump_pointer.h</code> 和 <code>src/std/ladder.h</code> 分别是分块和长链剖分的实现。</p>
 <p>由于常数太大，朴素的实现并不会比倍增更好，可能需要精细的卡常。</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><blockquote id="fn_1">
+<sup>1</sup>. MIT 6.851, Advanced Data Structure, Static tree(1)<a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#8617;</a>
+</blockquote>
 
       
     </div>
@@ -534,7 +538,7 @@ O(\sqrt n)\times b^2 = O(\sqrt n\log^2 n) = o(n)</script><p>对于一个询问 $
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -545,7 +549,7 @@ O(\sqrt n)\times b^2 = O(\sqrt n\log^2 n) = o(n)</script><p>对于一个询问 $
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -556,7 +560,7 @@ O(\sqrt n)\times b^2 = O(\sqrt n\log^2 n) = o(n)</script><p>对于一个询问 $
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
@@ -611,7 +615,7 @@ O(\sqrt n)\times b^2 = O(\sqrt n\log^2 n) = o(n)</script><p>对于一个询问 $
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#k-祖先问题"><span class="nav-number">1.</span> <span class="nav-text">$k$ 祖先问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#倍增"><span class="nav-number">2.</span> <span class="nav-text">倍增</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#长链剖分"><span class="nav-number">3.</span> <span class="nav-text">长链剖分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#O-n-O-log-n-算法"><span class="nav-number">3.1.</span> <span class="nav-text">$O(n)-O(\log n)$ 算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#O-n-log-n-O-1-算法"><span class="nav-number">3.2.</span> <span class="nav-text">$O(n\log n)-O(1)$ 算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线性时间优化"><span class="nav-number">3.3.</span> <span class="nav-text">线性时间优化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">4.</span> <span class="nav-text">实现</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#k-祖先问题"><span class="nav-number">1.</span> <span class="nav-text">$k$ 祖先问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#倍增"><span class="nav-number">2.</span> <span class="nav-text">倍增</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#长链剖分"><span class="nav-number">3.</span> <span class="nav-text">长链剖分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#O-n-O-log-n-算法"><span class="nav-number">3.1.</span> <span class="nav-text">$O(n)-O(\log n)$ 算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#O-n-log-n-O-1-算法"><span class="nav-number">3.2.</span> <span class="nav-text">$O(n\log n)-O(1)$ 算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线性时间优化"><span class="nav-number">3.3.</span> <span class="nav-text">线性时间优化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">4.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">5.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
