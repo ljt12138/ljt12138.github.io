@@ -89,7 +89,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.loli.net/2019/08/08/ZNI8sXwvL4gSMUa.png">
 <meta property="og:image" content="https://i.loli.net/2019/08/10/R6UwVY47yhiozak.png">
-<meta property="og:updated_time" content="2019-08-13T06:26:49.809Z">
+<meta property="og:updated_time" content="2019-12-19T08:42:52.531Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="缓存无关数据结构">
 <meta name="twitter:description" content="缓存无关模型在算法层面考虑储存器层次结构时，我们通常使用的是外部储存模型（External Memory Model）。在这样的模型中，储存器具有两级 $L_1, L_2$，且 $|L_1| = M, |L_2| = \infty$。$L_1$ 被看作 $L_2$ 的缓存，当访问的数据不在 $L_1$ 中时，我们将数据从 $L_2$ 中调入 $L_1$，并花费 $T$ 的传输时间。">
@@ -335,12 +335,12 @@
       
 
       
-        <h2 id="缓存无关模型"><a href="#缓存无关模型" class="headerlink" title="缓存无关模型"></a>缓存无关模型</h2><p>在算法层面考虑储存器层次结构时，我们通常使用的是<strong>外部储存模型（External Memory Model）</strong>。在这样的模型中，储存器具有两级 $L_1, L_2$，且 $|L_1| = M, |L_2| = \infty$。$L_1$ 被看作 $L_2$ 的缓存，当访问的数据不在 $L_1$ 中时，我们将数据从 $L_2$ 中调入 $L_1$，并花费 $T$ 的传输时间。</p>
+        <h1 id="缓存无关模型"><a href="#缓存无关模型" class="headerlink" title="缓存无关模型"></a>缓存无关模型</h1><p>在算法层面考虑储存器层次结构时，我们通常使用的是<strong>外部储存模型（External Memory Model）</strong>。在这样的模型中，储存器具有两级 $L_1, L_2$，且 $|L_1| = M, |L_2| = \infty$。$L_1$ 被看作 $L_2$ 的缓存，当访问的数据不在 $L_1$ 中时，我们将数据从 $L_2$ 中调入 $L_1$，并花费 $T$ 的传输时间。</p>
 <a id="more"></a>
-<p>事实上，由于传输延迟很大，每次从 $L_2$ 中会将连续长度为 $B$ 的数据调入 $L_1$ 中，也就是说整个储存按照 $B$ 的块大小划分为 $M/B$ 个块。外部储存模型是说，给定 $M, B$，设计算法以降低传输数据的次数。<strong>缓存无关模型（Cache Oblivious Model）</strong>则加了一个限制：算法不知道 $M, B$ 的具体取值，换言之，其要在不同的层次结构下取得良好的性能。</p>
+<p>事实上，由于传输延迟很大，每次从 $L_2$ 中会将连续长度为 $B$ 的数据调入 $L_1$ 中，也就是说整个储存按照 $B$ 的块大小划分为 $M/B$ 个块。外部储存模型是说，给定 $M, B$，设计算法以降低传输数据的次数。<strong>缓存无关模型（Cache Oblivious Model）</strong>则加了一个限制：算法不知道 $M, B​$ 的具体取值，换言之，其要在不同的层次结构下取得良好的性能。</p>
 <p>值得说明的一点是，在缓存无关模型的讨论中，我们均认为页面置换算法取最优算法 OPT。这是因为常用的置换算法如 $LRU, FIFO$ 在拥有两倍空间的情况下拥有常数竞争比，因此在渐进意义下 OPT 即可代表实际开销。</p>
 <p>举例而言，无论 $M, B$ 为多少，顺序扫描长度为 $N$ 的数组均可以在 $\Theta(N/B)$ 次内存传输内完成，而二分查找则做不到这一点。事实上，通过在内存中维护递归树前 $\lg B$ 层的所有结点，我们可以说明二分查找的内存传输次数是 $\Theta(\lg n - \lg B)$ 的，而非我们希望的 $\Theta(\lg n/\lg B)$。</p>
-<h2 id="BBST-的优化"><a href="#BBST-的优化" class="headerlink" title="BBST 的优化"></a>BBST 的优化</h2><p>BST 的操作往往是从树根出发，沿着一条链向下直到遇到某个结点为止。和二分查找一样，如果不经过特殊安排，访问一个结点的内存传输次数可能高达 $\Theta(\lg n-\lg B)$。事实上存在优秀的策略可以将单次操作的内存传输次数降低到 $O(\log_B n)$。</p>
+<h1 id="BBST-的优化"><a href="#BBST-的优化" class="headerlink" title="BBST 的优化"></a>BBST 的优化</h1><p>BST 的操作往往是从树根出发，沿着一条链向下直到遇到某个结点为止。和二分查找一样，如果不经过特殊安排，访问一个结点的内存传输次数可能高达 $\Theta(\lg n-\lg B)$。事实上存在优秀的策略可以将单次操作的内存传输次数降低到 $O(\log_B n)$。</p>
 <p>将 BST 如此重新标号：设线段树的高度为 $h$，将最高的 $h$ 层构成的联通块记作 $T_0$，删去 $T_1$ 后形成的联通块分别为 $T_1, T_2, \dots, T_k$。我们按照 $T_0, T_1, T_2, \dots, T_k$ 的顺序依次递归标号。这可以使用 dfs 在 $O(n)$ 的时间复杂度内完成。接下来，将标记为 $k$ 的结点放置到数组第 $k$ 位的位置，并修改所有的指针结构。这样的放置顺序称为数组的 vEB 序。</p>
 <p><img src="https://i.loli.net/2019/08/08/ZNI8sXwvL4gSMUa.png" alt="veb.png"></p>
 <blockquote>
@@ -350,7 +350,7 @@
 <p>vEB 序一个有趣的应用是改进线段树的缓存性能，我们可以利用 dfs 给结点标号，并按照标号重新放置线段树。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * dfs_relabel：使用 dfs 标号</span></span><br><span class="line"><span class="comment"> * @nd: 当前处理的子树根节点</span></span><br><span class="line"><span class="comment"> * @h: 当前处理的子树高度，仅处理从 @nd 开始深度为 @h 的结点构成的子树</span></span><br><span class="line"><span class="comment"> * @id: 记录已使用标号</span></span><br><span class="line"><span class="comment"> * @que: 记录深度为 @h 结点的所有儿子结点</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs_relabel</span><span class="params">(node *nd, <span class="keyword">int</span> h, <span class="keyword">int</span> &amp;id, <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;node*&gt; &amp;que)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (nd == <span class="literal">nullptr</span>)</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	<span class="keyword">if</span> (h == <span class="number">1</span>) &#123;</span><br><span class="line">		pos[nd - pool] = id++;</span><br><span class="line">        <span class="comment">// nd - pool 为结点在数组中的位置</span></span><br><span class="line">		<span class="keyword">if</span> (nd-&gt;lc != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">			que.push_back(nd-&gt;lc);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (nd-&gt;rc != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">			que.push_back(nd-&gt;rc);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;node*&gt; q;</span><br><span class="line">		<span class="keyword">int</span> up = h / <span class="number">2</span>, down = h - up;</span><br><span class="line">		dfs_relabel(nd, up, id, q);</span><br><span class="line">        <span class="comment">// 处理高处的子树</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">auto</span> nxt : q) &#123;</span><br><span class="line">			dfs_relabel(nxt, down, id, que);</span><br><span class="line">		&#125;</span><br><span class="line">        <span class="comment">// 处理低处的子树</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>实验表明，在其他实现相同的情况下，使用 vEB 序的线段树可以提高 20% 到 50% 的性能。当然这和机器的储存器体系结构有着很大的关系。完整的测试代码在 <a href="/code/segtree-cache.zip">segtree-cache.zip</a>。</p>
-<h2 id="有序文件"><a href="#有序文件" class="headerlink" title="有序文件"></a>有序文件</h2><p>为了实现缓存无关的 B 树我们需要一个称为<strong>有序文件（Ordered Files）</strong>的有趣数据结构，它是说我们要在 $O(n)$ 的数组中维护 $n$ 个元素，保证他们的顺序，并支持在对应位置插入、删除。有序文件可以做到平摊每次插入 $O(\log^2 n)$ 次元素移动。</p>
+<h1 id="有序文件"><a href="#有序文件" class="headerlink" title="有序文件"></a>有序文件</h1><p>为了实现缓存无关的 B 树我们需要一个称为<strong>有序文件（Ordered Files）</strong>的有趣数据结构，它是说我们要在 $O(n)$ 的数组中维护 $n$ 个元素，保证他们的顺序，并支持在对应位置插入、删除。有序文件可以做到平摊每次插入 $O(\log^2 n)$ 次元素移动。</p>
 <p>考虑构建一个满二叉树，其每个叶子结点对应 $O(\log n)$ 个空闲数组位置，我们称这是有序文件的一个<strong>组</strong>。整个结构共有 $O(n/\log n)$ 组。</p>
 <p><img src="https://i.loli.net/2019/08/10/R6UwVY47yhiozak.png" alt="files.png"></p>
 <p>设树高为 $h$，根节点深度为 $1$，我们维护整个结构使得第 $d$ 层每个节点的<strong>装载率</strong> $load(d)$，即装入元素的个数除以该节点对应子树所对应的的空间大小满足：</p>
@@ -361,13 +361,19 @@ load(d)\in \left[\frac{1}{2}-\frac{d}{4h}, \frac{3}{4}+\frac{d}{4h}\right]</scri
 load(b)\in\left[\frac{1}{2}-\frac{l}{4h}, \frac{3}{4}+\frac{l}{4h}\right]</script><p>那么 $g$ 下一次被重构，至少是其左右孩子中某一者违反装载率限制，这至少需要将装载率变化 $1/4h$，而每次操作仅会使装载率变化 $1/2^l\log n$，因此这至少在</p>
 <script type="math/tex; mode=display">
 \frac{1/4h}{1/2^l\log n}=\Omega\left(2^l\right)</script><p>次操作之后，那么 $g$ 贡献的每一次操作的平摊开销就是 $O(\log n)$。注意到每一次操作后将被其所有祖先贡献一个 $O(\log n)$ 的平摊开销，那么每一次操作总的平摊开销就是 $O(\log^2 n)$。由于我们仅仅使用了线性扫描，所需的内存传输次数不会超过 $O(\log^2 n/B)$。</p>
-<h2 id="缓存无关的-BBST"><a href="#缓存无关的-BBST" class="headerlink" title="缓存无关的 BBST"></a>缓存无关的 BBST</h2><p>接下来我们试图构建缓存无关的查找树，核心思路是用有序文件保证元素的有序性。为了平摊掉有序文件所带来的 $O(\log^2 n)$ 的时间开销，我们将 $O(\log n)​$ 个相邻的递增元素<strong>分成一组</strong>放入有序文件中。接下来在有序文件数组上建立线段树，每个结点维护区间中的最大值。考察各种 BST 操作：</p>
+<h1 id="缓存无关的-BBST"><a href="#缓存无关的-BBST" class="headerlink" title="缓存无关的 BBST"></a>缓存无关的 BBST</h1><p>接下来我们试图构建缓存无关的查找树，核心思路是用有序文件保证元素的有序性。为了平摊掉有序文件所带来的 $O(\log^2 n)$ 的时间开销，我们将 $O(\log n)​$ 个相邻的递增元素<strong>分成一组</strong>放入有序文件中。接下来在有序文件数组上建立线段树，每个结点维护区间中的最大值。考察各种 BST 操作：</p>
 <ul>
 <li><strong>查找元素：</strong>相当于在线段树上二分，考察当前元素和左边最大值的关系，然后递归查找。查询操作的最坏复杂度为 $O(\log n)$。</li>
 <li><strong>插入元素</strong>：首先找到应当插入的组。取 $S = O(\log n)$，我们希望保证该组的大小在 $[S, 2S)$ 之间，如果元素过多，就将其分解成两个组，而这需要在有序文件中做插入操作。由于每 $O(S)$ 次操作会带来一次有序文件操作，因此平摊时间复杂度为 $O(\log n)$。</li>
 <li><strong>删除元素：</strong>和插入一样，不过这次需要在元素过少时合并，平摊复杂度为 $O(\log n)$。</li>
 </ul>
 <p>其余的操作均和线段树无异。如果将 BBST 按照 vEB 序存储，所有操作都可以在均摊 $O(\log_B n)$ 的时间复杂度内完成。</p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><blockquote id="fn_1">
+<sup>1</sup>. MIT 6.851, Memory hierarchy: models, cache-oblivious B-trees<a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_2">
+<sup>2</sup>. Memory hierarchy: ordered-file maintenance, list labeling, order queries, cache-oblivious priority queues<a href="#reffn_2" title="Jump back to footnote [2] in the text."> &#8617;</a>
+</blockquote>
 
       
     </div>
@@ -603,7 +609,7 @@ load(b)\in\left[\frac{1}{2}-\frac{l}{4h}, \frac{3}{4}+\frac{l}{4h}\right]</scrip
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#缓存无关模型"><span class="nav-number">1.</span> <span class="nav-text">缓存无关模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BBST-的优化"><span class="nav-number">2.</span> <span class="nav-text">BBST 的优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有序文件"><span class="nav-number">3.</span> <span class="nav-text">有序文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缓存无关的-BBST"><span class="nav-number">4.</span> <span class="nav-text">缓存无关的 BBST</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#缓存无关模型"><span class="nav-number">1.</span> <span class="nav-text">缓存无关模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BBST-的优化"><span class="nav-number">2.</span> <span class="nav-text">BBST 的优化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#有序文件"><span class="nav-number">3.</span> <span class="nav-text">有序文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#缓存无关的-BBST"><span class="nav-number">4.</span> <span class="nav-text">缓存无关的 BBST</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文献"><span class="nav-number">5.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
