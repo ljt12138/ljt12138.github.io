@@ -354,7 +354,7 @@
 <h3 id="转化为-±1-RMQ-问题"><a href="#转化为-±1-RMQ-问题" class="headerlink" title="转化为 ±1 RMQ 问题"></a>转化为 ±1 RMQ 问题</h3><p>一个常见的求 LCA 的算法是转而求解树的欧拉序列上的 RMQ 问题。所谓欧拉序列，就是对树做dfs，每当访问一条边 $(u,v)$ 时，就在序列上加入 $v$。特别的，序列上一开始只有根节点。设每个节点 $nd$ 出现的第一个位置为 $pos[nd]$，那么，两个节点 $u, v$ 的 LCA，就是 $[pos[u], pos[v]]$ 中最浅的节点。</p>
 <p>欧拉序列良好的性质在于，任何两个相邻元素之间深度相差必然为 $1$。那么问题便被转化为了，给定一个序列，任意两个元素之间相差为 $1$，并给定若干个区间，求区间内最小的数。</p>
 <h3 id="±1-RMQ问题的线性解法"><a href="#±1-RMQ问题的线性解法" class="headerlink" title="±1 RMQ问题的线性解法"></a>±1 RMQ问题的线性解法</h3><p>线性解决 ±1 RMQ 问题的关键在于，由于相邻两个元素之差为 $1$，那么长度为 $n$ 的本质不同的数列只有 $2^n$ 个。</p>
-<p>考虑将序列按照长度为 $\frac{\log(n)}{2}$ 分段，我们可以认为 $\log(n)\le w$，$w$ 是计算机的字长（假设我们在随机储存器计算模型下）。长度为 $\frac{\log(n)}{2}$ 的本质不同的数列只有 $O(\sqrt{n})$ 个，我们可以枚举所有可能的情况，并枚举左右端点。这可以在 $O(\sqrt{n}\log^2(n))$ 的时间复杂度内完成。一个数列长度为 $n$ 的数列可以用二进制串编码，其第 $j$ 位为 $[a<em>{j} \lt a</em>{j+1}]$。</p>
+<p>考虑将序列按照长度为 $\frac{\log(n)}{2}$ 分段，我们可以认为 $\log(n)\le w$，$w$ 是计算机的字长（假设我们在随机储存器计算模型下）。长度为 $\frac{\log(n)}{2}$ 的本质不同的数列只有 $O(\sqrt{n})$ 个，我们可以枚举所有可能的情况，并枚举左右端点。这可以在 $O(\sqrt{n}\log^2(n))$ 的时间复杂度内完成。一个数列长度为 $n$ 的数列可以用二进制串编码，其第 $j$ 位为 $[a_{j} \lt a_{j+1}]$。</p>
 <p>对于分成的 $O\left(\frac{n}{\log(n)}\right)$ 段，使用 ST 表维护区间最小值。这样可以做到 $O(n)$ 时间的预处理和 $O(1)$ 时间的询问。</p>
 <p>考虑一个区间询问 $[u, v]$，可以看成一些整块和一些零散部分。对于整块，可以用 ST 表上 $O(1)$ 询问最小值；对于零散部分，通过查表求出答案。这样，总共的询问时间复杂度是 $O(1)$ 的，而所有预处理的复杂度都是 $O(n)$ 的。因此，我们给出了 $O(n)-O(1)$ 求解一般 RMQ 问题的解法。</p>
 <h2 id="Stage2-线性树上并查集"><a href="#Stage2-线性树上并查集" class="headerlink" title="Stage2 : 线性树上并查集"></a>Stage2 : 线性树上并查集</h2><p>将 Tarjan 优化到线性的技术来源于线性树上并查集。树上并查集是并查集的一个特殊情况：给定一棵树，每次操作形如<strong>将一个节点合并到父亲</strong>，每次询问形如查询一个点已合并的祖先。</p>
@@ -541,7 +541,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -552,7 +552,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

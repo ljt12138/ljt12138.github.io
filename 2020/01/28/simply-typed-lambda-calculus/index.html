@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="lambda-calculus,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="简单类型 λ 演算类型系统简单类型 λ 演算（Simply Typed λ-Calculus），或称 $\lambda_{\to}$，在无类型 λ 演算的基础上引入了一个基本的类型系统。在简单类型 λ 演算中，类型要么是基本类型 $T \in \mathcal{T}$， 要么形如 $\varphi\to\psi$，非形式化地，表示参数为 $\varphi$、返回值为 $\psi$ 的函数。其中箭头">
+<meta name="keywords" content="lambda-calculus">
+<meta property="og:type" content="article">
+<meta property="og:title" content="简单类型 λ 演算">
+<meta property="og:url" content="http://ljt12138.github.io/2020/01/28/simply-typed-lambda-calculus/index.html">
+<meta property="og:site_name" content="From OI To CS">
+<meta property="og:description" content="简单类型 λ 演算类型系统简单类型 λ 演算（Simply Typed λ-Calculus），或称 $\lambda_{\to}$，在无类型 λ 演算的基础上引入了一个基本的类型系统。在简单类型 λ 演算中，类型要么是基本类型 $T \in \mathcal{T}$， 要么形如 $\varphi\to\psi$，非形式化地，表示参数为 $\varphi$、返回值为 $\psi$ 的函数。其中箭头">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-01-28T14:25:06.741Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="简单类型 λ 演算">
+<meta name="twitter:description" content="简单类型 λ 演算类型系统简单类型 λ 演算（Simply Typed λ-Calculus），或称 $\lambda_{\to}$，在无类型 λ 演算的基础上引入了一个基本的类型系统。在简单类型 λ 演算中，类型要么是基本类型 $T \in \mathcal{T}$， 要么形如 $\varphi\to\psi$，非形式化地，表示参数为 $\varphi$、返回值为 $\psi$ 的函数。其中箭头">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://ljt12138.github.io/2020/01/28/simply-typed-lambda-calculus/">
+
+
+
+
+
+  <title>简单类型 λ 演算 | From OI To CS</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">From OI To CS</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">ljt12138</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://ljt12138.github.io/2020/01/28/simply-typed-lambda-calculus/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ljt12138">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="From OI To CS">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">简单类型 λ 演算</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-28T00:15:48+08:00">
+                2020-01-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Programming-Language/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming Language</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="简单类型-λ-演算"><a href="#简单类型-λ-演算" class="headerlink" title="简单类型 λ 演算"></a>简单类型 λ 演算</h1><h2 id="类型系统"><a href="#类型系统" class="headerlink" title="类型系统"></a>类型系统</h2><p><strong>简单类型 λ 演算（Simply Typed λ-Calculus）</strong>，或称 $\lambda_{\to}$，在无类型 λ 演算的基础上引入了一个基本的类型系统。在简单类型 λ 演算中，类型要么是基本类型 $T \in \mathcal{T}$， 要么形如 $\varphi\to\psi$，非形式化地，表示参数为 $\varphi$、返回值为 $\psi$ 的函数。其中箭头是右结合的，即 $\varphi\to\psi\to \rho := \varphi\to(\psi\to\rho)$。</p>
+<a id="more"></a>
+<p>在简单类型 λ 演算中，λ 抽象中的变量需要标记类型，即</p>
+<script type="math/tex; mode=display">
+\lambda x:\varphi. e</script><p>根据变量的类型，我们可以根据一组类型规则确定一个 λ 项的类型，即</p>
+<script type="math/tex; mode=display">
+\frac{}{?, x:\varphi \vdash x:\varphi} ~ ~ ~ ~ ~ ~  
+\frac{?, x:\varphi \vdash e : \psi}{?\vdash(\lambda x:\varphi .e) : \varphi\to \psi} ~ ~ ~ ~ ~ ~ 
+\frac{?\vdash e_1:\varphi\to\psi ~ ~ ~ ?\vdash e_2:\varphi}{?\vdash(e_1 ~ e_2) : \psi}</script><p>其中，上下文 $?$ 的定义扩展为变量和类型的序对 $x:\varphi$ 构成的集合。$\mathrm{dom}~?$ 表示上下文中所有变量构成的集合，$\mathrm{range}~?$ 表示所有类型构成的集合。其中，$?, x:\varphi$ 表示将 $?$ 中加入 $x:\varphi$（如果 $x\in\mathrm{dom}~?$，覆盖已有的类型）。</p>
+<p>类型系统排除掉了一些“非正则”的 λ 项。举例而言，$\lambda x.x~x$ 是无类型 λ 演算中的一个项，但在无论给 $x$ 任何的类型，它都不是合法的 λ 项。事实上，我们将会证明简单类型 λ 演算的所有项都是<strong>强正则（Strongly Normalized）</strong>的，即不存在一个从有类型的 λ 开始的无限长的 $\beta​$ 规约序列。</p>
+<h2 id="Curry-风格的-lambda-to"><a href="#Curry-风格的-lambda-to" class="headerlink" title="Curry 风格的 $\lambda_{\to}$"></a>Curry 风格的 $\lambda_{\to}$</h2><p>上面所介绍的简单类型 λ 演算被称为 <strong>Church 风格的（à la Church）</strong>，而另一种类似的系统称为 <strong>Curry 风格的（à la Curry）</strong>。Curry 风格的 $\lambda_{\to}$ 并不在变量上标注其类型，相反，如果一个 λ 项可以为每个变量分配类型，使其在 Church 风格 $\lambda_{\to}$ 中具有类型，就称其是可类型化的（Typeable）。一个可类型化的 λ 项可能具有多种合法的类型分配，例如 $\lambda x.x$ 有多种可能的类型</p>
+<script type="math/tex; mode=display">
+\mathrm{bool}\to\mathrm{bool}, \mathrm{int}\to\mathrm{int},(\mathrm{int}\to\mathrm{int})\to(\mathrm{int}\to\mathrm{int}),\dots</script><h2 id="类型的基本性质"><a href="#类型的基本性质" class="headerlink" title="类型的基本性质"></a>类型的基本性质</h2><p><strong>性质 1（Generation Lemma）</strong>类型规则可以反向使用，即</p>
+<ol>
+<li>$?\vdash x:\varphi$，那么 $x:\varphi\in{?}$</li>
+<li>$?\vdash (e_1~e_2): \psi $，那么存在 $\varphi$ 使得 $?\vdash e_1:\varphi\to\psi$ 且 $?\vdash e_2:\varphi$</li>
+<li>$?\vdash (\lambda x:\varphi.e) : \varphi\to\psi$，那么 $?, x:\varphi\vdash e:\psi$</li>
+</ol>
+<p><strong>性质 2（Substitution Lemma）</strong> 类型不会由于类型名称/项替换而改变</p>
+<ol>
+<li>$?\vdash e:\varphi$，那么 $?[\sigma\mapsto\rho]\vdash e:\varphi[\sigma\mapsto\rho]$</li>
+<li>$?, x:\sigma\vdash e:\varphi$，并且 $?\vdash e’:\sigma$，那么 $?\vdash e[x\mapsto e’]$ </li>
+</ol>
+<ul>
+<li>证明思路：施归纳于 $?, x:\sigma\vdash e:\varphi$ 确定类型的结构。</li>
+</ul>
+<p><strong>性质 3（β-Reduction Lemma）</strong>β-reduction 不会改变项的类型</p>
+<ul>
+<li>证明思路：施归纳于 β-reduction 的结构，利用替换引理。</li>
+</ul>
+<p><strong>定理（Church-Rosser Theorem）：</strong>对于任意的 $e\twoheadrightarrow_{\beta} e_1, e\twoheadrightarrow_{\beta}e_2$，存在一个 $e_3$，使得 $e_1\twoheadrightarrow_{\beta}e_3$，且 $e_2\twoheadrightarrow_{\beta}e_3$</p>
+<ul>
+<li>证明思路：由无符号 λ 演算的 Church-Rosser 定理，及 β 规约引理证明。</li>
+</ul>
+<h2 id="类型对应的树"><a href="#类型对应的树" class="headerlink" title="类型对应的树"></a>类型对应的树</h2><p>为了描述的方便，我们可以将类型和树相互对应。我们称 $T$ 是类型 $\varphi$ 对应的树，如果</p>
+<ol>
+<li>$\varphi$ 是基本类型，$T$ 仅包含一个标有 $\varphi$ 的结点；</li>
+<li>$\varphi = \sigma_1\to\sigma_2\to\dots\to\sigma_k$，$T$ 的根节点标有 $\varphi $，且 $k$ 个孩子 $T_1, T_2, \dots, T_k$ 分别是 $\sigma_1, \sigma_2, \dots, \sigma_k$ 对应的树。</li>
+</ol>
+<p>类型对应的树并不一定是唯一的。以类型 $\alpha\to (\alpha\to\alpha)\to\alpha$ 为例，</p>
+<script type="math/tex; mode=display">
+\frac{\alpha\to (\alpha\to\alpha)\to\alpha}{\alpha~ ~ ~ ~ ~ ~\frac{(\alpha\to\alpha)\to\alpha}{\frac{\alpha\to\alpha}{\alpha~ ~ ~ ~ ~ ~\alpha}~ ~ ~ ~ ~ ~\alpha}}
+~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+\frac{\alpha\to (\alpha\to\alpha)\to\alpha}{\alpha~ ~ ~ ~ ~ ~\frac{\alpha\to\alpha}{\alpha~ ~ ~ ~ ~ ~\alpha}~ ~ ~ ~ ~ ~\alpha}</script><p>都是合法的类型对应的树。其中，我们关心两个特殊的树，即</p>
+<ol>
+<li>每个非基本类型均有两个儿子，这棵树称为类型<strong>对应的二叉树</strong>；</li>
+<li>对于每个结点 $T$，其最后一个孩子 $T_k$ 对应于基本类型，这棵树称为类型<strong>对应的多叉树</strong>。</li>
+</ol>
+<p>二叉树和多叉树表示体现了我们看待类型的两种视角，分别对应了一个函数的 curry/uncurry 化。其中，多叉树表示将一个非基本类型的 λ 项看作一个多元函数，每个子结点对应于每一项参数的类型。</p>
+<hr>
+<p><strong>定义（类型的高度）：</strong>定义类型的高度为对应二叉树的高度。换言之</p>
+<ol>
+<li>$h(\alpha) = 1$</li>
+<li>$h(\varphi\to\psi) = \max\{h(\varphi), h(\psi)\}+1$ </li>
+</ol>
+<h2 id="lambda-to-的表达能力"><a href="#lambda-to-的表达能力" class="headerlink" title="$\lambda_{\to}$ 的表达能力"></a>$\lambda_{\to}$ 的表达能力</h2><h3 id="自然数"><a href="#自然数" class="headerlink" title="自然数"></a>自然数</h3><p>设 $\alpha$ 是任意类型，类似无类型 λ 演算中 Church 数的定义，我们有</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+0 &:= \lambda f:\alpha\to\alpha.\lambda x:\alpha. x\\
+1 &:= \lambda f:\alpha\to\alpha.\lambda x:\alpha. f~x\\
+2 &:= \lambda f:\alpha\to\alpha.\lambda x:\alpha. f~(f~x)\\
+\vdots &:= \vdots
+\end{aligned}</script><p>根据类型规则，我们有 $int := (\alpha\to \alpha)\to(\alpha\to\alpha)$。容易验证自然数的基本运算可以在 $\lambda_{\to}$ 中定义。</p>
+<h3 id="布尔值"><a href="#布尔值" class="headerlink" title="布尔值"></a>布尔值</h3><p>设 $\alpha$ 是任意类型，我们可以定义布尔值 $bool_{\alpha} := \alpha\to\alpha\to\alpha$，其中</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+true_{\alpha} &:= \lambda x : \alpha. \lambda y : \alpha. x\\
+false_{\alpha} &:= \lambda x : \alpha. \lambda y : \alpha. y
+\end{aligned}</script><p>值得注意的是，$true$ 和 $false$ 并不能像原先一样充当一般的 if-then-else 语句。事实上，使用 $true_{\alpha}$  实现的 if-then-else 语句要求 then 和 else 中的值必须具有<strong>相同的类型</strong>，且均为 $\alpha$。举例而言，</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+true_{int}~1~2 &: int\\
+false_{int}~1~2 &: int\\
+true_{int}~1~(x:\alpha) &: untypeable\\
+true_{int}~(x:\alpha)~(y:\alpha) &: untypeable
+\end{aligned}</script><p>为了语言使用的方便，可以新增基本类型 bool 和 ITE 语句，并定义类型规则</p>
+<script type="math/tex; mode=display">
+\frac{?\vdash e_1:bool ~ ~ ~ ?\vdash e_2:\varphi ~ ~ ~ ?\vdash e_3:\varphi}{?\vdash \mathrm{ITE}(e_1, e_2, e_3) : \varphi}</script><p>以及各种逻辑连接词，例如 $\mathrm{and, or, not}$ 等等。</p>
+<h1 id="正则定理"><a href="#正则定理" class="headerlink" title="正则定理"></a>正则定理</h1><h2 id="正则和值"><a href="#正则和值" class="headerlink" title="正则和值"></a>正则和值</h2><p><strong>定义（正则和值）：</strong> </p>
+<ol>
+<li>$\lambda x:\varphi, e$ 和 $x~e_1~e_2~\dots e_k$ 称为<strong>值（Value）</strong></li>
+<li>定义 $e$ 为<strong>正则的（Normalized）</strong>，如果不存在 $e’$ 使得 $e\to_{\beta}e’$</li>
+<li>称 $e$ 是<strong>可正则化（Normalizable）</strong>的，如果其存在一个正则表示。称 $e’$ 是 $e$ 的<strong>正则表示（Normal Form）</strong>，如果 $e’$ 是正则的，且 $e\twoheadrightarrow_{\beta} e’$，记作 $e\Downarrow e’$</li>
+</ol>
+<hr>
+<p>非形式化的，不能继续计算（即在顶层执行 λ 应用）的项称为值，不能继续规约的项是正则的。</p>
+<hr>
+<p><strong>性质 1：</strong>正则的项是值</p>
+<p><strong>证明：</strong>施归纳于 λ 项的结构。如果一个正则的项具有 $e_1~e_2$ 的形态，由于 $e_1~e_2$ 是正则的，$e_1$ 也是正则的，从而 $e_1$ 是值。那么</p>
+<ol>
+<li>如果 $e_1$ 形如 $\lambda x:\varphi, e’$，那么 $e_1~e_2$ 可以进行一次 $\beta$ 规约，这与 $\lambda$ 是正则的矛盾。</li>
+<li>如果 $e_1$ 形如 $x~e_1’~e_2’~\dots~e_k’$，那么 $e_1~e_2$ 为<script type="math/tex; mode=display">
+e_{1}~e_2 = x~e_1'~e_2'~\dots~e_k'~e_2</script>从而也是值。</li>
+</ol>
+<p><strong>性质 2：</strong>如果 $e$ 是可正则化的，那么其正则表示唯一</p>
+<p><strong>证明：</strong>若存在两个正则表示，根据 Church-Rosser 定理，其正则表示必然唯一。</p>
+<hr>
+<p>我们将要证明两个正则定理，<strong>弱正则定理（Weak Normalization Theorem）</strong>和<strong>强正则定理（Strong Normalization Theorem）</strong>。其中，弱正则定理是强正则定理的平凡推论，为了思维的完整性，我们首先给出其证明。</p>
+<h2 id="弱正则定理"><a href="#弱正则定理" class="headerlink" title="弱正则定理"></a>弱正则定理</h2><p><strong>定理（弱正则定理，Weak Normalization Theorem）：</strong>在 $\lambda_{\to}$ 中，任何有类型的项都是可正则化的。更严格地，如果 $?\vdash e:\varphi$，那么 $e$ 是可正则化的。</p>
+<p><strong>证明（Turing，Prawitz）：</strong>不妨称 $(\lambda x:\varphi.e_1)~e_2$ 为一个可规约项，定义其高度为 $\lambda x:\varphi.e_1$ 类型的高度，定义 λ 项 $e$ 的高度 $h(e)$ 为其中高度最大的可规约项的高度，$n(e)$ 为 $e$ 中高度为 $h(e)$ 的 λ 应用对数。施归纳于 $(h(e), n(e))$ 的字典序，证明所有有类型的项都是可正则化的。</p>
+<ol>
+<li><p>当 $h(e) = 1, n(e) = 0$ 时，结论是显然的。</p>
+</li>
+<li><p>取 $e$ 中最靠右的、高度为 $h(e)$ 的可规约项 $\Delta = (\lambda x:\varphi.e_1)~e_2$。由于 $\Delta$ 的选取，$h(e_1)&lt;h(e)$，且 $h(e_2) &lt; h(e)$。让我们证明 $e_1[x\mapsto e_2]$ 的高度小于 $h(e)$，从而可以说明使用 $e_1[x\mapsto e_2]$ 代替 $\Delta$ 得到的 λ 项 $e’$，$(h(e’), n(e’))$ 具有较小的字典序。</p>
+<p>假设 $e_1[x\mapsto e_2]$ 中存在一个可规约项 $\Delta’$ 满足高度大于等于 $h(e)$，那么</p>
+<ol>
+<li>可规约项不包含由 $[x\mapsto e_2]$ 产生的项，其也存在于 $e_1$ 中。由于 $h(e_1)&lt;h(e)$，这是不可能的；</li>
+<li>可规约项以 $[x\mapsto e_2]$ 产生的项作为第一项，即形如 $\Delta’=e_2~o$，这是不可能的，因为 $h(e_2) &lt; h(e)$；</li>
+<li>可规约项以 $[x\mapsto e_2]$ 产生的项作为第二项，即形如 $\Delta’ = o~e_2$，那么 $o~x$ 构成了一个 $e_1$ 中的相同高度的可规约项，由于 $h(e_1) &lt; h(e)$，这时不可能的。</li>
+<li>可规约项以 $[x\mapsto e_2]$ 产生的项作为第一项和第二项，这是不可能的，因为 $x~x$ 不可能存在于有类型的项中，对于任意 $x:\varphi$。</li>
+</ol>
+</li>
+</ol>
+<hr>
+<p>弱正则定理说明，如果我们不断地选择最右侧、最高的可规约项进行规约，任何有类型的 λ 项总能在有限步内化为正则项。根据 Church-Rosser 定理，任何两个 $\beta-$等价的 λ 项都具有相同的正则表示，因此这提供了一个判定两个 λ 项 $\beta-$等价性的算法。</p>
+<p>弱正则定理的不足之处在于，它并没有说明任何有类型的项在“简明”的求值规则下可以在有限步终止。一般来说，常见“简明”的规约规则可以分为 Call by Value 和 Call by Name 两种方式。Call by Value 首先将 λ 应用的参数规约，然后做一步 β 规约；Call by Name 则直接进行 β 规约。举例而言，Call by Value 的 λ 演算求值规则可以定义如下</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+& \mathrm{Value\text{-}Rule}~ ~\frac{}{\mathrm{Val}(\lambda x:\varphi. e)}~ ~ ~\frac{}{\mathrm{Val}(x)}\\
+& \mathrm{Function\text{-}Reduce}~ ~\frac{e_1\Rightarrow e_1'}{e_1~e_2\Rightarrow e_1' e_2}\\
+& \mathrm{Argument\text{-}Reduce}~ ~\frac{\mathrm{Val}(e_1)~ ~ ~e_2\Rightarrow e_2'}{e_1~e_2\Rightarrow e_1~e_2'}\\
+& \mathrm{Beta\text{-}Reduction}~ ~\frac{\mathrm{Val}(e_2)}{(\lambda x:\varphi. e_1)~e_2\Rightarrow e_1[x\mapsto e_2]}
+\end{aligned}</script><p>容易说明，如果 $\vdash e$ 且 $e$ 不是值，那么有且仅有一条求值规则可以执行，即求值过程不会“卡住”。我们希望说明，任何有类型的 λ 项的求值过程可以在有限步内终止。事实上，无论以何种顺序，任何有类型的 λ 项进行求值的过程总是终止的。</p>
+<h2 id="强正则定理"><a href="#强正则定理" class="headerlink" title="强正则定理"></a>强正则定理</h2><p><strong>定理（强正则定理，Strong Normalization Theorem）：</strong>不存在以有类型的 λ 项开始的无限长的 $\beta$ 规约序列。</p>
+<p><strong>证明：</strong>首先归纳地定义 $\mathrm{SN}~e$ 表示任给 $e_1, e_2, \dots, e_k$，$k\ge 0$，满足</p>
+<ol>
+<li>对于 $1\le i\le k$，恒有 $\mathrm{SN}~e_i~$</li>
+<li>$e~e_1~e_2~\dots~e_k$ 是有类型的，且 $\mathrm{SN} ~e_i$</li>
+</ol>
+<p>那么 $e~e_1~e_2~\dots~e_k$ 不存在无限长的 $\beta$ 规约序列。由于 $e_i$ 类型的高度小于 $e$ 类型的高度，这个归纳定义是良好的。</p>
+<p>定义 $\mathrm{SN^\star}~e$，如果对于任意的 $\{e_1,e_2,\dots, e_k|\mathrm{SN}~e_i\}$，都有$\mathrm{SN}~e[\forall i, x_i\mapsto y_i]$，其中 $\{x_1, x_2, \dots, x_k\} = \mathrm{FV}~e$。为了简便，将 $e[\forall i, x_i\mapsto y_i]$ 记作 $\gamma(e)$。</p>
+<p><strong>增强定理：</strong>对于任意的 $?\vdash e:\varphi$，都有 $\mathrm{SN^\star}~e$</p>
+<p>显然增强定理确实是原定理的增强。为证明增强定理，我们给出一个引理。</p>
+<p><strong>引理：</strong>对于任意 $?\vdash e:\varphi$ 和 $e\to_{\beta} e’$，那么 $\mathrm{SN}~e\Rightarrow \mathrm{SN}~e’$</p>
+<p><strong>引理的证明：</strong>由于 $\beta$ 规约序列</p>
+<script type="math/tex; mode=display">
+e~e_1~\dots~e_k\to_{\beta} e'~e_1~\dots~e_k\twoheadrightarrow_{\beta}\dots</script><p>始终是有穷的，这一结论显然。</p>
+<p><strong>增强定理的证明：</strong>施归纳于 $?\vdash e:\varphi$ 的步骤，证明 $\mathrm{SN^\star}~e$。</p>
+<ol>
+<li><p>如果 $e = x$，对于任何合法的 $\gamma$，$\mathrm{SN}~\gamma(e)$ 成立。</p>
+</li>
+<li><p>如果 $e = o_1~o_2$，只需证明 $\mathrm{SN}(\gamma(o_1~o_2))\Leftrightarrow\mathrm{SN}((\gamma(o_1)~\gamma (o_2)))$。根据归纳假设，$\mathrm{SN^\star}(o_1)$ 且 $\mathrm{SN^\star}(o_2)$，那么也有 $\mathrm{SN}(\gamma(o_1))$ 和 $\mathrm{SN}(\gamma(o_2))$。任给 $e_1, e_2, \dots, e_k$ 满足 $\mathrm{SN}~e_i$，由于</p>
+<ol>
+<li>$\mathrm{SN}(\gamma(o_1))$</li>
+<li>$\mathrm{SN}(\gamma(o_2)), \mathrm{SN}(e_1), \dots, \mathrm{SN}(e_k)$</li>
+</ol>
+<p>根据 $\mathrm{SN}(\gamma(o_1))$ 的定义，可知 $\gamma(o_1)~\gamma(o_2)~e_1~\dots~e_k$ 不存在无限长的 $\beta$ 规约序列。</p>
+</li>
+<li><p>如果 $e=\lambda x:\varphi. o$，只需证明 $\mathrm{SN}(\gamma(\lambda x:\varphi.o)) \Leftrightarrow \mathrm{SN}(\lambda x:\varphi.\gamma(o)))$。下面用反证法。如果有 $e_1,e_2,\dots, e_k$ 满足 $\mathrm{SN}~e_i$，使得 $(\lambda x:\varphi.\gamma(o)))~e_1~\dots~e_k$ 存在一个无限长的 $\beta$ 规约序列，其一定形如</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&~(\lambda x:\varphi.\gamma(o)))~e_1~\dots~e_k\\
+\twoheadrightarrow_{\beta}&~(\lambda x:\varphi.\gamma(o)))~e_1'~\dots~e_k'\\
+\to_{\beta} &~ \gamma(o)[x\mapsto e_1']~e_2'~\dots~e_k'\\
+\twoheadrightarrow_{\beta}&~\dots
+\end{aligned}</script><p>根据引理 1，对于 $1\le i\le k$，均有 $\mathrm{SN}~e_i’$。因此可以构造合法的 $\gamma’$，满足 $\gamma’(o)=\gamma(o)[x\mapsto e_1’]$，从而根据归纳假设，$\mathrm{SN}(\gamma’(o))$。那么</p>
+<script type="math/tex; mode=display">
+\gamma(o)[x\mapsto e_1']~e_2'~\dots~e_k' = \gamma'(o)~e_2'~\dots~e_k'</script><p>不存在无限长的 $\beta$ 规约序列，这与假设矛盾。</p>
+</li>
+</ol>
+<p>综上所述，增强定理成立，因而原定理也成立。</p>
+<h1 id="记号说明"><a href="#记号说明" class="headerlink" title="记号说明"></a>记号说明</h1><ul>
+<li>$x, y, z, f, g, h$ 表示变量；</li>
+<li>$e, o$ 表示任意 λ 项；</li>
+<li>$\varphi, \psi, \rho, \sigma$ 等表示类型；</li>
+<li>使用 $\alpha, \beta$ 表示基本类型；</li>
+<li>使用 $?$ 表示上下文；</li>
+<li>$\rightarrow_{\beta}$ 表示一步 $\beta$ 规约；</li>
+<li>$\twoheadrightarrow_{\beta}$ 表示多步 $\beta$ 规约；</li>
+<li>$\mathrm{FV}~e$ 表示自由变量集合</li>
+<li>$e[x\mapsto e’]$ 表示将 $e$ 中的自由变量 $x$ 替换为 $e’$</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+	<div>
+		
+		
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2020/01/28/simply-typed-lambda-calculus/">简单类型 λ 演算</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 ljt12138 的个人博客">ljt12138</a></p>
+  <p><span>原始链接:</span><a href="/2020/01/28/simply-typed-lambda-calculus/" title="简单类型 λ 演算">http://ljt12138.github.io/2020/01/28/simply-typed-lambda-calculus/</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://ljt12138.github.io/2020/01/28/simply-typed-lambda-calculus/" aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+    });
+    });  
+</script>
+
+
+		
+	</div>
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/lambda-calculus/" rel="tag"># lambda-calculus</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/09/wc-final/" rel="next" title="浅谈信息学竞赛教学中非程序设计题目的应用">
+                <i class="fa fa-chevron-left"></i> 浅谈信息学竞赛教学中非程序设计题目的应用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div id="gitalk-container"></div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/header.jpg" alt="ljt12138">
+            
+              <p class="site-author-name" itemprop="name">ljt12138</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/ljt12138" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:lijt19@mails.tsinghua.edu.cn" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-nd.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简单类型-λ-演算"><span class="nav-number">1.</span> <span class="nav-text">简单类型 λ 演算</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#类型系统"><span class="nav-number">1.1.</span> <span class="nav-text">类型系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Curry-风格的-lambda-to"><span class="nav-number">1.2.</span> <span class="nav-text">Curry 风格的 $\lambda_{\to}$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类型的基本性质"><span class="nav-number">1.3.</span> <span class="nav-text">类型的基本性质</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类型对应的树"><span class="nav-number">1.4.</span> <span class="nav-text">类型对应的树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lambda-to-的表达能力"><span class="nav-number">1.5.</span> <span class="nav-text">$\lambda_{\to}$ 的表达能力</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#自然数"><span class="nav-number">1.5.1.</span> <span class="nav-text">自然数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#布尔值"><span class="nav-number">1.5.2.</span> <span class="nav-text">布尔值</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正则定理"><span class="nav-number">2.</span> <span class="nav-text">正则定理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#正则和值"><span class="nav-number">2.1.</span> <span class="nav-text">正则和值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#弱正则定理"><span class="nav-number">2.2.</span> <span class="nav-text">弱正则定理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#强正则定理"><span class="nav-number">2.3.</span> <span class="nav-text">强正则定理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#记号说明"><span class="nav-number">3.</span> <span class="nav-text">记号说明</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ljt12138</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src="https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: '023a14ecb0d9640c78ae',
+          clientSecret: '907b9345301ee9d44b411a1a3c54917684471802',
+          repo: 'ljt12138.github.io',
+          owner: 'ljt12138',
+          admin: ['ljt12138'],
+          id: location.pathname,
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')           
+       </script>
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>
