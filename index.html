@@ -331,7 +331,13 @@
 
       
         
-          <h1 id="简单类型-λ-演算"><a href="#简单类型-λ-演算" class="headerlink" title="简单类型 λ 演算"></a>简单类型 λ 演算</h1><h2 id="类型系统"><a href="#类型系统" class="headerlink" title="类型系统"></a>类型系统</h2><p><strong>简单类型 λ 演算（Simply Typed λ-Calculus）</strong>，或称 $\lambda_{\to}$，在无类型 λ 演算的基础上引入了一个基本的类型系统。在简单类型 λ 演算中，类型要么是基本类型 $T \in \mathcal{T}$， 要么形如 $\varphi\to\psi$，非形式化地，表示参数为 $\varphi$、返回值为 $\psi$ 的函数。其中箭头是右结合的，即 $\varphi\to\psi\to \rho := \varphi\to(\psi\to\rho)$。</p>
+          <h1 id="简单类型-λ-演算"><a href="#简单类型-λ-演算" class="headerlink" title="简单类型 λ 演算"></a>简单类型 λ 演算</h1><p>简单类型 λ 演算是一种非常简单的类型系统。在本文中，我们将从简单类型 λ 演算的基本性质出发，介绍四个不那么平凡的结果：</p>
+<ul>
+<li><strong>强正则定理</strong>：简单类型 λ 演算中，不存在以有类型的项开始的无限长的 β 规约序列；</li>
+<li><strong>类型推导算法：</strong>对于 Curry 风格（变量不注明类型）的 λ 演算，存在高效的算法求出 λ 项的“主类型”；</li>
+<li><strong>组合子逻辑</strong>：一个仅用 2 个组合子和组合子应用形成的演算系统，不需要任何变量；</li>
+<li><strong>Curry-Howard 同构</strong>：简单类型 λ 演算与直觉主义命题逻辑的自然演绎系统对应，简单类型组合子逻辑与直觉主义希尔伯特公理系统对应。</li>
+</ul>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2020/01/28/simply-typed-lambda-calculus/#more" rel="contents">
@@ -1811,7 +1817,7 @@ C_A(S) \le k\times OPT(S) + O(1)</script><p>其中 $OPT(S)$ 是离线最优算�
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
