@@ -270,39 +270,6 @@ S(\alpha) &:= \varphi, \alpha\mapsto \varphi \in S;\\
 S(\varphi\to\psi) &:= S(\varphi)\to S(\psi).
 \end{aligned}
 $$
-对于两个类型 $\varphi, \psi$，如果存在一个 $S$ 使得 $S(\varphi)= \psi$，我们称 $\varphi$ 比 $\psi$ 更通用，记作 $\varphi\le_S\psi$。显而易见，由于替换是可以合成的，$\le_S$ 构成一个偏序关系。定义 $\varphi\sim_S\psi$ 如果 $\varphi\le_S\psi$ 且 $\psi\le_S\varphi$。
-
-根据这一偏序关系，我们可以定义出下界、下确界以及上界、上确界。接下来我们证明任意两个元素均有上、下确界，从而类型在 $\le_S$ 关系下构成一个偏序格。
-
-------
-
-**引理：**类型在 $\le_S$ 关系下构成一个偏序格。
-
-**证明：**为此，仅需证明任意两个元素均有上下确界。由于两个方向证明类似，我们只证明下确界。对于任意的类型  $\varphi, \psi,\varphi',\psi' $ 和类型变量 $\alpha$，我们定义 $\land$ 运算为
-$$
-\begin{aligned}
-\alpha \land \varphi &:= \alpha;\\
-\varphi \land \alpha &:= \alpha;\\
-\varphi\to\psi\land \varphi'\to\psi' &:= (\varphi\land\psi)\to(\varphi'\land\psi').
-\end{aligned}
-$$
-用归纳法容易说明 $\varphi\land\psi$ 是 $\varphi$ 和 $\psi$ 的下界，下面证明 $\varphi\land \psi$ 正是 $\varphi, \psi$ 的下确界。施归纳于 $\land$ 的计算，证明对于任意的 $\rho$ 满足 $\rho\le_S \varphi$ 且 $\rho\le_S\psi$，均有 $\varphi\land \psi\le_S\rho$。讨论
-
-1. $\varphi$ 或 $\psi$ 是类型变量，由于 $\varphi\land\psi$ 一定是类型变量，我们有 $\varphi\land\psi\le_S\rho$；
-2. 若 $\varphi = \varphi_1\to \varphi_2$ 且 $\psi = \psi_1\to\psi_2$，由于 $\rho \le_S \varphi$ 有 $\rho = \rho_1\to\rho_2$ 且 $\rho_i\le_S\varphi_i$，同理有 $\rho_i\le_S\psi_i$。根据归纳假设，我们有 $\varphi_i\land\psi_i \le_S \rho_i$。根据替换的定义，有 $\varphi\land\psi \le_S\rho$。
-
-类似地，上确界的运算 $\lor$ 为
-$$
-\begin{aligned}
-\alpha \lor \varphi &:= \varphi;\\
-\varphi \lor \alpha &:= \varphi;\\
-\varphi\to\psi\lor \varphi'\to\psi' &:= (\varphi\lor\psi)\to(\varphi'\lor\psi').
-\end{aligned}
-$$
-
-------
-
-这一引理保证了“最通用”这一说法是良定义的。对于一个项不同的类型 $\varphi_1, \dots, \varphi_k$，根据格的性质，我们能够找到它们的下界 $\varphi = \varphi_1\land\dots\land\varphi_k$，使得任何一个合法的类型均可以由 $\varphi$ 做替换得到。
 
 ### 类型推导算法
 
@@ -346,7 +313,7 @@ $$
 
 **证明：**首先根据性质 2 对限制方程组做上三角化，接下来从下至上，用替换操作消去左侧变量所有的出现。
 
----
+------
 
 **算法：**我们的类型推导算法分为以下三步
 
@@ -384,25 +351,16 @@ $$
 我们的算法可以描述如下
 
 1. 初始时，为每一个限制 $\varphi = \psi$ 的两侧建立对应的类型树，并预处理 `T[u] = u`
-
 2. `Unify(u, v)` 表示将结点 `u, v` 对应的类型树相等的限制，加入到数据结构（T+U）之中，那么
    1. 设 `u=T(u), v=T(v)`
-
    2. 如果 `u=v`，说明这一条限制是冗余的
-
    3. 如果 `u` 对应于类型变量，设置 `T[u]=v`，并将 `u` 加入集合 $S$；如果 `v` 对应于类型变量，设置 `T[v]=u`，并将 `v` 加入集合 $S$。集合 $S$ 对应了限制方程组解左侧的“约束变元”。
-
-   4. 如果 `u=u1->u2`，且 `v=v1->v2`，递归 `Unify(u1, v1), Unify(u2, v2)`
-
+   4. 如果 `u=u1->u2`，且 `v=v1->v2`，设置 `T[u] = v`，并递归 `Unify(u1, v1), Unify(u2, v2)`
    5. 否则，返回失败 
-
 3. 依次 `Unify` 所有的限制
-
 4. `BFS(u)` 表示找到 `u` 对应的类型树，依次 `BFS` 所有集合 $S$ 中的结点并产生对应的类型树。
-
    - 如果任何一个结点 `BFS` 过程中回到了自身，返回失败
      - 这是由于在算法第第二步 3 中，我们没有检查 $u\notin\mathrm{FV}(v)$
-
 5. $S$ 和 `BFS` 产生的类型树对应的类型构成了一组解
 
 由于每一次 `Unify` 会将一对原类型树构成森林的子树判定为相同，而本质不同的对数仅有 $O(n^2)$ 个，因此 `Unify` 仅会执行 $O(n^2)$ 次，从而总的时间复杂度也是多项式级别的。
@@ -518,7 +476,7 @@ Curry-Howard 同构说明了类型系统和逻辑系统之间的重要联系。�
 
 ## 致谢
 
-感谢 @wmd 同学在作者学习中的帮助。如果您发现了本文中的问题，欢迎用评论或邮件 (lijt19@) 方式联系我。
+感谢 @wmd 同学在作者学习中的帮助。如果您发现了本文中的问题，欢迎用评论或邮件方式联系我。
 
 ## 参考文献
 

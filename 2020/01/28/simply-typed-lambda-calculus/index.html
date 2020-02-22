@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="From OI To CS">
 <meta property="og:description" content="简单类型 λ 演算简单类型 λ 演算是一种非常简单的类型系统。在本文中，我们将从简单类型 λ 演算的基本性质出发，介绍四个不那么平凡的结果：  强正则定理：简单类型 λ 演算中，不存在以有类型的项开始的无限长的 β 规约序列； 类型推导算法：对于 Curry 风格（变量不注明类型）的 λ 演算，存在高效的算法求出 λ 项的“主类型”； 组合子逻辑：一个仅用 2 个组合子和组合子应用形成的演算系统，">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-02-05T14:19:33.565Z">
+<meta property="og:updated_time" content="2020-02-22T10:34:04.391Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="简单类型 λ 演算">
 <meta name="twitter:description" content="简单类型 λ 演算简单类型 λ 演算是一种非常简单的类型系统。在本文中，我们将从简单类型 λ 演算的基本性质出发，介绍四个不那么平凡的结果：  强正则定理：简单类型 λ 演算中，不存在以有类型的项开始的无限长的 β 规约序列； 类型推导算法：对于 Curry 风格（变量不注明类型）的 λ 演算，存在高效的算法求出 λ 项的“主类型”； 组合子逻辑：一个仅用 2 个组合子和组合子应用形成的演算系统，">
@@ -509,30 +509,7 @@ e~e_1~\dots~e_k\to_{\beta} e'~e_1~\dots~e_k\twoheadrightarrow_{\beta}\dots</scri
 S(\alpha) &:= \alpha, \alpha\notin\mathrm{dom}~S;\\
 S(\alpha) &:= \varphi, \alpha\mapsto \varphi \in S;\\
 S(\varphi\to\psi) &:= S(\varphi)\to S(\psi).
-\end{aligned}</script><p>对于两个类型 $\varphi, \psi$，如果存在一个 $S$ 使得 $S(\varphi)= \psi$，我们称 $\varphi$ 比 $\psi$ 更通用，记作 $\varphi\le_S\psi$。显而易见，由于替换是可以合成的，$\le_S$ 构成一个偏序关系。定义 $\varphi\sim_S\psi$ 如果 $\varphi\le_S\psi$ 且 $\psi\le_S\varphi$。</p>
-<p>根据这一偏序关系，我们可以定义出下界、下确界以及上界、上确界。接下来我们证明任意两个元素均有上、下确界，从而类型在 $\le_S$ 关系下构成一个偏序格。</p>
-<hr>
-<p><strong>引理：</strong>类型在 $\le_S$ 关系下构成一个偏序格。</p>
-<p><strong>证明：</strong>为此，仅需证明任意两个元素均有上下确界。由于两个方向证明类似，我们只证明下确界。对于任意的类型  $\varphi, \psi,\varphi’,\psi’ $ 和类型变量 $\alpha$，我们定义 $\land$ 运算为</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-\alpha \land \varphi &:= \alpha;\\
-\varphi \land \alpha &:= \alpha;\\
-\varphi\to\psi\land \varphi'\to\psi' &:= (\varphi\land\psi)\to(\varphi'\land\psi').
-\end{aligned}</script><p>用归纳法容易说明 $\varphi\land\psi$ 是 $\varphi$ 和 $\psi$ 的下界，下面证明 $\varphi\land \psi$ 正是 $\varphi, \psi$ 的下确界。施归纳于 $\land$ 的计算，证明对于任意的 $\rho$ 满足 $\rho\le_S \varphi$ 且 $\rho\le_S\psi$，均有 $\varphi\land \psi\le_S\rho$。讨论</p>
-<ol>
-<li>$\varphi$ 或 $\psi$ 是类型变量，由于 $\varphi\land\psi$ 一定是类型变量，我们有 $\varphi\land\psi\le_S\rho$；</li>
-<li>若 $\varphi = \varphi_1\to \varphi_2$ 且 $\psi = \psi_1\to\psi_2$，由于 $\rho \le_S \varphi$ 有 $\rho = \rho_1\to\rho_2$ 且 $\rho_i\le_S\varphi_i$，同理有 $\rho_i\le_S\psi_i$。根据归纳假设，我们有 $\varphi_i\land\psi_i \le_S \rho_i$。根据替换的定义，有 $\varphi\land\psi \le_S\rho$。</li>
-</ol>
-<p>类似地，上确界的运算 $\lor$ 为</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-\alpha \lor \varphi &:= \varphi;\\
-\varphi \lor \alpha &:= \varphi;\\
-\varphi\to\psi\lor \varphi'\to\psi' &:= (\varphi\lor\psi)\to(\varphi'\lor\psi').
-\end{aligned}</script><hr>
-<p>这一引理保证了“最通用”这一说法是良定义的。对于一个项不同的类型 $\varphi_1, \dots, \varphi_k$，根据格的性质，我们能够找到它们的下界 $\varphi = \varphi_1\land\dots\land\varphi_k$，使得任何一个合法的类型均可以由 $\varphi$ 做替换得到。</p>
-<h3 id="类型推导算法"><a href="#类型推导算法" class="headerlink" title="类型推导算法"></a>类型推导算法</h3><p>接下来我们将要给出一个算法 <sup><a href="#fn_2" id="reffn_2">2</a></sup>，计算一个 Curry 风格 λ 项的主类型。算法首先给每个 $\lambda$ 抽象的变量 $x_i$ 赋予两两不同的类型变量 $\alpha_i$，接下来在计算 λ 项类型的同时，维护一个“限制方程组”，其中每一项形如 $\varphi_i = \psi_i$，表示 $\varphi_i$ 和 $\psi_i$ “是相同的类型”。不妨讨论 λ 项的构成。</p>
+\end{aligned}</script><h3 id="类型推导算法"><a href="#类型推导算法" class="headerlink" title="类型推导算法"></a>类型推导算法</h3><p>接下来我们将要给出一个算法 <sup><a href="#fn_2" id="reffn_2">2</a></sup>，计算一个 Curry 风格 λ 项的主类型。算法首先给每个 $\lambda$ 抽象的变量 $x_i$ 赋予两两不同的类型变量 $\alpha_i$，接下来在计算 λ 项类型的同时，维护一个“限制方程组”，其中每一项形如 $\varphi_i = \psi_i$，表示 $\varphi_i$ 和 $\psi_i$ “是相同的类型”。不妨讨论 λ 项的构成。</p>
 <ol>
 <li>若 λ 项为 $x_i$，此项的类型为 $\alpha_i$</li>
 <li>若 λ 项为 $\lambda x_i. e$，递归计算 $e$ 的类型 $\varphi$，此项的类型为 $\alpha_i\to\varphi$</li>
@@ -607,7 +584,7 @@ a_{n}=a_{n+1}\to a_{n+1}</script><p>按照 $a_n, a_{n-1},\dots, a_1$ 的顺序�
 </li>
 <li><p>如果 <code>u</code> 对应于类型变量，设置 <code>T[u]=v</code>，并将 <code>u</code> 加入集合 $S$；如果 <code>v</code> 对应于类型变量，设置 <code>T[v]=u</code>，并将 <code>v</code> 加入集合 $S$。集合 $S$ 对应了限制方程组解左侧的“约束变元”。</p>
 </li>
-<li><p>如果 <code>u=u1-&gt;u2</code>，且 <code>v=v1-&gt;v2</code>，递归 <code>Unify(u1, v1), Unify(u2, v2)</code></p>
+<li><p>如果 <code>u=u1-&gt;u2</code>，且 <code>v=v1-&gt;v2</code>，设置 <code>T[u] = v</code>，并递归 <code>Unify(u1, v1), Unify(u2, v2)</code></p>
 </li>
 <li><p>否则，返回失败 </p>
 </li>
@@ -896,7 +873,7 @@ a_{n}=a_{n+1}\to a_{n+1}</script><p>按照 $a_n, a_{n-1},\dots, a_1$ 的顺序�
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
