@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Algorithm-Analysis,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="$k$ 祖先问题$k$ 祖先问题（Level Ancestor Problem）是静态树的重要问题之一。给定一棵树和若干个询问 $(u, k)$，要求结点 $u$ 的第 $k​$ 个祖先结点。 离线情景下的 $k$ 祖先问题存在一个简单的 $O(n+q)$ 的算法：在 dfs 的过程中维护一个记录祖先的栈，然后在每个结点处回答和这个结点有关的所有询问；在线情景下有基于倍增的 $O(n\log n)">
+<meta name="keywords" content="Algorithm-Analysis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="树上 k 祖先问题">
+<meta property="og:url" content="http://ljt12138.github.io/2019/08/13/level-ancestor/index.html">
+<meta property="og:site_name" content="一些有的没的">
+<meta property="og:description" content="$k$ 祖先问题$k$ 祖先问题（Level Ancestor Problem）是静态树的重要问题之一。给定一棵树和若干个询问 $(u, k)$，要求结点 $u$ 的第 $k​$ 个祖先结点。 离线情景下的 $k$ 祖先问题存在一个简单的 $O(n+q)$ 的算法：在 dfs 的过程中维护一个记录祖先的栈，然后在每个结点处回答和这个结点有关的所有询问；在线情景下有基于倍增的 $O(n\log n)">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.loli.net/2019/08/13/6VR9zwBMXyxITFl.png">
+<meta property="og:updated_time" content="2020-08-28T05:02:22.040Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="树上 k 祖先问题">
+<meta name="twitter:description" content="$k$ 祖先问题$k$ 祖先问题（Level Ancestor Problem）是静态树的重要问题之一。给定一棵树和若干个询问 $(u, k)$，要求结点 $u$ 的第 $k​$ 个祖先结点。 离线情景下的 $k$ 祖先问题存在一个简单的 $O(n+q)$ 的算法：在 dfs 的过程中维护一个记录祖先的栈，然后在每个结点处回答和这个结点有关的所有询问；在线情景下有基于倍增的 $O(n\log n)">
+<meta name="twitter:image" content="https://i.loli.net/2019/08/13/6VR9zwBMXyxITFl.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://ljt12138.github.io/2019/08/13/level-ancestor/">
+
+
+
+
+
+  <title>树上 k 祖先问题 | 一些有的没的</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">一些有的没的</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">ljt12138</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://ljt12138.github.io/2019/08/13/level-ancestor/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ljt12138">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一些有的没的">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">树上 k 祖先问题</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-13T11:11:10+08:00">
+                2019-08-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="k-祖先问题"><a href="#k-祖先问题" class="headerlink" title="$k$ 祖先问题"></a>$k$ 祖先问题</h2><p>$k$ 祖先问题（Level Ancestor Problem）是静态树的重要问题之一。给定一棵树和若干个询问 $(u, k)$，要求结点 $u$ 的第 $k​$ 个祖先结点。</p>
+<p>离线情景下的 $k$ 祖先问题存在一个简单的 $O(n+q)$ 的算法：在 dfs 的过程中维护一个记录祖先的栈，然后在每个结点处回答和这个结点有关的所有询问；在线情景下有基于倍增的 $O(n\log n)-O(\log n)$ 算法，基于长链剖分的 $O(n)-O(\log n)$ 算法和 $O(n\log n) - O(1)$ 算法，以及最终的 $O(n) - O(1)$ 算法。</p>
+<a id="more"></a>
+<h2 id="倍增"><a href="#倍增" class="headerlink" title="倍增"></a>倍增</h2><p>倍增法预处理 $f[i][u]$ 表示结点 $u$ 向上 $2^i$ 个祖先结点，其中 $f[0][u]$ 正是父亲，其余部分遵循递推式</p>
+<script type="math/tex; mode=display">
+f[i][u] = f[i-1][f[i-1][u]]</script><p>对于一组询问 $(u, k)$，考察 $k$ 的二进制分解 $2^{a_i}+2^{a_2}+\dots + 2^{a_m}$，我们可以利用不超过 $O(\log n)$ 次跳跃到其第 $k$ 个祖先。</p>
+<h2 id="长链剖分"><a href="#长链剖分" class="headerlink" title="长链剖分"></a>长链剖分</h2><h3 id="O-n-O-log-n-算法"><a href="#O-n-O-log-n-算法" class="headerlink" title="$O(n)-O(\log n)$ 算法"></a>$O(n)-O(\log n)$ 算法</h3><p>长链剖分是这样一种分解：定义树的高度为最深叶子的深度，我们将每个结点于其最高的儿子之间的边标为重边，将其余边标为轻边，那么重边就构成了对树的一个链划分。这个划分有如下的性质：</p>
+<ol>
+<li><p>轻儿子的深度之和 $\le n$。将轻儿子的深度附着在这个轻儿子的重链上，显而易见每一条重链只会提供 $1$ 的贡献，因此轻儿子深度之和 $\le n$。</p>
+</li>
+<li><p>结点 $u$ 的 $k$ 祖先 $g$ 所在的重链长度至少是 $k$。若不然，$g\to u$ 构成了一条更高的链。</p>
+</li>
+</ol>
+<p>我们将每条长度为 $L$ 的重链预处理出其上方 $L$ 个结点，称为这个重链的上部，这样预处理复杂度仍是 $O(n)$ 的。考虑下面的算法：</p>
+<ul>
+<li>对于询问 $(u, k)​$，若 $k​$ 祖先仍在重链和其上部之内，查表得到 $k​$ 祖先</li>
+<li>否则，跳到重链上部的顶端，并更新 $u$ 和 $k$</li>
+</ul>
+<p>由于每次跳到重链上部的顶端后，所在重链的长度至少 $\times 2$，因此这样的算法时间复杂度是 $O(\log n)$ 的。</p>
+<p>如果不预处理上部，仅仅每次跳到重链顶端的话，算法的时间复杂度将是 $O(\sqrt n)$ 的。一方面，由于每次跳跃后重链长度必然增加，当重链长度小于 $\sqrt n$ 时仅会跳跃 $O(\sqrt n)$ 次，当重链长度大于 $\sqrt n$ 时仅存在不超过 $O(\sqrt n)$ 条不同的重链；另一方面，我们可以构造如下的树将算法的时间复杂度卡到 $\Omega(\sqrt n)$：</p>
+<p><img src="https://i.loli.net/2019/08/13/6VR9zwBMXyxITFl.png" alt="pic2.png"></p>
+<h3 id="O-n-log-n-O-1-算法"><a href="#O-n-log-n-O-1-算法" class="headerlink" title="$O(n\log n)-O(1)$ 算法"></a>$O(n\log n)-O(1)$ 算法</h3><p>要获得更好的询问时间复杂度可以结合以上两个算法：</p>
+<ul>
+<li>用 $O(n\log n)$ 的时间复杂度预处理倍增表 $f[i][u]$</li>
+<li>预处理长链剖分，并计算每条长链的上端</li>
+<li>对于询问 $(u, k)$，设 $k$ 二进制下的最高位是 $d$，跳到 $f[d][u]$。根据上面的性质 $2$，一定可以通过在长链及其上端查表得到 $k$ 祖先。</li>
+</ul>
+<p>这样时间复杂度就被降低到了 $O(n\log n) - O(1)$。</p>
+<h3 id="线性时间优化"><a href="#线性时间优化" class="headerlink" title="线性时间优化"></a>线性时间优化</h3><p>使用分块技巧可以将预处理的时间复杂度降低到 $O(n)$。设 $b = \lg n / 4$，利用如下算法在树中选出 $O(n/b)$ 个关键点，并使得删去关键点后每一部分大小都不超过 $b$。</p>
+<ul>
+<li>在 dfs 处理结点 $nd$ 的过程中，如果子树大小小于 $b$ 则不处理，否则将 $nd$ 选为关键点，并删去整个子树。</li>
+</ul>
+<p>一方面利用离线 $O(n+q)$ 算法计算出所有关键点的倍增表，其中 $q = n/b\times \log n = O(n)$；另一方面我们预处理所有节点数小于 $b$ 的树 $T$ 所有可能的询问。由于 $a$ 个节点的树可以对应于 $2a$ 个括号组成的括号序列，因此树的个数不会超过</p>
+<script type="math/tex; mode=display">
+2^{2b} = O(\sqrt n)</script><p>表的总大小为</p>
+<script type="math/tex; mode=display">
+O(\sqrt n)\times b^2 = O(\sqrt n\log^2 n) = o(n)</script><p>对于一个询问 $(u, k)$，如果答案在块内则查表计算，否则可以转化为关键点上的询问——这可以用倍增表和长链剖分在 $O(1)$ 的时间复杂度内完成。 </p>
+<p><strong>Note：</strong><sup><a href="#fn_1" id="reffn_1">1</a></sup>中给出了一种更简单的分块方法。</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p><del>事实上我已经两次尝试写树上四毛子了</del>。相比树上并查集实现起来要容易一些，因为并不需要保证联通块个数的界，只需让关键点不太多即可。<a href="/code/ancestor.zip">下载代码</a></p>
+<p>可以使用 CMake 编译运行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cmake .</span><br><span class="line">$ make</span><br><span class="line">$ ./main</span><br></pre></td></tr></table></figure>
+<p>其中 <code>src/tree</code> 是树的实现，<code>src/brute</code> 是作为对照的倍增算法，<code>src/std/jump_pointer.h</code> 和 <code>src/std/ladder.h</code> 分别是分块和长链剖分的实现。</p>
+<p>由于常数太大，朴素的实现并不会比倍增更好，可能需要精细的卡常。</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><blockquote id="fn_1">
+<sup>1</sup>. MIT 6.851, Advanced Data Structure, Static tree(1)<a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#8617;</a>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+	<div>
+		
+		
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2019/08/13/level-ancestor/">树上 k 祖先问题</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 ljt12138 的个人博客">ljt12138</a></p>
+  <p><span>原始链接:</span><a href="/2019/08/13/level-ancestor/" title="树上 k 祖先问题">http://ljt12138.github.io/2019/08/13/level-ancestor/</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://ljt12138.github.io/2019/08/13/level-ancestor/" aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+    });
+    });  
+</script>
+
+
+		
+	</div>
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Algorithm-Analysis/" rel="tag"># Algorithm-Analysis</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/08/cache-oblivious-ds/" rel="next" title="缓存无关数据结构">
+                <i class="fa fa-chevron-left"></i> 缓存无关数据结构
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/12/01/k-sorter-problem/" rel="prev" title="关于 k-sorter 问题">
+                关于 k-sorter 问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div id="gitalk-container"></div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/header.jpg" alt="ljt12138">
+            
+              <p class="site-author-name" itemprop="name">ljt12138</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/ljt12138" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:lijt19@mails.tsinghua.edu.cn" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-nd.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#k-祖先问题"><span class="nav-number">1.</span> <span class="nav-text">$k$ 祖先问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#倍增"><span class="nav-number">2.</span> <span class="nav-text">倍增</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#长链剖分"><span class="nav-number">3.</span> <span class="nav-text">长链剖分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#O-n-O-log-n-算法"><span class="nav-number">3.1.</span> <span class="nav-text">$O(n)-O(\log n)$ 算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#O-n-log-n-O-1-算法"><span class="nav-number">3.2.</span> <span class="nav-text">$O(n\log n)-O(1)$ 算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线性时间优化"><span class="nav-number">3.3.</span> <span class="nav-text">线性时间优化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">4.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">5.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ljt12138</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src="https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: '023a14ecb0d9640c78ae',
+          clientSecret: '907b9345301ee9d44b411a1a3c54917684471802',
+          repo: 'ljt12138.github.io',
+          owner: 'ljt12138',
+          admin: ['ljt12138'],
+          id: location.pathname,
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')           
+       </script>
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>

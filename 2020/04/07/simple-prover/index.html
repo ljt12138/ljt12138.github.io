@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="概述：本文将介绍如何实现一个非常简单的命题逻辑定理证明器。这个定理证明器用 Haskell 编写，以交互式的方式进行使用，输出 Hilbert Style System 下原命题的一个证明。用这个小工具，我们可以生成许多难以直接证明的定理（如析取、合取的结合律）的证明。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="实现一个简单的命题逻辑定理证明器">
+<meta property="og:url" content="http://ljt12138.github.io/2020/04/07/simple-prover/index.html">
+<meta property="og:site_name" content="一些有的没的">
+<meta property="og:description" content="概述：本文将介绍如何实现一个非常简单的命题逻辑定理证明器。这个定理证明器用 Haskell 编写，以交互式的方式进行使用，输出 Hilbert Style System 下原命题的一个证明。用这个小工具，我们可以生成许多难以直接证明的定理（如析取、合取的结合律）的证明。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-08-28T05:02:22.050Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="实现一个简单的命题逻辑定理证明器">
+<meta name="twitter:description" content="概述：本文将介绍如何实现一个非常简单的命题逻辑定理证明器。这个定理证明器用 Haskell 编写，以交互式的方式进行使用，输出 Hilbert Style System 下原命题的一个证明。用这个小工具，我们可以生成许多难以直接证明的定理（如析取、合取的结合律）的证明。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://ljt12138.github.io/2020/04/07/simple-prover/">
+
+
+
+
+
+  <title>实现一个简单的命题逻辑定理证明器 | 一些有的没的</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">一些有的没的</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">ljt12138</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://ljt12138.github.io/2020/04/07/simple-prover/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ljt12138">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一些有的没的">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">实现一个简单的命题逻辑定理证明器</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-07T16:07:36+08:00">
+                2020-04-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Programming-Language/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming Language</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>概述：</strong>本文将介绍如何实现一个非常简单的命题逻辑定理证明器。这个定理证明器用 Haskell 编写，以交互式的方式进行使用，输出 Hilbert Style System 下原命题的一个证明。用这个小工具，我们可以生成许多难以直接证明的定理（如析取、合取的结合律）的证明。</p>
+<a id="more"></a>
+<h1 id="问题设定"><a href="#问题设定" class="headerlink" title="问题设定"></a>问题设定</h1><h2 id="Hilbert-Style-System"><a href="#Hilbert-Style-System" class="headerlink" title="Hilbert Style System"></a>Hilbert Style System</h2><p>我们的目标是输出原命题在 Hilbert Style System 下的一个证明。我们所使用的系统只有一个连接词 $\to$ 和一个特殊的、表示矛盾原子命题 $\perp$。其中，$\lnot\varphi $ 定义为 $\varphi\to\perp$，$\varphi\lor \psi$ 定义为 $\lnot \varphi\to \psi$，$\varphi\land\psi$ 定义为 $\lnot(\varphi\to\lnot\psi)$。为了方便起见，$\to$ 是右结合的。很容易验证这样的定理和通常的定义是等价的。证明系统具有三个公理模式：</p>
+<ol>
+<li>$\varphi\to\psi\to\varphi$</li>
+<li>$(\varphi\to\psi\to\rho)\to(\varphi\to\psi)\to\varphi\to\rho$</li>
+<li>$\lnot\lnot\varphi\to\varphi$</li>
+</ol>
+<p>也就是说，我们将要在经典逻辑而非直觉主义逻辑下工作。证明系统唯一的证明规则是 MP Rule，即如果已证明 $\varphi\to\psi$ 和 $\varphi$，那么可以证明 $\psi$。</p>
+<p>更严格的，Hilbert Style System 的证明由 $n$ 行构成，其中每一行要么是某个公理模式的一个实例（即将每个命题变元 $\varphi,\psi.\rho$ 替换为具体的内容），要么是 MP $(i, j)$，即对第 $i$ 行和第 $j$ 行的结论使用 MP Rule。</p>
+<h2 id="自然演绎系统"><a href="#自然演绎系统" class="headerlink" title="自然演绎系统"></a>自然演绎系统</h2><p>我们将要使用自然演绎系统作为生成 Hilbert Style System 证明的中介。对命题逻辑来说，自然演绎系统的证明是一棵以结论为根的树。关于自然演绎系统的描述可以在数理逻辑教材上找到，这里略过细节。</p>
+<h2 id="交互方式"><a href="#交互方式" class="headerlink" title="交互方式"></a>交互方式</h2><p>定理证明器的前端由以下三部分构成。</p>
+<ol>
+<li><strong>假设：</strong>列出所有可以在证明中使用的假设，其中每条假设都对应一个编号，以在证明中使用这条假设。</li>
+<li><strong>目标（或子目标）：</strong>当前需要证明的目标，是一个命题。</li>
+<li><strong>命令行：</strong>即用户可以执行的证明策略。</li>
+</ol>
+<p>用户可以执行的基本证明策略包括以下几种：</p>
+<ol>
+<li>前提引入<code>intro @id</code>：若目标为 $\varphi\to\psi$，将 $\varphi$ 加入假设列表，编号为 <code>@id</code>，并将目标转化为 $\psi$；</li>
+<li>应用 <code>apply @id</code>：若目标为 $\varphi$，编号为 <code>@id</code> 的假设为 $\psi\to\rho$，那么系统会先生成一个子目标 $\psi$；在子目标完成证明后，将目标变为 $\rho\to\varphi$。特别的，如果假设 <code>@id</code> 正是 $\psi\to\varphi$，那么第二部分仅需要证明 $\varphi\to\varphi$。</li>
+<li>引用假设 <code>just @id</code>：若目标正是编号为 <code>id</code> 的假设，则可以直接用这一条命令结束目标的证明。</li>
+<li>反证法 <code>contra @id</code>：若目标为 $\varphi$，将 $\lnot\varphi$ 加入假设编号为 <code>id</code>，并将目标变为 $\perp$。这正是我们平常对反证法的使用。</li>
+</ol>
+<p>为了方便使用，我们还引入了 <code>perp</code>，<code>identity</code> 和 <code>assumption</code> 策略，分别表示</p>
+<ol>
+<li>当目标为 $\perp$ 时，结束证明</li>
+<li>当目标为 $\varphi\to\varphi$ 时，结束证明</li>
+<li>当目标是某个假设时，结束证明</li>
+</ol>
+<p>为了实现的方便，我们忽略命题的 parsing，直接使用 Haskell shell 唤起定理证明器。</p>
+<h1 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h1><p>可以发现，问题关键在于将交互式的证明过程转化成 Hilbert Style System 中的一个证明。根据 Deduction Theorem，$\Gamma \vdash \varphi\to\psi$ 当且仅当 $\Gamma, \varphi\vdash \psi$，我们可以用展开 Deduction Theorem 的证明的方式实现前提引入。</p>
+<p>为了实现的方便，我们将采取另一种方式，即利用 Curry Howard 同构的方式来完成这种转化。从这种视角来看，证明的转化对应了不同语言之间的编译，而编译则是我们非常熟悉的任务。编译过程分为三步：</p>
+<ol>
+<li>前端：将输入的指令翻译成一个用简单类型 λμ 演算表示的、自然演绎系统的证明；</li>
+<li>中端：将自然演绎系统的证明翻译成用组合子表示的、Hilbert Style System 的证明；</li>
+<li>后端：输出一份可读的 Hilbert Style System 证明。</li>
+</ol>
+<h2 id="命题的表示"><a href="#命题的表示" class="headerlink" title="命题的表示"></a>命题的表示</h2><p>在 Curry Howard 同构的视角下，证明对应于类型，其定义仅包含原子类型、$\perp$ 和箭头类型三种。为了使用的方便，我们可以定义出箭头类型、与、或、非和逻辑等价的简记符号。</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">data</span> <span class="type">Type</span> = <span class="type">TypeId</span> <span class="type">Int</span> | <span class="type">TypeArrow</span> <span class="type">Type</span> <span class="type">Type</span> | <span class="type">Perp</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">infixr</span> <span class="number">5</span> <span class="comment">--&gt;</span></span><br><span class="line">(<span class="comment">--&gt;) u v = TypeArrow u v</span></span><br><span class="line"></span><br><span class="line"><span class="title">lnot</span> u = u <span class="comment">--&gt; Perp</span></span><br><span class="line"><span class="title">atom</span> u = <span class="type">TypeId</span> u</span><br><span class="line"><span class="title">perp</span> = <span class="type">Perp</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">infixl</span> <span class="number">6</span> \/</span><br><span class="line">(\/) u v = (lnot u)<span class="comment">--&gt;v</span></span><br><span class="line"><span class="keyword">infixl</span> <span class="number">7</span> /\</span><br><span class="line">(/\) u v = (u<span class="comment">--&gt;(lnot v))--&gt;perp</span></span><br><span class="line"><span class="keyword">infixl</span> <span class="number">4</span> &lt;-&gt;</span><br><span class="line">(&lt;-&gt;) u v = (u <span class="comment">--&gt; v) /\ (v --&gt; u)</span></span><br></pre></td></tr></table></figure>
+<p>我们需要定义类型的输出函数，即 <code>Show Type</code> 的实例。此外，我们需要定义两个类型的相等，作为使用 MP Rule 的判别条件。</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">sametype</span> (<span class="type">TypeId</span> u) (<span class="type">TypeId</span> v) = u == v</span><br><span class="line"><span class="title">sametype</span> (<span class="type">TypeArrow</span> u u') (<span class="type">TypeArrow</span> v v') = (sametype u v) &amp;&amp; (sametype u' v')</span><br><span class="line"><span class="title">sametype</span> <span class="type">Perp</span> <span class="type">Perp</span> = <span class="type">True</span></span><br><span class="line"><span class="title">sametype</span> _ _ = <span class="type">False</span></span><br></pre></td></tr></table></figure>
+<h2 id="简单类型-λμ-演算"><a href="#简单类型-λμ-演算" class="headerlink" title="简单类型 λμ 演算"></a>简单类型 λμ 演算</h2><p>简单类型 λμ 演算的项是如下定义的：</p>
+<script type="math/tex; mode=display">
+Term := x\mid \lambda x:Type.Term \mid (Term~Term)\mid \mu x:\lnot Type.Term</script><p>也就是</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">data</span> <span class="type">Term</span> = <span class="type">VarId</span> <span class="type">Int</span> | <span class="type">App</span> <span class="type">Term</span> <span class="type">Term</span> | </span></span><br><span class="line">			<span class="type">Abs</span> <span class="type">Int</span> <span class="type">Type</span> <span class="type">Term</span> | </span><br><span class="line">			<span class="type">Mu</span> <span class="type">Int</span> <span class="type">Type</span> <span class="type">Term</span></span><br></pre></td></tr></table></figure>
+<p>其中，<code>Mu u t e</code> 表示 $\mu x:\lnot t.e$。如果这一项是类型良好的，那么 $e:\perp$，并且这一项的类型为 $t$。我们需要编写 λμ 演算的类型规则，即给定一个项，如何确定其类型。令 <code>@con</code> 为自由变量的类型表，<code>get_type</code> 函数计算一个项的类型。</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">type</span> <span class="type">Context</span> = <span class="type">Map</span>.<span class="type">Map</span> <span class="type">Int</span> <span class="type">Type</span></span></span><br><span class="line"><span class="title">get_type</span> :: <span class="type">Context</span> -&gt; <span class="type">Term</span> -&gt; <span class="type">Maybe</span> <span class="type">Type</span></span><br><span class="line"><span class="title">get_type</span> con (<span class="type">VarId</span> id)   = <span class="type">Map</span>.lookup id con</span><br><span class="line"><span class="title">get_type</span> con (<span class="type">Abs</span> id t e) = fmap (\x -&gt; t <span class="comment">--&gt; x) $ get_type (Map.insert id t con) e </span></span><br><span class="line"><span class="title">get_type</span> con (<span class="type">Mu</span> id t e) = <span class="keyword">case</span> get_type (<span class="type">Map</span>.insert id (lnot t) con) e <span class="keyword">of</span></span><br><span class="line">                             <span class="type">Just</span> <span class="type">Perp</span> -&gt; <span class="type">Just</span> t</span><br><span class="line">                             _ -&gt; <span class="type">Nothing</span>                             </span><br><span class="line"><span class="title">get_type</span> con (<span class="type">App</span> e e') = <span class="keyword">let</span> tt  = get_type con e</span><br><span class="line">                              tt' = get_type con e'</span><br><span class="line">  <span class="keyword">in</span> <span class="keyword">case</span> tt' <span class="keyword">of</span></span><br><span class="line">       <span class="type">Just</span> t' -&gt; <span class="keyword">case</span> tt <span class="keyword">of</span> </span><br><span class="line">                     <span class="type">Just</span> (<span class="type">TypeArrow</span> t1 t2) -&gt;</span><br><span class="line">                       <span class="keyword">if</span> sametype t1 t' <span class="keyword">then</span></span><br><span class="line">                         <span class="type">Just</span> t2</span><br><span class="line">                       <span class="keyword">else</span></span><br><span class="line">                         <span class="type">Nothing</span></span><br><span class="line">                     _ -&gt; <span class="type">Nothing</span></span><br><span class="line">       _ -&gt; <span class="type">Nothing</span></span><br></pre></td></tr></table></figure>
+<h2 id="简单类型组合子"><a href="#简单类型组合子" class="headerlink" title="简单类型组合子"></a>简单类型组合子</h2><p>类似地，用于表示 Hilbert Style System 证明的简单类型组合子项如下定义。</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">data</span> <span class="type">CTerm</span> = <span class="type">CVarId</span> <span class="type">Int</span> | <span class="type">CApp</span> <span class="type">CTerm</span> <span class="type">CTerm</span> </span></span><br><span class="line">			| <span class="type">S</span> <span class="type">Type</span> <span class="type">Type</span> <span class="type">Type</span> | <span class="type">K</span> <span class="type">Type</span> <span class="type">Type</span> | <span class="type">D</span> <span class="type">Type</span></span><br></pre></td></tr></table></figure>
+<p>其中，<code>CVarId Int</code> 表示自由变元，其对应于证明使用的所有假设。在证明转化的过程中，我们将会使用自由变元。<code>CApp</code> 对应了组合子的应用，对应于 MP Rule。<code>S, K, D</code> 表示了三个基本组合子，分别为 </p>
+<script type="math/tex; mode=display">
+\begin{align*}
+S_{\varphi,\psi,\rho}:&~(\varphi\to\psi\to\rho)\to(\varphi\to\psi)\to\varphi\to\rho\\
+K_{\varphi,\psi}:&~\varphi\to\psi\to\varphi\\
+D_{\varphi}:&~\lnot\lnot\varphi\to\varphi
+\end{align*}</script><p>分别对应了系统的三条公理模式。我们需要定义组合子项的类型 <code>get_type_c</code>。</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">get_type_c</span> con (<span class="type">CVarId</span> id) = <span class="type">Map</span>.lookup id con</span><br><span class="line"><span class="title">get_type_c</span> con (<span class="type">S</span> p q r) = <span class="type">Just</span> $ (p <span class="comment">--&gt; q --&gt; r) --&gt; (p --&gt; q) --&gt; p --&gt; r</span></span><br><span class="line"><span class="title">get_type_c</span> con (<span class="type">K</span> p q) = <span class="type">Just</span> $ p <span class="comment">--&gt; q --&gt; p</span></span><br><span class="line"><span class="title">get_type_c</span> con (<span class="type">D</span> p) = <span class="type">Just</span> $ (lnot $ lnot p) <span class="comment">--&gt; p</span></span><br><span class="line"><span class="title">get_type_c</span> con (<span class="type">CApp</span> c c') = <span class="keyword">let</span> tt  = get_type_c con c</span><br><span class="line">                                 tt' = get_type_c con c'</span><br><span class="line">  <span class="keyword">in</span> <span class="keyword">case</span> tt' <span class="keyword">of</span></span><br><span class="line">       <span class="type">Just</span> t' -&gt; <span class="keyword">case</span> tt <span class="keyword">of</span> </span><br><span class="line">                     <span class="type">Just</span> (<span class="type">TypeArrow</span> t1 t2) -&gt;</span><br><span class="line">                       <span class="keyword">if</span> sametype t1 t' <span class="keyword">then</span></span><br><span class="line">                         <span class="type">Just</span> t2</span><br><span class="line">                       <span class="keyword">else</span></span><br><span class="line">                         <span class="type">Nothing</span></span><br><span class="line">                     _ -&gt; <span class="type">Nothing</span></span><br><span class="line">       _ -&gt; <span class="type">Nothing</span></span><br></pre></td></tr></table></figure>
+<h2 id="后端：证明的输出"><a href="#后端：证明的输出" class="headerlink" title="后端：证明的输出"></a>后端：证明的输出</h2><p>假如我们已经获取了以组合子表示的 Hilbert Style System 的证明，那么只需要在组合子项的语法树上递归，便可以生成其对应的“可读”的证明。</p>
+<ol>
+<li>对于 <code>S, K, D</code> 直接生成一行公理 </li>
+<li>对于 <code>CApp u v</code>，分别生成 <code>u</code> 和 <code>v</code> 的证明，记录它们最后一行的编号，并生成一行 MP Rule. </li>
+</ol>
+<p>在代码中，<code>generate_c</code>，<code>show_proof</code> 和 <code>show_theorem</code> 实现了这一步。</p>
+<h2 id="中端：证明的转化"><a href="#中端：证明的转化" class="headerlink" title="中端：证明的转化"></a>中端：证明的转化</h2><p>假定现在已经有了一个用 λμ 项表示的自然演绎证明，考虑应当如何将其转化为一个类型相同的组合子项。注意到三个组合子项都可以被一个简明的 λμ 项表示（即从组合子项到 λμ 项的翻译是容易的）。</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+S_{\varphi,\psi,\rho} &:= \lambda x:\varphi\to\psi\to\rho.\lambda y:\varphi\to\psi.\lambda z:\varphi.(x~z)~(y~z) \\
+K_{\varphi,\psi} &:= \lambda x:\varphi.\lambda y:\psi.x \\
+D_{\varphi} &:= \lambda x:\lnot\lnot\varphi.\mu y:\lnot\varphi.(x~y)
+\end{align*}</script><p>反过来，我们可以定义 </p>
+<script type="math/tex; mode=display">
+I_{\varphi} = (S_{\varphi,\varphi\to\varphi,\varphi}~K_{\varphi,\varphi\to\varphi})~K_{\varphi,\varphi}</script><p>容易说明 $I_\varphi:\varphi\to\varphi$。对于一个组合子项  $c:\varphi$ 和类型 $\psi$，$\lambda^{\star}x:\psi.c$ 表示生成一个新的组合子项 $c’:\psi\to\varphi$。$\lambda^{\star}$ 的定义如下：</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+\lambda^{\star}x:\varphi.x&:=I_{\varphi}\\
+\lambda^{\star}x:\varphi.F&:=K_{\psi,\varphi}~F, & F=S/K/D\land F:\psi\\
+\lambda^{\star}x:\varphi.F~G&:=S_{\varphi,\psi,\rho}~(\lambda^{\star}x.F)~(\lambda^{\star}x.G) & \Gamma,x:\varphi\vDash F:\psi\land G:\rho
+\end{align*}</script><p>容易证明该定义符合我们的描述。借助这个函数，我们便可以定义出转化函数  $[*]$。</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+[x] & := x \\
+[e~e'] & := [e]~[e']\\
+[\lambda x:\varphi.e] &:= \lambda^{\star}x:\varphi.e \\
+[\mu x:\lnot\varphi.e] &:= D_{\varphi}~(\lambda^{\star}x:\lnot \varphi. e)
+\end{align*}</script><p>转化算法正确性的证明是容易的。从某种意义上说，这种转换和 Deduction Theorem 的证明等价。</p>
+<h2 id="前端：交互"><a href="#前端：交互" class="headerlink" title="前端：交互"></a>前端：交互</h2><p>简单来说，证明的过程是一个从根向下、递归构建自然演绎系统的证明树（也就是对应的 λμ 项的语法树）的过程。在这里我们简要描述每种操作的实现。令 <code>con : Map Int Type</code> 为假设表，<code>goal</code> 为当前的目标。</p>
+<ol>
+<li><code>intro u</code>：如果当前目标为 $\varphi\to\psi$，那么将 $\varphi$ 加入假设表，递归地证明 $\psi$，并得到一个 λμ 项 $e$。那么 $\lambda x:\varphi.e$ 便是原先目标对应的证明；</li>
+<li><code>apply u</code>：如果假设 <code>u</code> 为 $\varphi\to\psi$，目标为 $\rho$，那么首先建立一个子目标 $\varphi$ 并递归地证明，得到一个证明 $e_1$。然后建立新的目标 $\psi\to\rho$ 并递归地证明，得到一个证明 $e_2$。那么原先目标的证明便是 $(e_2~(u~e_1))$。</li>
+<li><code>just u</code>：证明为 $u$；</li>
+<li><code>contra u</code>：如果目标为 $\varphi$，将 $\lnot\varphi$ 加入假设表，递归地证明 $\perp$ 并得到一个 λμ 项 $e$。那么原先目标对应的证明便是 $\mu u:\lnot\varphi.e$。</li>
+</ol>
+<h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><p>实现代码见 <a href="/files/lambda-staff/prover.hs">prover.hs</a>。可以在 ghci 里调用 <code>theorem p</code> 来开始证明，其中 <code>p</code> 是一个命题。一个简单的示例如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">*Main&gt; let p = TypeId 0</span><br><span class="line">*Main&gt; theorem (p--&gt;p)</span><br><span class="line">------------</span><br><span class="line">goal:   (t0→t0)</span><br><span class="line">&gt; intro 1</span><br><span class="line">1       :       t0</span><br><span class="line">------------</span><br><span class="line">goal:   t0</span><br><span class="line">&gt; just 1</span><br><span class="line">Theorem : (t0→t0).</span><br><span class="line">Proof.</span><br><span class="line">1. Axiom 1      |- ((t0→((t0→t0)→t0))→((t0→(t0→t0))→(t0→t0)))</span><br><span class="line">2. Axiom 2      |- (t0→((t0→t0)→t0))</span><br><span class="line">3. MP 1,2       |- ((t0→(t0→t0))→(t0→t0))</span><br><span class="line">4. Axiom 2      |- (t0→(t0→t0))</span><br><span class="line">5. MP 3,4       |- (t0→t0)</span><br><span class="line">Qed.</span><br></pre></td></tr></table></figure>
+<p>另外，可以实现的一个简单拓展是所谓“proof normalization”以简化最终输出的证明。这对应于 λμ 项和组合子项的规约。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+	<div>
+		
+		
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2020/04/07/simple-prover/">实现一个简单的命题逻辑定理证明器</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 ljt12138 的个人博客">ljt12138</a></p>
+  <p><span>原始链接:</span><a href="/2020/04/07/simple-prover/" title="实现一个简单的命题逻辑定理证明器">http://ljt12138.github.io/2020/04/07/simple-prover/</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://ljt12138.github.io/2020/04/07/simple-prover/" aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+    });
+    });  
+</script>
+
+
+		
+	</div>
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/28/simply-typed-lambda-calculus/" rel="next" title="简单类型 λ 演算">
+                <i class="fa fa-chevron-left"></i> 简单类型 λ 演算
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/05/05/logic-note/" rel="prev" title="A Quick Introduction to Mathematical Logic">
+                A Quick Introduction to Mathematical Logic <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div id="gitalk-container"></div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/header.jpg" alt="ljt12138">
+            
+              <p class="site-author-name" itemprop="name">ljt12138</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/ljt12138" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:lijt19@mails.tsinghua.edu.cn" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-nd.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#问题设定"><span class="nav-number">1.</span> <span class="nav-text">问题设定</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hilbert-Style-System"><span class="nav-number">1.1.</span> <span class="nav-text">Hilbert Style System</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自然演绎系统"><span class="nav-number">1.2.</span> <span class="nav-text">自然演绎系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#交互方式"><span class="nav-number">1.3.</span> <span class="nav-text">交互方式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实现方式"><span class="nav-number">2.</span> <span class="nav-text">实现方式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#命题的表示"><span class="nav-number">2.1.</span> <span class="nav-text">命题的表示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单类型-λμ-演算"><span class="nav-number">2.2.</span> <span class="nav-text">简单类型 λμ 演算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单类型组合子"><span class="nav-number">2.3.</span> <span class="nav-text">简单类型组合子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后端：证明的输出"><span class="nav-number">2.4.</span> <span class="nav-text">后端：证明的输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中端：证明的转化"><span class="nav-number">2.5.</span> <span class="nav-text">中端：证明的转化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前端：交互"><span class="nav-number">2.6.</span> <span class="nav-text">前端：交互</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码实现"><span class="nav-number">3.</span> <span class="nav-text">代码实现</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ljt12138</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src="https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: '023a14ecb0d9640c78ae',
+          clientSecret: '907b9345301ee9d44b411a1a3c54917684471802',
+          repo: 'ljt12138.github.io',
+          owner: 'ljt12138',
+          admin: ['ljt12138'],
+          id: location.pathname,
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')           
+       </script>
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>

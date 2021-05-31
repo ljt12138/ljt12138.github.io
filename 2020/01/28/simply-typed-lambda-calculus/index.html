@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Lambda-Calculus, Curry-Howard Corresponding,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="简单类型 λ 演算简单类型 λ 演算是一种非常简单的类型系统。在本文中，我们将从简单类型 λ 演算的基本性质出发，介绍四个不那么平凡的结果：  强正则定理：简单类型 λ 演算中，不存在以有类型的项开始的无限长的 β 规约序列； 类型推导算法：对于 Curry 风格（变量不注明类型）的 λ 演算，存在高效的算法求出 λ 项的“主类型”； 组合子逻辑：一个仅用 2 个组合子和组合子应用形成的演算系统，">
+<meta name="keywords" content="Lambda-Calculus, Curry-Howard Corresponding">
+<meta property="og:type" content="article">
+<meta property="og:title" content="简单类型 λ 演算">
+<meta property="og:url" content="http://ljt12138.github.io/2020/01/28/simply-typed-lambda-calculus/index.html">
+<meta property="og:site_name" content="一些有的没的">
+<meta property="og:description" content="简单类型 λ 演算简单类型 λ 演算是一种非常简单的类型系统。在本文中，我们将从简单类型 λ 演算的基本性质出发，介绍四个不那么平凡的结果：  强正则定理：简单类型 λ 演算中，不存在以有类型的项开始的无限长的 β 规约序列； 类型推导算法：对于 Curry 风格（变量不注明类型）的 λ 演算，存在高效的算法求出 λ 项的“主类型”； 组合子逻辑：一个仅用 2 个组合子和组合子应用形成的演算系统，">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-08-28T05:02:22.050Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="简单类型 λ 演算">
+<meta name="twitter:description" content="简单类型 λ 演算简单类型 λ 演算是一种非常简单的类型系统。在本文中，我们将从简单类型 λ 演算的基本性质出发，介绍四个不那么平凡的结果：  强正则定理：简单类型 λ 演算中，不存在以有类型的项开始的无限长的 β 规约序列； 类型推导算法：对于 Curry 风格（变量不注明类型）的 λ 演算，存在高效的算法求出 λ 项的“主类型”； 组合子逻辑：一个仅用 2 个组合子和组合子应用形成的演算系统，">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://ljt12138.github.io/2020/01/28/simply-typed-lambda-calculus/">
+
+
+
+
+
+  <title>简单类型 λ 演算 | 一些有的没的</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">一些有的没的</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">ljt12138</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://ljt12138.github.io/2020/01/28/simply-typed-lambda-calculus/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ljt12138">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一些有的没的">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">简单类型 λ 演算</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-28T00:15:48+08:00">
+                2020-01-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Programming-Language/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming Language</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="简单类型-λ-演算"><a href="#简单类型-λ-演算" class="headerlink" title="简单类型 λ 演算"></a>简单类型 λ 演算</h1><p>简单类型 λ 演算是一种非常简单的类型系统。在本文中，我们将从简单类型 λ 演算的基本性质出发，介绍四个不那么平凡的结果：</p>
+<ul>
+<li><strong>强正则定理</strong>：简单类型 λ 演算中，不存在以有类型的项开始的无限长的 β 规约序列；</li>
+<li><strong>类型推导算法：</strong>对于 Curry 风格（变量不注明类型）的 λ 演算，存在高效的算法求出 λ 项的“主类型”；</li>
+<li><strong>组合子逻辑</strong>：一个仅用 2 个组合子和组合子应用形成的演算系统，不需要任何变量；</li>
+<li><strong>Curry-Howard 同构</strong>：简单类型 λ 演算与直觉主义命题逻辑的自然演绎系统对应，简单类型组合子逻辑与直觉主义希尔伯特公理系统对应。</li>
+</ul>
+<a id="more"></a>
+<h2 id="类型系统"><a href="#类型系统" class="headerlink" title="类型系统"></a>类型系统</h2><p><strong>简单类型 λ 演算（Simply Typed λ-Calculus）</strong>，或称 $\lambda_{\to}$，在无类型 λ 演算的基础上引入了一个基本的类型系统。在简单类型 λ 演算中，类型要么是基本类型 $T \in \mathcal{T}$， 要么形如 $\varphi\to\psi$，非形式化地，表示参数为 $\varphi$、返回值为 $\psi$ 的函数。其中箭头是右结合的，即 $\varphi\to\psi\to \rho := \varphi\to(\psi\to\rho)$。</p>
+<p>在简单类型 λ 演算中，λ 抽象中的变量需要标记类型，即</p>
+<script type="math/tex; mode=display">
+\lambda x:\varphi. e</script><p>根据变量的类型，我们可以根据一组类型规则确定一个 λ 项的类型，即</p>
+<script type="math/tex; mode=display">
+\frac{}{?, x:\varphi \vdash x:\varphi} ~ ~ ~ ~ ~ ~  
+\frac{?, x:\varphi \vdash e : \psi}{?\vdash(\lambda x:\varphi .e) : \varphi\to \psi} ~ ~ ~ ~ ~ ~ 
+\frac{?\vdash e_1:\varphi\to\psi ~ ~ ~ ?\vdash e_2:\varphi}{?\vdash(e_1 ~ e_2) : \psi}</script><p>其中，上下文 $?$ 的定义扩展为变量和类型的序对 $x:\varphi$ 构成的集合。$\mathrm{dom}~?$ 表示上下文中所有变量构成的集合，$\mathrm{range}~?$ 表示所有类型构成的集合。其中，$?, x:\varphi$ 表示将 $?$ 中加入 $x:\varphi$（如果 $x\in\mathrm{dom}~?$，覆盖已有的类型）。</p>
+<p>类型系统排除掉了一些“非正则”的 λ 项。举例而言，$\lambda x.x~x$ 是无类型 λ 演算中的一个项，但在无论给 $x$ 任何的类型，它都不是合法的 λ 项。事实上，我们将会证明简单类型 λ 演算的所有项都是<strong>强正则（Strongly Normalized）</strong>的，即不存在一个从有类型的 λ 开始的无限长的 $\beta​$ 规约序列。</p>
+<h2 id="Curry-风格的-lambda-to"><a href="#Curry-风格的-lambda-to" class="headerlink" title="Curry 风格的 $\lambda_{\to}$"></a>Curry 风格的 $\lambda_{\to}$</h2><p>上面所介绍的简单类型 λ 演算被称为 <strong>Church 风格的（à la Church）</strong>，而另一种类似的系统称为 <strong>Curry 风格的（à la Curry）</strong>。Curry 风格的 $\lambda_{\to}$ 并不在变量上标注其类型，相反，如果一个 λ 项可以为每个变量分配类型，使其在 Church 风格 $\lambda_{\to}$ 中具有类型，就称其是可类型化的（Typable）。一个可类型化的 λ 项可能具有多种合法的类型分配，例如 $\lambda x.x$ 有多种可能的类型</p>
+<script type="math/tex; mode=display">
+\mathrm{bool}\to\mathrm{bool}, \mathrm{int}\to\mathrm{int},(\mathrm{int}\to\mathrm{int})\to(\mathrm{int}\to\mathrm{int}),\dots</script><h2 id="类型的基本性质"><a href="#类型的基本性质" class="headerlink" title="类型的基本性质"></a>类型的基本性质</h2><p><strong>性质 1（Generation Lemma）</strong>类型规则可以反向使用，即</p>
+<ol>
+<li>$?\vdash x:\varphi$，那么 $x:\varphi\in{?}$</li>
+<li>$?\vdash (e_1~e_2): \psi $，那么存在 $\varphi$ 使得 $?\vdash e_1:\varphi\to\psi$ 且 $?\vdash e_2:\varphi$</li>
+<li>$?\vdash (\lambda x:\varphi.e) : \varphi\to\psi$，那么 $?, x:\varphi\vdash e:\psi$</li>
+</ol>
+<p><strong>性质 2（Substitution Lemma）</strong> 类型不会由于类型名称/项替换而改变</p>
+<ol>
+<li>$?\vdash e:\varphi$，那么 $?[\sigma\mapsto\rho]\vdash e:\varphi[\sigma\mapsto\rho]$</li>
+<li>$?, x:\sigma\vdash e:\varphi$，并且 $?\vdash e’:\sigma$，那么 $?\vdash e[x\mapsto e’]$ </li>
+</ol>
+<ul>
+<li>证明思路：施归纳于 $?, x:\sigma\vdash e:\varphi$ 确定类型的结构。</li>
+</ul>
+<p><strong>性质 3（β-Reduction Lemma）</strong>β-reduction 不会改变项的类型</p>
+<ul>
+<li>证明思路：施归纳于 β-reduction 的结构，利用替换引理。</li>
+</ul>
+<p><strong>定理（Church-Rosser Theorem）：</strong>对于任意的 $e\twoheadrightarrow_{\beta} e_1, e\twoheadrightarrow_{\beta}e_2$，存在一个 $e_3$，使得 $e_1\twoheadrightarrow_{\beta}e_3$，且 $e_2\twoheadrightarrow_{\beta}e_3$</p>
+<ul>
+<li>证明思路：由无符号 λ 演算的 Church-Rosser 定理，及 β 规约引理证明。</li>
+</ul>
+<h2 id="类型对应的树"><a href="#类型对应的树" class="headerlink" title="类型对应的树"></a>类型对应的树</h2><p>为了描述的方便，我们可以将类型和树相互对应。我们称 $T$ 是类型 $\varphi$ 对应的树，如果</p>
+<ol>
+<li>$\varphi$ 是基本类型，$T$ 仅包含一个标有 $\varphi$ 的结点；</li>
+<li>$\varphi = \sigma_1\to\sigma_2\to\dots\to\sigma_k$，$T$ 的根节点标有 $\varphi $，且 $k$ 个孩子 $T_1, T_2, \dots, T_k$ 分别是 $\sigma_1, \sigma_2, \dots, \sigma_k$ 对应的树。</li>
+</ol>
+<p>类型对应的树并不一定是唯一的。以类型 $\alpha\to (\alpha\to\alpha)\to\alpha$ 为例，</p>
+<script type="math/tex; mode=display">
+\frac{\alpha\to (\alpha\to\alpha)\to\alpha}{\alpha~ ~ ~ ~ ~ ~\frac{(\alpha\to\alpha)\to\alpha}{\frac{\alpha\to\alpha}{\alpha~ ~ ~ ~ ~ ~\alpha}~ ~ ~ ~ ~ ~\alpha}}
+~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+\frac{\alpha\to (\alpha\to\alpha)\to\alpha}{\alpha~ ~ ~ ~ ~ ~\frac{\alpha\to\alpha}{\alpha~ ~ ~ ~ ~ ~\alpha}~ ~ ~ ~ ~ ~\alpha}</script><p>都是合法的类型对应的树。其中，我们关心两个特殊的树，即</p>
+<ol>
+<li>每个非基本类型均有两个儿子，这棵树称为类型<strong>对应的二叉树</strong>；</li>
+<li>对于每个结点 $T$，其最后一个孩子 $T_k$ 对应于基本类型，这棵树称为类型<strong>对应的多叉树</strong>。</li>
+</ol>
+<p>二叉树和多叉树表示体现了我们看待类型的两种视角，分别对应了一个函数的 curry/uncurry 化。其中，多叉树表示将一个非基本类型的 λ 项看作一个多元函数，每个子结点对应于每一项参数的类型。</p>
+<hr>
+<p><strong>定义（类型的高度）：</strong>定义类型的高度为对应二叉树的高度。换言之</p>
+<ol>
+<li>$h(\alpha) = 1$</li>
+<li>$h(\varphi\to\psi) = \max\{h(\varphi), h(\psi)\}+1$ </li>
+</ol>
+<h2 id="lambda-to-的表达能力"><a href="#lambda-to-的表达能力" class="headerlink" title="$\lambda_{\to}$ 的表达能力"></a>$\lambda_{\to}$ 的表达能力</h2><h3 id="自然数"><a href="#自然数" class="headerlink" title="自然数"></a>自然数</h3><p>设 $\alpha$ 是任意类型，类似无类型 λ 演算中 Church 数的定义，我们有</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+0 &:= \lambda f:\alpha\to\alpha.\lambda x:\alpha. x\\
+1 &:= \lambda f:\alpha\to\alpha.\lambda x:\alpha. f~x\\
+2 &:= \lambda f:\alpha\to\alpha.\lambda x:\alpha. f~(f~x)\\
+\vdots &:= \vdots
+\end{aligned}</script><p>根据类型规则，我们有 $int := (\alpha\to \alpha)\to(\alpha\to\alpha)$。容易验证自然数的基本运算可以在 $\lambda_{\to}$ 中定义。</p>
+<h3 id="布尔值"><a href="#布尔值" class="headerlink" title="布尔值"></a>布尔值</h3><p>设 $\alpha$ 是任意类型，我们可以定义布尔值 $bool_{\alpha} := \alpha\to\alpha\to\alpha$，其中</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+true_{\alpha} &:= \lambda x : \alpha. \lambda y : \alpha. x\\
+false_{\alpha} &:= \lambda x : \alpha. \lambda y : \alpha. y
+\end{aligned}</script><p>值得注意的是，$true$ 和 $false$ 并不能像原先一样充当一般的 if-then-else 语句。事实上，使用 $true_{\alpha}$  实现的 if-then-else 语句要求 then 和 else 中的值必须具有<strong>相同的类型</strong>，且均为 $\alpha$。举例而言，</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+true_{int}~1~2 &: int\\
+false_{int}~1~2 &: int\\
+true_{int}~1~(x:\alpha) &: untypeable\\
+true_{int}~(x:\alpha)~(y:\alpha) &: untypeable
+\end{aligned}</script><p>为了语言使用的方便，可以新增基本类型 bool 和 ITE 语句，并定义类型规则</p>
+<script type="math/tex; mode=display">
+\frac{?\vdash e_1:bool ~ ~ ~ ?\vdash e_2:\varphi ~ ~ ~ ?\vdash e_3:\varphi}{?\vdash \mathrm{ITE}(e_1, e_2, e_3) : \varphi}</script><p>以及各种逻辑连接词，例如 $\mathrm{and, or, not}$ 等等。</p>
+<h2 id="正则定理"><a href="#正则定理" class="headerlink" title="正则定理"></a>正则定理</h2><h3 id="正则和值"><a href="#正则和值" class="headerlink" title="正则和值"></a>正则和值</h3><p><strong>定义（正则和值）：</strong> </p>
+<ol>
+<li>$\lambda x:\varphi, e$ 和 $x~e_1~e_2~\dots e_k$ 称为<strong>值（Value）</strong></li>
+<li>定义 $e$ 为<strong>正则的（Normalized）</strong>，如果不存在 $e’$ 使得 $e\to_{\beta}e’$</li>
+<li>称 $e$ 是<strong>可正则化（Normalizable）</strong>的，如果其存在一个正则表示。称 $e’$ 是 $e$ 的<strong>正则表示（Normal Form）</strong>，如果 $e’$ 是正则的，且 $e\twoheadrightarrow_{\beta} e’$，记作 $e\Downarrow e’$</li>
+</ol>
+<hr>
+<p>非形式化的，不能继续计算（即在顶层执行 λ 应用）的项称为值，不能继续规约的项是正则的。</p>
+<hr>
+<p><strong>性质 1：</strong>正则的项是值</p>
+<p><strong>证明：</strong>施归纳于 λ 项的结构。如果一个正则的项具有 $e_1~e_2$ 的形态，由于 $e_1~e_2$ 是正则的，$e_1$ 也是正则的，从而 $e_1$ 是值。那么</p>
+<ol>
+<li>如果 $e_1$ 形如 $\lambda x:\varphi, e’$，那么 $e_1~e_2$ 可以进行一次 $\beta$ 规约，这与 $\lambda$ 是正则的矛盾。</li>
+<li>如果 $e_1$ 形如 $x~e_1’~e_2’~\dots~e_k’$，那么 $e_1~e_2$ 为<script type="math/tex; mode=display">
+e_{1}~e_2 = x~e_1'~e_2'~\dots~e_k'~e_2</script>从而也是值。</li>
+</ol>
+<p><strong>性质 2：</strong>如果 $e$ 是可正则化的，那么其正则表示唯一</p>
+<p><strong>证明：</strong>若存在两个正则表示，根据 Church-Rosser 定理，其正则表示必然唯一。</p>
+<hr>
+<p>我们将要证明两个正则定理，<strong>弱正则定理（Weak Normalization Theorem）</strong>和<strong>强正则定理（Strong Normalization Theorem）</strong>。其中，弱正则定理是强正则定理的平凡推论，为了思维的完整性，我们首先给出其证明。</p>
+<h3 id="弱正则定理"><a href="#弱正则定理" class="headerlink" title="弱正则定理"></a>弱正则定理</h3><p><strong>定理（弱正则定理，Weak Normalization Theorem）：</strong>在 $\lambda_{\to}$ 中，任何有类型的项都是可正则化的。更严格地，如果 $?\vdash e:\varphi$，那么 $e$ 是可正则化的。</p>
+<p><strong>证明（Turing，Prawitz）：</strong>不妨称 $(\lambda x:\varphi.e_1)~e_2$ 为一个可规约项，定义其高度为 $\lambda x:\varphi.e_1$ 类型的高度，定义 λ 项 $e$ 的高度 $h(e)$ 为其中高度最大的可规约项的高度，$n(e)$ 为 $e$ 中高度为 $h(e)$ 的 λ 应用对数。施归纳于 $(h(e), n(e))$ 的字典序，证明所有有类型的项都是可正则化的。</p>
+<ol>
+<li><p>当 $h(e) = 1, n(e) = 0$ 时，结论是显然的。</p>
+</li>
+<li><p>取 $e$ 中最靠右的、高度为 $h(e)$ 的可规约项 $\Delta = (\lambda x:\varphi.e_1)~e_2$。由于 $\Delta$ 的选取，$h(e_1)&lt;h(e)$，且 $h(e_2) &lt; h(e)$。让我们证明 $e_1[x\mapsto e_2]$ 的高度小于 $h(e)$，从而可以说明使用 $e_1[x\mapsto e_2]$ 代替 $\Delta$ 得到的 λ 项 $e’$，$(h(e’), n(e’))$ 具有较小的字典序。</p>
+<p>假设 $e_1[x\mapsto e_2]$ 中存在一个可规约项 $\Delta’$ 满足高度大于等于 $h(e)$，那么</p>
+<ol>
+<li>可规约项不包含由 $[x\mapsto e_2]$ 产生的项，其也存在于 $e_1$ 中。由于 $h(e_1)&lt;h(e)$，这是不可能的；</li>
+<li>可规约项以 $[x\mapsto e_2]$ 产生的项作为第一项，即形如 $\Delta’=e_2~o$，这是不可能的，因为 $h(e_2) &lt; h(e)$；</li>
+<li>可规约项以 $[x\mapsto e_2]$ 产生的项作为第二项，即形如 $\Delta’ = o~e_2$，那么 $o~x$ 构成了一个 $e_1$ 中的相同高度的可规约项，由于 $h(e_1) &lt; h(e)$，这时不可能的。</li>
+<li>可规约项以 $[x\mapsto e_2]$ 产生的项作为第一项和第二项，这是不可能的，因为 $x~x$ 不可能存在于有类型的项中，对于任意 $x:\varphi$。</li>
+<li>可规约项在 $e_2$ 内部，由于 $h(e_2)&lt;h(e)$，这是不可能的。</li>
+</ol>
+</li>
+</ol>
+<hr>
+<p>弱正则定理说明，如果我们不断地选择最右侧、最高的可规约项进行规约，任何有类型的 λ 项总能在有限步内化为正则项。根据 Church-Rosser 定理，任何两个 $\beta-$等价的 λ 项都具有相同的正则表示，因此这提供了一个判定两个 λ 项 $\beta-$等价性的算法。</p>
+<p>弱正则定理的不足之处在于，它并没有说明任何有类型的项在“简明”的求值规则下可以在有限步终止。一般来说，常见“简明”的规约规则可以分为 Call by Value 和 Call by Name 两种方式。Call by Value 首先将 λ 应用的参数规约，然后做一步 β 规约；Call by Name 则直接进行 β 规约。举例而言，Call by Value 的 λ 演算求值规则可以定义如下</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+& \mathrm{Value\text{-}Rule}~ ~\frac{}{\mathrm{Val}(\lambda x:\varphi. e)}\\
+& \mathrm{Function\text{-}Reduce}~ ~\frac{e_1\Rightarrow e_1'}{e_1~e_2\Rightarrow e_1' e_2}\\
+& \mathrm{Argument\text{-}Reduce}~ ~\frac{\mathrm{Val}(e_1)~ ~ ~e_2\Rightarrow e_2'}{e_1~e_2\Rightarrow e_1~e_2'}\\
+& \mathrm{Beta\text{-}Reduction}~ ~\frac{\mathrm{Val}(e_2)}{(\lambda x:\varphi. e_1)~e_2\Rightarrow e_1[x\mapsto e_2]}
+\end{aligned}</script><p>容易说明，如果 $\vdash e$ 且 $e$ 不是值，那么有且仅有一条求值规则可以执行，即求值过程不会“卡住”。我们希望说明，任何有类型的 λ 项的求值过程可以在有限步内终止。事实上，无论以何种顺序，任何有类型的 λ 项进行求值的过程总是终止的。</p>
+<h3 id="强正则定理"><a href="#强正则定理" class="headerlink" title="强正则定理"></a>强正则定理</h3><p><strong>定理（强正则定理，Strong Normalization Theorem）：</strong>不存在以有类型的 λ 项开始的无限长的 $\beta$ 规约序列 <sup><a href="#fn_1" id="reffn_1">1</a></sup>。</p>
+<p><strong>证明：</strong>首先归纳地定义 $\mathrm{SN}~e$ 表示任给 $e_1, e_2, \dots, e_k$，$k\ge 0$，满足</p>
+<ol>
+<li>对于 $1\le i\le k$，恒有 $\mathrm{SN}~e_i~$</li>
+<li>$e~e_1~e_2~\dots~e_k$ 是有类型的</li>
+</ol>
+<p>那么 $e~e_1~e_2~\dots~e_k$ 不存在无限长的 $\beta$ 规约序列。由于 $e_i$ 类型的高度小于 $e$ 类型的高度，SN 是良定义的。</p>
+<p>定义 $\mathrm{SN^\star}~e$，如果对于任意的 $\{y_1,y_2,\dots, y_k\mid \mathrm{SN}~y_i\}$，都有$\mathrm{SN}~e[\forall i, x_i\mapsto y_i]$，其中 $\{x_1, x_2, \dots, x_k\} = \mathrm{FV}~e$。为了简便，将 $e[\forall i, x_i\mapsto y_i]$ 记作 $\gamma(e)$。</p>
+<p><strong>增强定理：</strong>对于任意的 $?\vdash e:\varphi$，都有 $\mathrm{SN^\star}~e$</p>
+<p>显然增强定理确实是原定理的增强。为证明增强定理，我们给出一个引理。</p>
+<p><strong>引理：</strong>对于任意 $?\vdash e:\varphi$ 和 $e\to_{\beta} e’$，那么 $\mathrm{SN}~e\Rightarrow \mathrm{SN}~e’$</p>
+<p><strong>引理的证明：</strong>由于 $\beta$ 规约序列</p>
+<script type="math/tex; mode=display">
+e~e_1~\dots~e_k\to_{\beta} e'~e_1~\dots~e_k\twoheadrightarrow_{\beta}\dots</script><p>始终是有穷的，这一结论显然。</p>
+<p><strong>增强定理的证明：</strong>施归纳于 $?\vdash e:\varphi$ 的步骤，证明 $\mathrm{SN^\star}~e$。</p>
+<ol>
+<li><p>如果 $e = x$，对于任何合法的 $\gamma$，$\mathrm{SN}~\gamma(e)$ 成立。</p>
+</li>
+<li><p>如果 $e = o_1~o_2$，只需证明 $\mathrm{SN}(\gamma(o_1~o_2))$，这等价于 $\mathrm{SN}((\gamma(o_1)~\gamma (o_2)))$。根据归纳假设，$\mathrm{SN^\star}(o_1)$ 且 $\mathrm{SN^\star}(o_2)$，那么也有 $\mathrm{SN}(\gamma(o_1))$ 和 $\mathrm{SN}(\gamma(o_2))$。任给 $e_1, e_2, \dots, e_k$ 满足 $\mathrm{SN}~e_i$，由于</p>
+<ol>
+<li>$\mathrm{SN}(\gamma(o_1))$</li>
+<li>$\mathrm{SN}(\gamma(o_2)), \mathrm{SN}(e_1), \dots, \mathrm{SN}(e_k)$</li>
+</ol>
+<p>根据 $\mathrm{SN}(\gamma(o_1))$ 的定义，可知 $\gamma(o_1)~\gamma(o_2)~e_1~\dots~e_k$ 不存在无限长的 $\beta$ 规约序列。</p>
+</li>
+<li><p>如果 $e=\lambda x:\varphi. o$，只需证明 $\mathrm{SN}(\gamma(\lambda x:\varphi.o))$，这等价于 $\mathrm{SN}(\lambda x:\varphi.\gamma(o)))$。下面用反证法。如果有 $e_1,e_2,\dots, e_k$ 满足 $\mathrm{SN}~e_i$，使得 $(\lambda x:\varphi.\gamma(o)))~e_1~\dots~e_k$ 存在一个无限长的 $\beta$ 规约序列，其一定形如</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&~(\lambda x:\varphi.\gamma(o)))~e_1~\dots~e_k\\
+\twoheadrightarrow_{\beta}&~(\lambda x:\varphi.\gamma(o)))~e_1'~\dots~e_k'\\
+\to_{\beta} &~ \gamma(o)[x\mapsto e_1']~e_2'~\dots~e_k'\\
+\twoheadrightarrow_{\beta}&~\dots
+\end{aligned}</script><p>根据引理 1，对于 $1\le i\le k$，均有 $\mathrm{SN}~e_i’$。又因为可以构造合法的 $\gamma’$，满足 $\gamma’(o)=\gamma(o)[x\mapsto e_1’]$，从而根据归纳假设 $\mathrm{SN^{\star}}(o)$，有 $\mathrm{SN}(\gamma’(o))$。那么</p>
+<script type="math/tex; mode=display">
+\gamma(o)[x\mapsto e_1']~e_2'~\dots~e_k' = \gamma'(o)~e_2'~\dots~e_k'</script><p>不存在无限长的 $\beta$ 规约序列，这与假设矛盾。</p>
+</li>
+</ol>
+<p>综上所述，增强定理成立，因而原定理也成立。</p>
+<h2 id="类型推导"><a href="#类型推导" class="headerlink" title="类型推导"></a>类型推导</h2><h3 id="主类型"><a href="#主类型" class="headerlink" title="主类型"></a>主类型</h3><p>对于一个 Curry 风格的 λ 项，其可能具有多种不同的合法类型指派，且不同的类型指派之间有着有趣的关系。以 $\lambda x.\lambda y.x~y$ 为例，类型指派 $\{(x:\alpha\to\beta), (y:\alpha)\}$ 对应的项的类型为 $(\alpha\to\beta)\to \alpha \to \beta$，而另一个类型指派 $\{(x:\alpha\to\alpha), (y:\alpha)\}$ 对应的类型为 $(\alpha\to \alpha)\to \alpha\to\alpha$。如果将 $\alpha, \beta$ 都看作待取值的“变量”，前者是一个更一般的类型指派，对应的项的类型也更通用。非形式化地，我们将一个 λ 项“最通用”的类型称为其<strong>主类型 (Principal Type)</strong>。</p>
+<p>为了描述主类型，我们需要定义<strong>类型变量</strong>。类型变量可以被任意替换成其他类型，表示在任意替换后得到的类型仍是原先 λ 项的类型。举例而言，如果将 $\alpha, \beta$ 看作基本类型，$(\alpha\to \beta)\to \alpha\to\beta$ 是 λ 项 $\lambda x.\lambda y.x~y$ 的主类型，将 $\alpha$ 替换为 $\beta$ 即可得到主类型的一个特例。</p>
+<p>我们定义类型的替换 $S$ 是一个替换序对 $\alpha\mapsto\varphi$ 的集合，表示将类型变量 $\alpha$ 替换为类型 $\varphi$。其中 $\mathrm{dom}$ 和 $\mathrm{range}$ 的定义同 λ 项的替换。替换作用于类型的规则可以简单地定义为</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+S(\alpha) &:= \alpha, \alpha\notin\mathrm{dom}~S;\\
+S(\alpha) &:= \varphi, \alpha\mapsto \varphi \in S;\\
+S(\varphi\to\psi) &:= S(\varphi)\to S(\psi).
+\end{aligned}</script><h3 id="类型推导算法"><a href="#类型推导算法" class="headerlink" title="类型推导算法"></a>类型推导算法</h3><p>接下来我们将要给出一个算法 <sup><a href="#fn_2" id="reffn_2">2</a></sup>，计算一个 Curry 风格 λ 项的主类型。算法首先给每个 $\lambda$ 抽象的变量 $x_i$ 赋予两两不同的类型变量 $\alpha_i$，接下来在计算 λ 项类型的同时，维护一个“限制方程组”，其中每一项形如 $\varphi_i = \psi_i$，表示 $\varphi_i$ 和 $\psi_i$ “是相同的类型”。不妨讨论 λ 项的构成。</p>
+<ol>
+<li>若 λ 项为 $x_i$，此项的类型为 $\alpha_i$</li>
+<li>若 λ 项为 $\lambda x_i. e$，递归计算 $e$ 的类型 $\varphi$，此项的类型为 $\alpha_i\to\varphi$</li>
+<li>若 λ 项为 $(e_1~e_2)$，递归计算 $e_1$ 的类型为 $\varphi_1$，$e_2$ 的类型为 $\varphi_2$，此项的类型为 $\rho_i$，且将限制 $\varphi_1 = \varphi_2\to\rho_i$ 加入限制方程组。其中，$\rho_i$ 是一个未使用过的新类型变量。</li>
+</ol>
+<p>根据这一算法，我们求解出 λ 项的一个序对 $(\varphi, C)$，其中 $\varphi$ 是其类型，$C$ 是类型变量之间的一些“限制”。因而类型推导问题就转化成了求解“限制”的问题。更严谨地，一个限制方程组是一系列类型“等式” $\varphi=\psi$ 的集合，表明了在类型推断的过程中需要满足的限制。我们可以通过等量替换的方式化简限制方程组。</p>
+<hr>
+<p><strong>性质 1：</strong>算法求得 λ 项的类型 $\varphi$ 是其主类型的下界。</p>
+<p><strong>证明：</strong>考虑主类型的类型指派，这是显然的。</p>
+<p><strong>性质 2：</strong>限制方程组可以被转化为等价的限制方程组，使得</p>
+<ol>
+<li>限制方程组形如 $\{b_1=\varphi_1, b_2=\varphi_2,\dots, b_k=\varphi_k\}$</li>
+<li>对于任意的 $i\le j$，$b_i\notin \mathrm{FV}(\varphi_j)$。换言之，我们将限制方程组转化成了一个“上三角”的形式。</li>
+</ol>
+<p><strong>证明：</strong>首先需要明确“等价的限制方程组”的含义。对于一个限制方程组 $C$，由其定义的等价关系是满足以下规则的最小等价关系</p>
+<ol>
+<li>如果 $\varphi=\psi\in C$，那么 $\varphi=\psi$；</li>
+<li>$\varphi_1 = \psi_1\land \varphi_2=\psi_2$ 当且仅当 $\varphi_1\to\varphi_2 = \psi_1\to\psi_2$。</li>
+</ol>
+<p>我们称两个限制方程组等价，如果它们定义出的等价关系是相等的。转化算法类似解代数方程组的带入消元算法，具体而言，变换 $\mathrm{unify}(C\cup \{\varphi=\psi\})$ 定义为：</p>
+<ol>
+<li>$\varphi=\beta$，且 $\beta\notin\mathrm{FV}(\psi)$，$\mathrm{unify}(C\cup \{\varphi=\psi\}):=\mathrm{unify}(C[\beta\mapsto \psi])\cup\{\beta=\psi\}$，显然 $\beta$ 一定不会出现在 $C[\beta\mapsto \psi]$；</li>
+<li>$\psi=\beta$，且 $\beta\notin\mathrm{FV}(\varphi)$，和上一种情况类似</li>
+<li>$\varphi=\varphi_1\to\varphi_2$，且 $\psi=\psi_1\to\psi_2$，那么 $\mathrm{unify}(C\cup \{\varphi=\psi\}):=\mathrm{unify}(C\cup\{\varphi_1=\psi_1\}\cup\{\varphi_2=\psi_2\})$</li>
+<li>其他情况，失败，返回 $\varnothing$</li>
+</ol>
+<p>很容易验证，变换的每一步均保持限制方程组等价。另一方面，由于每一次 1,2 均会使类型变量数量减小，3 仅能连续执行有限次，我们的算法总会在有限步内终止。</p>
+<p><strong>引理：</strong>限制方程组可以被转化为等价的限制方程组，使得</p>
+<ol>
+<li>限制方程组形如 $\{b_1=\varphi_1, b_2=\varphi_2,\dots, b_k=\varphi_k\}$</li>
+<li>对于任意的 $i, j$，$b_i\notin \mathrm{FV}(\varphi_j)$。换言之，我们将限制方程组转化成了一个“解”的形式。</li>
+</ol>
+<p><strong>证明：</strong>首先根据性质 2 对限制方程组做上三角化，接下来从下至上，用替换操作消去左侧变量所有的出现。</p>
+<hr>
+<p><strong>算法：</strong>我们的类型推导算法分为以下三步</p>
+<ol>
+<li>为所有变量分配两两不同的类型，计算 λ 项的类型和限制方程组</li>
+<li>解限制方程组</li>
+<li>将所有限制 $b_i=\varphi_i$ 左侧的类型变量用右侧的类型替换</li>
+</ol>
+<p><strong>例 1：</strong>$\lambda x.\lambda y.x~(x~y)$，首先指派 $x:\alpha, y:\beta$，那么有</p>
+<ol>
+<li>$\lambda x.\lambda y.x~(x~y):\alpha\to\beta\to\sigma$，限制方程组为 $\{\alpha =\beta\to\rho, \alpha=\rho\to\sigma\}$</li>
+<li>解限制方程组，得到 $\alpha=\sigma\to\sigma,\beta=\sigma,\rho=\sigma$</li>
+<li>将类型按照解替换为 $(\sigma\to\sigma)\to\sigma\to\sigma$</li>
+</ol>
+<p><strong>例 2：</strong>$\lambda x.x~x$，首先指派 $x:\alpha$，那么有</p>
+<ol>
+<li>$\lambda x.x~x:\alpha\to\rho$，限制方程组为 $\{\alpha=\alpha\to\rho\}$</li>
+<li>注意到限制方程组中存在一个环，解限制方程组失败</li>
+</ol>
+<h3 id="解限制方程组的复杂性"><a href="#解限制方程组的复杂性" class="headerlink" title="解限制方程组的复杂性"></a>解限制方程组的复杂性</h3><p>注意到上面的算法运行时间可能为指数级别。举例而言，限制方程组</p>
+<script type="math/tex; mode=display">
+a_1=a_2\to a_2\\
+a_2=a_3\to a_3\\
+\dots\\
+a_{n}=a_{n+1}\to a_{n+1}</script><p>按照 $a_n, a_{n-1},\dots, a_1$ 的顺序消去变量，则最终类型长度高达 $O(2^n)$。但幸运的是，由于类型长度的增加是由替换引起的，对于类型对应的树构成的森林，其本质不同的子树数量并不会增加。因此我们可以将类型对应的树构成的森林转化为 DAG。对于 DAG 上的一个结点，其 BFS 生成的树是其对应的类型树。</p>
+<p>在实现中，在类型树构成森林的基础上加一个基于并查集的表 $T:\mathrm{Node}\to\mathrm{Node}$，支持</p>
+<ul>
+<li>将 $T[u]$ 设为 $v$</li>
+<li>找到 $T^{\infty}[u]$，记作 $T(u)$</li>
+</ul>
+<p>我们的算法可以描述如下</p>
+<ol>
+<li><p>初始时，为每一个限制 $\varphi = \psi$ 的两侧建立对应的类型树，并预处理 <code>T[u] = u</code></p>
+</li>
+<li><p><code>Unify(u, v)</code> 表示将结点 <code>u, v</code> 对应的类型树相等的限制，加入到数据结构（T+U）之中，那么</p>
+<ol>
+<li><p>设 <code>u=T(u), v=T(v)</code></p>
+</li>
+<li><p>如果 <code>u=v</code>，说明这一条限制是冗余的</p>
+</li>
+<li><p>如果 <code>u</code> 对应于类型变量，设置 <code>T[u]=v</code>，并将 <code>u</code> 加入集合 $S$；如果 <code>v</code> 对应于类型变量，设置 <code>T[v]=u</code>，并将 <code>v</code> 加入集合 $S$。集合 $S$ 对应了限制方程组解左侧的“约束变元”。</p>
+</li>
+<li><p>如果 <code>u=u1-&gt;u2</code>，且 <code>v=v1-&gt;v2</code>，设置 <code>T[u] = v</code>，并递归 <code>Unify(u1, v1), Unify(u2, v2)</code></p>
+</li>
+<li><p>否则，返回失败 </p>
+</li>
+</ol>
+</li>
+<li><p>依次 <code>Unify</code> 所有的限制</p>
+</li>
+<li><p><code>BFS(u)</code> 表示找到 <code>u</code> 对应的类型树，依次 <code>BFS</code> 所有集合 $S$ 中的结点并产生对应的类型树。</p>
+<ul>
+<li>如果任何一个结点 <code>BFS</code> 过程中回到了自身，返回失败<ul>
+<li>这是由于在算法第第二步 3 中，我们没有检查 $u\notin\mathrm{FV}(v)$</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>$S$ 和 <code>BFS</code> 产生的类型树对应的类型构成了一组解</p>
+</li>
+</ol>
+<p>由于每一次 <code>Unify</code> 会将一对原类型树构成森林的子树判定为相同，而本质不同的对数仅有 $O(n^2)$ 个，因此 <code>Unify</code> 仅会执行 $O(n^2)$ 次，从而总的时间复杂度也是多项式级别的。</p>
+<p>关于这一算法，<sup><a href="#fn_3" id="reffn_3">3</a></sup> 给出了更详细的描述。</p>
+<h2 id="组合子逻辑"><a href="#组合子逻辑" class="headerlink" title="组合子逻辑"></a>组合子逻辑</h2><h3 id="无类型组合子逻辑"><a href="#无类型组合子逻辑" class="headerlink" title="无类型组合子逻辑"></a>无类型组合子逻辑</h3><p>组合子逻辑是为了消除 λ 演算中变量的存在。具体来说，我们希望找到一组基 $\{B_1, B_2, \dots, B_n\}$ 满足任意 λ 项都可以被 $B_i$ 和它们之间的组合表示。所谓表示，是指“外延相同”，即给足参数后计算的结果相同。事实上，一组可能的基是：</p>
+<ul>
+<li>$\mathbf{S}=\lambda xyz.(x~z)~(y~z)$</li>
+<li>$\mathbf{K}=\lambda xy.x$</li>
+</ul>
+<p>下面就来证明任何 λ 项都存在一个外延相同的 λ 项，使其为 $\mathbf{S~K}$ 组合子之间的应用。首先有</p>
+<ul>
+<li>$\mathbf{I} = \mathbf{S~K~K}$，其中对于所有 $F$，均有 $\mathbf{I}~F\to_{\beta}\mathbf{K}~F~(\mathbf{K}~F)\to_{\beta}F$</li>
+</ul>
+<p>定义一个组合子项为 $\mathcal{C} := V\mid\mathbf{K}\mid\mathbf{S}\mid(\mathcal{C}~\mathcal{C})$，其中 $V$ 是变量集合，用来在将 λ 项转化为组合子项时的过渡。定义组合子项的 $w$ 规约 $\to_w$ 为</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&\mathbf{K}~F~G\to_w F\\
+&\mathbf{S}~F~G~H\to_w F~H~(G~H)\\
+&\frac{F\to_wF'}{F~G\to_wF'~G}~ \frac{F\to_wF'}{G~F\to_wG~F'}
+\end{aligned}</script><p>同理可定义 $\twoheadrightarrow_w$。定义组合子项的自由变量 $\mathrm{FV}(c)$ 为其中出现的所有变量。对于 $F\in\mathcal{C}$，定义 $\lambda^*x.F$ 为</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\lambda^*x.x&:=\mathbf{I}\\
+\lambda^*x.F&:=\mathbf{K}~F, x\notin \mathrm{FV}(F)\\
+\lambda^*x.F~G&:=\mathbf{S}~(\lambda^*x.F)~(\lambda^*x.G)
+\end{aligned}</script><p>很容易说明 $\lambda^*x.F$ 是良定义的。正如符号指出的一样，施归纳于定义很容易说明</p>
+<script type="math/tex; mode=display">
+(\lambda^*x.F)~G\to_w F[x\mapsto G]</script><p>下面考虑 λ 项到组合子项的转化算法，定义 $(*)_{\mathcal{C}}:\Gamma\to\mathcal{C}$ 为</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+(x)_{\mathcal{C}}&:=x\\
+(e_1~e_2)_{\mathcal{C}}&:=(e_1)_{\mathcal{C}}~(e_2)_{\mathcal{C}}\\
+\lambda x.e&:=\lambda^*x.(e)_{\mathcal{C}}
+\end{aligned}</script><p>非形式化地，K 组合子充当了放弃无用参数的作用，而 S 组合子充当了参数替换的作用。施归纳于生成算法容易说明，由 λ 项生成的组合子项和原先 λ 项是外延相同的，因此无类型组合子逻辑的表示能力和无类型 λ 演算等价，且均是图灵完备的。</p>
+<h3 id="简单类型组合子逻辑"><a href="#简单类型组合子逻辑" class="headerlink" title="简单类型组合子逻辑"></a>简单类型组合子逻辑</h3><p>类似简单类型 λ 演算，我们可以给每个组合子项赋予类型，例如 $\mathbf{I}$ 的主类型为 $\alpha\to\alpha$，$\mathbf{K}$ 的主类型为 $\alpha\to\beta\to\alpha$，而 $\mathbf{S}$ 的主类型为 $(\alpha\to\beta\to\eta)\to(\alpha\to\beta)\to\alpha\to\eta$。由此构成的系统称为 Curry 风格的简单类型组合子逻辑。类似地，也可以定义出 Church 风格的简单类型组合子逻辑。</p>
+<p>由于 λ 演算和组合子逻辑间的对应关系，简单类型组合子逻辑也具有类似地 Church-Rosser 定理，正则定理等等。</p>
+<h2 id="Curry-Howard-同构"><a href="#Curry-Howard-同构" class="headerlink" title="Curry-Howard 同构"></a>Curry-Howard 同构</h2><p>Curry-Howard 同构说明了类型系统和逻辑系统之间的重要联系。事实上我们可以说明</p>
+<ol>
+<li>简单类型 λ 演算对应于直觉主义谓词逻辑的自然演绎系统</li>
+<li>简单类型组合子逻辑对应于希尔伯特公理系统</li>
+</ol>
+<p>在 Curry-Howard 同构的视角下，有</p>
+<ul>
+<li>类型对应于逻辑命题：例如 $\alpha\to\beta\to\alpha$ 既可以看作 λ 项的类型，也可以看作谓词逻辑中的一个命题</li>
+<li>程序对应于证明：一个类型为 $\varphi$ 的程序对应于对命题 $\varphi$ 的证明<ul>
+<li>λ 应用 $e_1 ~e_2$ 对应于证明规则 $\frac{P\to Q~P}{Q}$</li>
+<li>λ 项的语法树对应于自然演绎系统的一棵证明树（在之后解释）</li>
+<li>组合子项对应于公理系统中的一个证明</li>
+</ul>
+</li>
+<li>λ 项的正则化对应于自然演绎中证明树的正则化</li>
+<li>…</li>
+</ul>
+<h3 id="自然演绎系统"><a href="#自然演绎系统" class="headerlink" title="自然演绎系统"></a>自然演绎系统</h3><p><strong>自然演绎系统（Natural Deduction System）</strong>是一种用来研究证明形式化的证明系统。在自然演绎系统中，一个证明是一棵以结论为根的有根树（通常来说，我们将叶子画在上方，将根画在下方），其所有的叶子结点是假设，且由以下的生成规则生成。</p>
+<ol>
+<li>$\to$ 引入规则：给定一棵以 $Q$ 为根的证明树，且树中存在一个“开”的假设 $[P]$，可以建立 $\frac{Q}{P\to Q}$，并将假设 $P$ 关闭。为表述方便，上面的树记作 $[P]\dots Q$；</li>
+<li>$\to$ 消去规则：给定一棵以 $P\to Q$ 为根的证明树和一棵以 $P$ 为根的证明树，可以建立 $\frac{P~P\to Q}{Q}；$</li>
+<li>$\land$ 引入规则：给定以 $P, Q$ 为根的证明树，可以建立 $\frac{P~Q}{P\land Q}$；</li>
+<li>$\land$ 消去规则：给定以 $P\land Q$ 为根的证明树，可以建立 $\frac{P\land Q}{P}$ 或者 $\frac{P\land Q}{Q}；$</li>
+<li>$\lor$ 引入规则：给定以 $P$ 为根的证明树，可以建立 $\frac{P}{P\lor Q}$ 或者 $\frac{P}{Q\lor P}$；</li>
+<li>$\lor$ 消去规则：给定以 $P\lor Q$，$[P]\dots R$ 和 $[Q]\dots R$ 为根的证明树，可以建立 $\frac{P\lor Q~[P]\dots R~[Q]\dots R}{R}$，并将 $[P], [Q]$ 关闭；</li>
+<li>$\perp$ 消去规则：给定以 $\perp$ 为根的证明树，可以建立 $\frac{\perp}{P}$。这条规则是说，假设为矛盾，则可以得到一切结论。通常的 $\lnot P$ 被定义为 $P\to\perp$。</li>
+<li><strong>!</strong> 双重否定律：给定以 $\lnot\lnot P$ 为根的证明树，可以建立 $\frac{\lnot\lnot P}{P}$ 为根的证明树。</li>
+</ol>
+<p>一般来说，1-7 构成的系统称为直觉主义自然演绎系统 $\mathrm{IPC}$，1-8 构成的系统称为经典自然演绎系统，而仅有 1,2,7 的系统称为 $\mathrm{IPC}(\to)$。很容易发现，$\mathrm{IPC}(\to)$ 和 $\lambda_\to$ 有着对应关系，$\mathrm{IPC}$ 则与引入了 $\land, \lor, \perp$ 对应的类型构造子和类型规则的 λ 演算对应。我们可以证明，类型存在一个 λ 项，当且仅当类型对应的命题存在一棵证明树。</p>
+<p>自然演绎系统可以写成所谓<strong>串行演算（Sequential Calculus）</strong>的形式。</p>
+<h3 id="希尔伯特公理系统"><a href="#希尔伯特公理系统" class="headerlink" title="希尔伯特公理系统"></a>希尔伯特公理系统</h3><p>希尔伯特公理系统是另一种表示逻辑的形式系统。直觉主义的希尔伯特公理系统由唯一的分离规则（Detachment Rule）和两条公理构成。其中，分离规则是说 $\frac{P~P\to Q}{Q}$，而两条公理是：</p>
+<ol>
+<li>$P\to Q\to P$</li>
+<li>$(P\to Q\to R)\to(P\to Q)\to P\to R$</li>
+</ol>
+<p>很明显，两条公理对应于组合子 $\mathbf{S, K}$ 的类型，分离规则对应于组合子应用的类型规则。由于组合子逻辑和 $\lambda_\to$ 的对应，我们也得到了希尔伯特公理系统与 $\mathrm{IPC}(\to)$ 证明能力的等价性。</p>
+<h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><h2 id="记号说明"><a href="#记号说明" class="headerlink" title="记号说明"></a>记号说明</h2><ul>
+<li>$x, y, z, f, g, h$ 表示变量；</li>
+<li>$e, o$ 表示任意 λ 项；</li>
+<li>$\varphi, \psi, \rho, \sigma$ 等表示类型；</li>
+<li>使用 $\alpha, \beta$ 表示基本类型；</li>
+<li>使用 $?$ 表示上下文；</li>
+<li>$\rightarrow_{\beta}$ 表示一步 $\beta$ 规约，$w$ 规约类似；</li>
+<li>$\twoheadrightarrow_{\beta}$ 表示多步 $\beta$ 规约，$w$ 规约类似；</li>
+<li>$\mathrm{FV}~e$ 表示自由变量集合；</li>
+<li>$e[x\mapsto e’]$ 表示将 $e$ 中的自由变量 $x$ 替换为 $e’$；</li>
+<li>$\Gamma$ 表示 λ 项的集合，$\mathcal{C}$ 表示组合子项的集合。</li>
+</ul>
+<h2 id="致谢"><a href="#致谢" class="headerlink" title="致谢"></a>致谢</h2><p>感谢 @wmd 同学在作者学习中的帮助。如果您发现了本文中的问题，欢迎用评论或邮件方式联系我。</p>
+<h2 id="附件"><a href="#附件" class="headerlink" title="附件"></a>附件</h2><p>本文的 PDF 版本：<a href="/files/lambda-staff/simply-typed-lambda-calculus.pdf">simply-typed-lambda-calculus.pdf</a></p>
+<p>关于组合子逻辑的示例代码：<a href="/files/lambda-staff/combinators.hs">combinators.hs</a></p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><blockquote id="fn_1">
+<sup>1</sup>. An Introduction to Logical Relation. arXiv : Programming Languages, 2019. Lau Skorstengaard.<a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_2">
+<sup>2</sup>. Lectures on the Curry-Howard Isomorphism. Studies in Logic and the Foundations of Mathematics, 2006. Morten Heine Sorensen and Pawel Urzyczyn. <a href="#reffn_2" title="Jump back to footnote [2] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_3">
+<sup>3</sup>. Compilers: Principles, Techniques, and Tools. Alfred V Aho, et al. <a href="#reffn_3" title="Jump back to footnote [3] in the text."> &#8617;</a>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+	<div>
+		
+		
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2020/01/28/simply-typed-lambda-calculus/">简单类型 λ 演算</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 ljt12138 的个人博客">ljt12138</a></p>
+  <p><span>原始链接:</span><a href="/2020/01/28/simply-typed-lambda-calculus/" title="简单类型 λ 演算">http://ljt12138.github.io/2020/01/28/simply-typed-lambda-calculus/</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://ljt12138.github.io/2020/01/28/simply-typed-lambda-calculus/" aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+    });
+    });  
+</script>
+
+
+		
+	</div>
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Lambda-Calculus-Curry-Howard-Corresponding/" rel="tag"># Lambda-Calculus, Curry-Howard Corresponding</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/09/wc-final/" rel="next" title="浅谈信息学竞赛教学中非程序设计题目的应用">
+                <i class="fa fa-chevron-left"></i> 浅谈信息学竞赛教学中非程序设计题目的应用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/04/07/simple-prover/" rel="prev" title="实现一个简单的命题逻辑定理证明器">
+                实现一个简单的命题逻辑定理证明器 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div id="gitalk-container"></div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/header.jpg" alt="ljt12138">
+            
+              <p class="site-author-name" itemprop="name">ljt12138</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/ljt12138" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:lijt19@mails.tsinghua.edu.cn" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-nd.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简单类型-λ-演算"><span class="nav-number">1.</span> <span class="nav-text">简单类型 λ 演算</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#类型系统"><span class="nav-number">1.1.</span> <span class="nav-text">类型系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Curry-风格的-lambda-to"><span class="nav-number">1.2.</span> <span class="nav-text">Curry 风格的 $\lambda_{\to}$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类型的基本性质"><span class="nav-number">1.3.</span> <span class="nav-text">类型的基本性质</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类型对应的树"><span class="nav-number">1.4.</span> <span class="nav-text">类型对应的树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lambda-to-的表达能力"><span class="nav-number">1.5.</span> <span class="nav-text">$\lambda_{\to}$ 的表达能力</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#自然数"><span class="nav-number">1.5.1.</span> <span class="nav-text">自然数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#布尔值"><span class="nav-number">1.5.2.</span> <span class="nav-text">布尔值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正则定理"><span class="nav-number">1.6.</span> <span class="nav-text">正则定理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#正则和值"><span class="nav-number">1.6.1.</span> <span class="nav-text">正则和值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#弱正则定理"><span class="nav-number">1.6.2.</span> <span class="nav-text">弱正则定理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#强正则定理"><span class="nav-number">1.6.3.</span> <span class="nav-text">强正则定理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类型推导"><span class="nav-number">1.7.</span> <span class="nav-text">类型推导</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#主类型"><span class="nav-number">1.7.1.</span> <span class="nav-text">主类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类型推导算法"><span class="nav-number">1.7.2.</span> <span class="nav-text">类型推导算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解限制方程组的复杂性"><span class="nav-number">1.7.3.</span> <span class="nav-text">解限制方程组的复杂性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组合子逻辑"><span class="nav-number">1.8.</span> <span class="nav-text">组合子逻辑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#无类型组合子逻辑"><span class="nav-number">1.8.1.</span> <span class="nav-text">无类型组合子逻辑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单类型组合子逻辑"><span class="nav-number">1.8.2.</span> <span class="nav-text">简单类型组合子逻辑</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Curry-Howard-同构"><span class="nav-number">1.9.</span> <span class="nav-text">Curry-Howard 同构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#自然演绎系统"><span class="nav-number">1.9.1.</span> <span class="nav-text">自然演绎系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#希尔伯特公理系统"><span class="nav-number">1.9.2.</span> <span class="nav-text">希尔伯特公理系统</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#附录"><span class="nav-number">2.</span> <span class="nav-text">附录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#记号说明"><span class="nav-number">2.1.</span> <span class="nav-text">记号说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#致谢"><span class="nav-number">2.2.</span> <span class="nav-text">致谢</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#附件"><span class="nav-number">2.3.</span> <span class="nav-text">附件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">2.4.</span> <span class="nav-text">参考文献</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ljt12138</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src="https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: '023a14ecb0d9640c78ae',
+          clientSecret: '907b9345301ee9d44b411a1a3c54917684471802',
+          repo: 'ljt12138.github.io',
+          owner: 'ljt12138',
+          admin: ['ljt12138'],
+          id: location.pathname,
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')           
+       </script>
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>
