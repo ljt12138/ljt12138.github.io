@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next gemini use-motion" lang="zh-Hans">
+<html class="theme-next gemini use-motion" lang="en">
 <head><meta name="generator" content="Hexo 3.9.0">
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -42,6 +42,32 @@
   
   <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="https://fonts.lug.ustc.edu.cn/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
 
 
 
@@ -86,7 +112,7 @@
 <meta property="og:url" content="http://ljt12138.github.io/2019/12/01/k-sorter-problem/index.html">
 <meta property="og:site_name" content="Jiatu Li">
 <meta property="og:description" content="概述k-sorter 问题指如何利用“给 k 个元素排序”这一基本操作，构造高效的排序算法。由于一个 k-sorter 可以由 $k\log k$ 次比较操作构造，而比较排序的时间复杂度下界是 $n\log n$，因此 k-sorter 问题的排序器使用次数下界（下称比较下界）为 $n\log n/k\log k$。我对这个问题的了解来自于清华大学邓俊辉老师的《数据结构》课程中的一道编程练习题（题">
-<meta property="og:locale" content="zh-Hans">
+<meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2019-12-01T15:58:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于 k-sorter 问题">
@@ -106,7 +132,7 @@
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
       userId: '0',
-      author: '博主'
+      author: 'Author'
     },
     algolia: {
       applicationID: '',
@@ -138,7 +164,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
 
   
   
@@ -186,7 +212,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
-            首页
+            Home
           </a>
         </li>
       
@@ -196,7 +222,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
-            分类
+            Categories
           </a>
         </li>
       
@@ -206,7 +232,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
-            归档
+            Archives
           </a>
         </li>
       
@@ -270,9 +296,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">发表于</span>
+                <span class="post-meta-item-text">Posted on</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-01T22:06:29+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-01T22:06:29+08:00">
                 2019-12-01
               </time>
             
@@ -291,7 +317,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">分类于</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -553,10 +579,10 @@ T(n) &\le \sum_{i=0}^b c\frac{d_i\log d_i}{k\log k} + c_1\frac{n}{k}\\
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
+            Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
+            Overview
           </li>
         </ul>
       
@@ -579,7 +605,7 @@ T(n) &\le \sum_{i=0}^b c\frac{d_i\log d_i}{k\log k} + c_1\frac{n}{k}\\
                 <a href="/archives/">
               
                   <span class="site-state-item-count">14</span>
-                  <span class="site-state-item-name">日志</span>
+                  <span class="site-state-item-name">posts</span>
                 </a>
               </div>
             
@@ -590,7 +616,7 @@ T(n) &\le \sum_{i=0}^b c\frac{d_i\log d_i}{k\log k} + c_1\frac{n}{k}\\
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
                   <span class="site-state-item-count">6</span>
-                  <span class="site-state-item-name">分类</span>
+                  <span class="site-state-item-name">categories</span>
                 </a>
               </div>
             
@@ -601,7 +627,7 @@ T(n) &\le \sum_{i=0}^b c\frac{d_i\log d_i}{k\log k} + c_1\frac{n}{k}\\
               <div class="site-state-item site-state-tags">
                 
                   <span class="site-state-item-count">4</span>
-                  <span class="site-state-item-name">标签</span>
+                  <span class="site-state-item-name">tags</span>
                 
               </div>
             
@@ -685,7 +711,7 @@ T(n) &\le \sum_{i=0}^b c\frac{d_i\log d_i}{k\log k} + c_1\frac{n}{k}\\
 </div>
 
 
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
 
 
 
@@ -693,7 +719,7 @@ T(n) &\le \sum_{i=0}^b c\frac{d_i\log d_i}{k\log k} + c_1\frac{n}{k}\\
 
 
 
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
 
 
 

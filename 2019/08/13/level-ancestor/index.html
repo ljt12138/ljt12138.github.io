@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next gemini use-motion" lang="zh-Hans">
+<html class="theme-next gemini use-motion" lang="en">
 <head><meta name="generator" content="Hexo 3.9.0">
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -42,6 +42,32 @@
   
   <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="https://fonts.lug.ustc.edu.cn/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
 
 
 
@@ -86,7 +112,7 @@
 <meta property="og:url" content="http://ljt12138.github.io/2019/08/13/level-ancestor/index.html">
 <meta property="og:site_name" content="Jiatu Li">
 <meta property="og:description" content="$k$ 祖先问题$k$ 祖先问题（Level Ancestor Problem）是静态树的重要问题之一。给定一棵树和若干个询问 $(u, k)$，要求结点 $u$ 的第 $k​$ 个祖先结点。 离线情景下的 $k$ 祖先问题存在一个简单的 $O(n+q)$ 的算法：在 dfs 的过程中维护一个记录祖先的栈，然后在每个结点处回答和这个结点有关的所有询问；在线情景下有基于倍增的 $O(n\log n)">
-<meta property="og:locale" content="zh-Hans">
+<meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.loli.net/2019/08/13/6VR9zwBMXyxITFl.png">
 <meta property="og:updated_time" content="2020-01-27T16:00:06.000Z">
 <meta name="twitter:card" content="summary">
@@ -108,7 +134,7 @@
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
       userId: '0',
-      author: '博主'
+      author: 'Author'
     },
     algolia: {
       applicationID: '',
@@ -140,7 +166,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
 
   
   
@@ -188,7 +214,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
-            首页
+            Home
           </a>
         </li>
       
@@ -198,7 +224,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
-            分类
+            Categories
           </a>
         </li>
       
@@ -208,7 +234,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
-            归档
+            Archives
           </a>
         </li>
       
@@ -272,9 +298,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">发表于</span>
+                <span class="post-meta-item-text">Posted on</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-13T11:11:10+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-13T11:11:10+08:00">
                 2019-08-13
               </time>
             
@@ -293,7 +319,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">分类于</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -513,10 +539,10 @@ O(\sqrt n)\times b^2 = O(\sqrt n\log^2 n) = o(n)</script><p>对于一个询问 $
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
+            Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
+            Overview
           </li>
         </ul>
       
@@ -539,7 +565,7 @@ O(\sqrt n)\times b^2 = O(\sqrt n\log^2 n) = o(n)</script><p>对于一个询问 $
                 <a href="/archives/">
               
                   <span class="site-state-item-count">14</span>
-                  <span class="site-state-item-name">日志</span>
+                  <span class="site-state-item-name">posts</span>
                 </a>
               </div>
             
@@ -550,7 +576,7 @@ O(\sqrt n)\times b^2 = O(\sqrt n\log^2 n) = o(n)</script><p>对于一个询问 $
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
                   <span class="site-state-item-count">6</span>
-                  <span class="site-state-item-name">分类</span>
+                  <span class="site-state-item-name">categories</span>
                 </a>
               </div>
             
@@ -561,7 +587,7 @@ O(\sqrt n)\times b^2 = O(\sqrt n\log^2 n) = o(n)</script><p>对于一个询问 $
               <div class="site-state-item site-state-tags">
                 
                   <span class="site-state-item-count">4</span>
-                  <span class="site-state-item-name">标签</span>
+                  <span class="site-state-item-name">tags</span>
                 
               </div>
             
@@ -645,7 +671,7 @@ O(\sqrt n)\times b^2 = O(\sqrt n\log^2 n) = o(n)</script><p>对于一个询问 $
 </div>
 
 
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
 
 
 
@@ -653,7 +679,7 @@ O(\sqrt n)\times b^2 = O(\sqrt n\log^2 n) = o(n)</script><p>对于一个询问 $
 
 
 
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
 
 
 
