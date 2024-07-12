@@ -265,7 +265,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ljt12138.github.io/2020/04/07/simple-prover/">
+    <link itemprop="mainEntityOfPage" href="http://ljt12138.github.io/2022/02/24/lattice/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jiatu Li">
@@ -284,7 +284,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/04/07/simple-prover/" itemprop="url">实现一个简单的命题逻辑定理证明器</a></h1>
+                <a class="post-title-link" href="/2022/02/24/lattice/" itemprop="url">Is Lattice-Based Cryptography Post-Quantum Secure?</a></h1>
         
 
         <div class="post-meta">
@@ -296,8 +296,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-07T16:07:36-04:00">
-                2020-04-07
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-02-24T00:39:09-05:00">
+                2022-02-24
               </time>
             
 
@@ -306,28 +306,6 @@
             
           </span>
 
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Programming-Language/" itemprop="url" rel="index">
-                    <span itemprop="name">Programming Language</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -357,14 +335,15 @@
 
       
         
-          <p><strong>概述：</strong>本文将介绍如何实现一个非常简单的命题逻辑定理证明器。这个定理证明器用 Haskell 编写，以交互式的方式进行使用，输出 Hilbert Style System 下原命题的一个证明。用这个小工具，我们可以生成许多难以直接证明的定理（如析取、合取的结合律）的证明。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/04/07/simple-prover/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
+            <h2 id="Quantum-Algorithms-for-Lattice-Problems"><a href="#Quantum-Algorithms-for-Lattice-Problems" class="headerlink" title="Quantum Algorithms for Lattice Problems"></a>Quantum Algorithms for Lattice Problems</h2><p><em>Cryptographers seldom sleep well</em>, as noted in <a href="https://dl.acm.org/doi/10.1145/62212.62215">[Kil88]</a>, <em>Their careers are frequently based on very precise complexity-theoretic assumptions, which could be shattered the next morning</em>. Based on my personal observation, many of my friends working in cryptography are currently facing the situation that a new algorithm <a href="https://eprint.iacr.org/2024/555">[Che24]</a> would change their careers, or even their whole lives <sup><a href="#fn_1" id="reffn_1">1</a></sup>.   </p>
+<p>Learning with error (LWE) is the following (average-case) search problem. Let $n,m,q\in\mathbb{N}$ and $\alpha\in(0,1)$ be parameters, and $s\in\mathbb{Z}_q^n$ be a hidden vector. Given a uniformly random matrix $A\in \mathbb{Z}_q^{n\times m}$, and a vector $sA+e\bmod q$ for some error vector $e\in\mathbb{Z}_q^m$ whose coordinates are i.i.d. sampled from Gaussian distribution with standard deviation $\alpha q/\sqrt{2\pi}$, the task is to find the secret $s$. </p>
+<p>Chen <a href="https://eprint.iacr.org/2024/555">[Che24]</a> designed a new quantum algorithm for Learning-with-Error with parameters $m=\Omega()$</p>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><blockquote id="fn_1">
+<sup>1</sup>. Anonymous, private communication. <a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#8617;</a>
+</blockquote>
+
+          
         
       
     </div>
@@ -406,7 +385,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -454,7 +433,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -476,7 +455,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
