@@ -1,0 +1,2 @@
+void co_zkw_init(const vector<int> &vec);
+int co_zkw_query(int lpos, int rpos);

@@ -1,0 +1,77 @@
+---
+title: About Me
+copyright: false
+date: 2022-02-24 00:39:09
+tags:
+top: 1
+---
+
+# 李嘉图 Jiatu Li
+
+## Basic information
+
+I am a third-year undergraduate student in the Yao Class, Institute for Interdisciplinary Information Science (IIIS), Tsinghua University. My research interest is about *circuit complexity*, *proof complexity*, and *cryptography*. Currently I am thinking about problems about bounded arithmetic (fragments of Peano that captures the *complexity of proofs*). 
+
+I am also interested in writing formal (i.e. computer verified) mathematical proofs in Coq and Lean. Although it seems to be incredible nowadays, I believe that proof assistants will eventually be able to help mathematicians in their research (if mathematicians are not completely replaced by something like GPT-256).
+
+## How to contact me?
+
+- **Email 1:** <lijt19@mails.tsinghua.edu.cn>
+- **Email 2:** <ljt714285@gmail.com>
+- **Github:** <http://github.com/ljt12138/>
+
+If you have any questions or comments about my papers, essays, and any other projects, please feel free to contact me. I will be more than happy to hear from anyone interested in my works.
+
+# My works
+
+## Research papers
+
+> In theoretical computer science, the authors are usually listed in alphabetical order. 
+
+- **Extremely Efficient Constructions of Hash Functions, with Applications to Hardness Magnification and PRFs.**
+    + A joint work with Lijie Chen and Tianqi Yang.
+    + In Computational Complexity Conference (**CCC** 2022).
+    + Full version: <https://eccc.weizmann.ac.il/report/2022/086/>
+    + **Summary.** We construct an explicit, uniform, randomness efficient, and low-complexity hash function. It is used to prove the following hardness magnification result: if there is a sparse language in **NP** that is not computable by $2.01n$ size probabilistic circuits, then **NP** is not contained in **SIZE**$[n^k]$.  
+- **The Exact Complexity of Pseudorandom Functions and the Black-Box Natural Proof Barrier for Bootstrapping Results in Computational Complexity.**
+    + A joint work with Zhiyuan Fan and Tianqi Yang.
+    + In 54th ACM Symposium on Theory of Computing (**STOC** 2022).
+    + Full version: <https://eccc.weizmann.ac.il/report/2021/125/>
+    + Online talk by me: <https://www.youtube.com/watch?v=QcBypyG6oMU&t=451s>
+    + **Summary.** We give tight bounds to compute PRFs in general $\mathsf{B}_2$ circuit (in size), $\mathsf{NC}_1$ circuits (in size and depth) and $\mathsf{TC}_0$ circuits (in wire). Inspired by the natural proof barrier and our results, we demonstrate a barrier for bootstrapping results (e.g. hardness magnification) in complexity theory.
+- **$3.1n−o(n)$ Circuit Lower Bounds for Explicit Functions.** 
+    + A joint work with Tianqi Yang.
+    + In 54th ACM Symposium on Theory of Computing (**STOC** 2022).
+    + Full version: <https://eccc.weizmann.ac.il/report/2021/023/>
+    + Onlnie talk by Tianqi: <https://www.youtube.com/watch?v=54ILPK6JK5c&t=1118s>
+    + **Summary.** We improve the $(3 + 1/86)n + o(n)$ unconditional circuit lower bound (for explicit function in $\mathsf{P}$ to $3.1n + o(n)$ with a more clever choice of complexity measure and a more careful case analysis.
+
+## Other projects 
+
+- **Formalization of PAL·S5 in Proof Assistant.**
+    + Technical Report: <https://arxiv.org/abs/2012.09388>.
+    + Talk in LIRa seminar: <https://projects.illc.uva.nl/lgc/seminar/2021/03/lira-session-jiatu-li/>
+    + **Summary.** We formalize public announcement logic (a special kind of dynamic epistemic logic) in Lean theorem prover as an experiment to apply formal tools in logic research. We present formal proof of its soundness, completeness and reduction (i.e. elimination of dynamic modalities) theorem.
+- **Formalization of a theorem in a competitive programming problem.**
+    + Github: <https://github.com/ljt12138/Proof-of-Surreal>
+- **Cutepiler: A Compiler for a C-like Language.**
+    + Github: <https://github.com/Cutepiler/Cutepiler-Sysy2020>
+    + In National Student Computer System Capability Challenge (Compiler track).
+    + A joint work with Runda Liu, Zhidong Wang and Mengdi Wu.
+- **Hyper OS: An Operating System Simulator in C++.**
+    + Github: <https://github.com/tqyaaaaang/Hyper-OS>
+    + A joint work with Tianqi Yang. 
+    + **Summary.** An operating system simulator for teaching and research use in C++. It contains basic virtual hardwares (such as CPU, APIC, MMU, etc) and a tiny kernel (including process scheduling and paging).
+
+## Notes, talks, and essays
+
+- **A Quick Introduction to Mathematical Logic.**
+    + Note: <https://ljt12138.github.io/2020/05/05/logic-note/>
+    + **Summary.** A note on classical results about propositional logic, first-order logic, proof system and (basic) model theory. It covers completeness theorem of first-order logic, compactness theorem and G¨odel’s incompleteness theorem.
+- **The Application of Non-Programming Problems in Competitive Programming Training (in Chinese).**
+    + Essay: <https://ljt12138.github.io/2020/01/09/wc-final/>
+
+# Interesting facts about me
+
+- My name, Li Jiatu, is the same as the Chinese translation of *Ricardo*. My parents choose the name when they are reading *The Capital* of Karl Marx, in which the name *David Ricardo* occurs constantly.
+

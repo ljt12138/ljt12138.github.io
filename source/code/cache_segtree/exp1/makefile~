@@ -1,0 +1,2 @@
+driver: driver.cpp baseline.cpp co_zkw.cpp
+	g++ driver.cpp baseline.cpp co_zkw.cpp -o driver -O2 -std=c++11

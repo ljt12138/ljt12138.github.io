@@ -1,0 +1,16 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+static vector<int> tree;
+static int N;
+
+void co_zkw_init(const vector<int> &vec)
+{
+	N = 1;
+	while (N < vec.size()) {
+		N <<= 1;
+		lgn++;
+	}
+	tree.resize(N << 1);
+	
+}
