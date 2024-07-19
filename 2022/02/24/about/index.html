@@ -2,10 +2,8 @@
 
 
 
-  
 
-
-<html class="theme-next gemini use-motion" lang="en">
+<html class="theme-next gemini" lang="en">
 <head><meta name="generator" content="Hexo 3.9.0">
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -112,7 +110,7 @@
 <meta property="og:site_name" content="Jiatu Li">
 <meta property="og:description" content="Basic informationI am Jiatu Li (李嘉图), a first-year graduate student at MIT theory group, advised by Prof. Ryan Williams. I obtained my Bachelor’s degree from ``Yao Class”, Institute for Interdisciplin">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2024-07-12T16:08:30.208Z">
+<meta property="og:updated_time" content="2024-07-19T03:31:03.819Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="About Me">
 <meta name="twitter:description" content="Basic informationI am Jiatu Li (李嘉图), a first-year graduate student at MIT theory group, advised by Prof. Ryan Williams. I obtained my Bachelor’s degree from ``Yao Class”, Institute for Interdisciplin">
@@ -128,7 +126,7 @@
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
       userId: '0',
       author: 'Author'
@@ -338,13 +336,12 @@
         <h1 id="Basic-information"><a href="#Basic-information" class="headerlink" title="Basic information"></a>Basic information</h1><p>I am Jiatu Li (李嘉图), a first-year graduate student at <a href="https://toc.csail.mit.edu/">MIT theory group</a>, advised by Prof. <a href="https://people.csail.mit.edu/rrw/">Ryan Williams</a>. I obtained my Bachelor’s degree from ``Yao Class”, Institute for Interdisciplinary Information Science (IIIS), Tsinghua University.</p>
 <p>My research interests are about <em>circuit complexity</em>, <em>meta-complexity</em>, and <em>proof complexity</em>. Recently, I am interested in the following concrete directions:</p>
 <ul>
-<li>The strength of Bounded Arithmetic, the fragments of Peano that capture the <em>complexity of reasoning</em> (see, e.g., <a href="https://www.youtube.com/watch?v=cD9lnxr9aJI">Youtube Talk by Sam Buss</a>). Can we prove strong lower bounds in <a href="https://dl.acm.org/doi/10.1145/800116.803756">Cook’s theory <strong>PV$_1$</strong></a> or <a href="https://dl.acm.org/doi/10.1145/22145.22177">Buss’s theory $S^1_2$</a>? Can we separate <a href="https://www.cambridge.org/core/journals/journal-of-symbolic-logic/article/abs/approximate-counting-in-bounded-arithmetic/A7B01D53C883261836B93CD036B1FE9D">Jerabek’s theory <strong>APC$_1$</strong></a> and Cook’s <strong>PV$_1$</strong>? Can we identify the relative strengths of combinatorial principles and theorems as a feasible analogy of the program of <a href="https://en.wikipedia.org/wiki/Reverse_mathematics">Reverse Mathematics</a>?</li>
-<li>The complexity of the Range Avoidance Problem (see <a href="https://www.dcs.warwick.ac.uk/~igorcarb/complexity-meetings-files/OliverKorten-Talk.pdf">Kor21</a>, <a href="https://www.icms.org.uk/sites/default/files/downloads/Workshops/2022/Jul-2022/Tzameret/Hanlin%20Ren.pdf">RSW22</a>). What is the computational complexity of finding a non-output of an $n$-input $(n+1)$-output circuit? What if the circuit is a restricted one, say, an <strong>AC$_0$</strong> circuit?</li>
-<li>Proving unconditional complexity lower bounds (e.g. <a href="https://eccc.weizmann.ac.il/report/2017/188/">MW18</a>, <a href="https://eccc.weizmann.ac.il/report/2022/183/">Chen23</a>, <a href="https://arxiv.org/pdf/2309.12912.pdf">CHR23</a>, <a href="https://arxiv.org/abs/2310.17762">Li23</a>) and derandomization results (e.g. <a href="https://arxiv.org/abs/2305.15140">CLORS23</a>). </li>
+<li>The strength of Bounded Arithmetic, the fragments of Peano that capture the <em>complexity of reasoning</em> (see, e.g., <a href="https://www.youtube.com/watch?v=cD9lnxr9aJI">Youtube Talk by Sam Buss</a>). Can we prove strong lower bounds in <a href="https://dl.acm.org/doi/10.1145/800116.803756">Cook’s theory <strong>PV$_1$</strong></a> or <a href="https://dl.acm.org/doi/10.1145/22145.22177">Buss’s theory $S^1_2$</a>? Can we separate <a href="https://www.cambridge.org/core/journals/journal-of-symbolic-logic/article/abs/approximate-counting-in-bounded-arithmetic/A7B01D53C883261836B93CD036B1FE9D">Jerabek’s theory <strong>APC$_1$</strong></a> and Cook’s <strong>PV$_1$</strong>? Can we identify the relative strengths of combinatorial principles and theorems as a feasible analogy of the program of <a href="https://en.wikipedia.org/wiki/Reverse_mathematics">Reverse Mathematics</a>? Our partial results: <a href="https://eccc.weizmann.ac.il/report/2023/038/">APC vs PV</a>, <a href="https://eccc.weizmann.ac.il/report/2024/060/">reverse mathematics</a>, <a href="https://eccc.weizmann.ac.il/report/2023/022/">unprovability</a>, <a href="https://eccc.weizmann.ac.il/report/2024/083/">unprovability’</a></li>
+<li>The complexity of the Range Avoidance Problem (see <a href="https://www.dcs.warwick.ac.uk/~igorcarb/complexity-meetings-files/OliverKorten-Talk.pdf">Kor21</a>, <a href="https://www.icms.org.uk/sites/default/files/downloads/Workshops/2022/Jul-2022/Tzameret/Hanlin%20Ren.pdf">RSW22</a>). What is the computational complexity of finding a non-output of an $n$-input $(n+1)$-output circuit? What if the circuit is a restricted one, say, an <strong>AC$_0$</strong> circuit? Our partial results: <a href="https://eccc.weizmann.ac.il/report/2023/072/">upper bound</a>, <a href="https://eccc.weizmann.ac.il/report/2023/038/">lower bound 1</a>, <a href="https://eccc.weizmann.ac.il/report/2023/206/">lower bound 2</a></li>
+<li>Proving unconditional complexity lower bounds (e.g. <a href="https://eccc.weizmann.ac.il/report/2017/188/">MW18</a>, <a href="https://eccc.weizmann.ac.il/report/2022/183/">Chen23</a>, <a href="https://arxiv.org/pdf/2309.12912.pdf">CHR23</a>, <a href="https://arxiv.org/abs/2310.17762">Li23</a>) and derandomization results (e.g. <a href="https://arxiv.org/abs/2305.15140">CLORS23</a>). Our partial results: <a href="https://eccc.weizmann.ac.il/report/2024/106/">catalytic</a>, <a href="https://eccc.weizmann.ac.il/report/2021/023/">general</a>, <a href="https://eccc.weizmann.ac.il/report/2021/125/">PRFs</a></li>
 </ul>
 <p>As complexity theorists, our mission is to liberate the warriors trying to solve inherently hard problems. Sometimes we can use their stories to alleviate insomnia for cryptographers (see, e.g., <a href="http://www.chenyilei.net/cryptographers-seldom-sleep-well.html">Cryptographers Seldom Sleep Well</a>).</p>
 <p>I am also interested in writing formal (i.e. computer verified) mathematical proofs in Coq and Lean. Although it seems to be incredible nowadays, I believe that proof assistants will eventually be able to help mathematicians in their research (if mathematicians are not completely replaced by something like GPT-256, see, e.g., <a href="https://chat.openai.com/">ChatGPT</a>).</p>
-<a id="more"></a>
 <h2 id="Experience"><a href="#Experience" class="headerlink" title="Experience"></a>Experience</h2><ul>
 <li>PhD Student: MIT (2023-)</li>
 <li>Undergraduate Student: Tsinghua University (2019-2023) <ul>
@@ -353,17 +350,11 @@
 </ul>
 </li>
 </ul>
-<h2 id="How-to-contact-me"><a href="#How-to-contact-me" class="headerlink" title="How to contact me?"></a>How to contact me?</h2><ul>
-<li><strong>Email 1:</strong> jiatuli AT mit DOT edu</li>
-<li><strong>Email 2:</strong> ljt714285 AT gmail DOT com</li>
-<li><strong>Github:</strong> <a href="http://github.com/ljt12138/">http://github.com/ljt12138/</a></li>
-</ul>
-<p>If you have any questions or comments about my papers, essays, and any other projects, please feel free to contact me. I will be more than happy to hear from anyone interested in my work.</p>
 <h1 id="Publication"><a href="#Publication" class="headerlink" title="Publication"></a>Publication</h1><blockquote>
 <p>In theoretical computer science, the authors are usually listed in alphabetical order.<br>See <a href="/2024/07/12/publications/">publication</a> for summaries.  </p>
 </blockquote>
 <h2 id="Conference-Papers"><a href="#Conference-Papers" class="headerlink" title="Conference Papers"></a>Conference Papers</h2><ul>
-<li><strong>Distinguishing, Predicting, and Certifying: On the Long Reach of Partial Notions of Pseudorandomness</strong>. FOCS 2024 (to apper). Jiatu Li, Edward Pyne, Roei Tell.</li>
+<li><strong>Distinguishing, Predicting, and Certifying: On the Long Reach of Partial Notions of Pseudorandomness</strong>. FOCS 2024 (to appear). Jiatu Li, Edward Pyne, Roei Tell.</li>
 <li><strong>Reverse Mathematics of Complexity Lower Bounds</strong>. FOCS 2024 (to appear). Lijie Chen, <em>Jiatu Li</em>, Igor C. Oliveira.</li>
 <li><strong>Hardness of Range Avoidance and Remote Point for Restricted Circuits via Cryptography.</strong> STOC 2024. Yilei Chen and <em>Jiatu Li</em>.</li>
 <li><strong>Indistinguishability Obfuscation, Range Avoidance, and Bounded Arithmetic.</strong> STOC 2023. Rahul Ilango, <em>Jiatu Li</em>, R. Ryan Williams. </li>
@@ -377,6 +368,12 @@
 <li><strong>The Structure of Catalytic Space: Capturing Randomness and Time via Compression.</strong> 2024. James Cook, <em>Jiatu Li</em>, Ian Mertz, Edward Pyne.</li>
 <li><strong>On the Unprovability of Circuit Size Bounds in Intuitionistic $S^1_2$</strong>. 2024. Lijie Chen, Jiatu Li, Igor C. Oliveira.</li>
 </ul>
+<h2 id="How-to-contact-me"><a href="#How-to-contact-me" class="headerlink" title="How to contact me?"></a>How to contact me?</h2><ul>
+<li><strong>Email 1:</strong> jiatuli AT mit DOT edu</li>
+<li><strong>Email 2:</strong> ljt714285 AT gmail DOT com</li>
+<li><strong>Github:</strong> <a href="http://github.com/ljt12138/">http://github.com/ljt12138/</a></li>
+</ul>
+<p>If you have any questions or comments about my papers, essays, and any other projects, please feel free to contact me. I will be more than happy to hear from anyone interested in my work.</p>
 <h1 id="Interesting-facts-about-me"><a href="#Interesting-facts-about-me" class="headerlink" title="Interesting facts about me"></a>Interesting facts about me</h1><ul>
 <li>My name, Li Jiatu, is the same as the Chinese translation of <em>Ricardo</em>. My parents chose the name when they were reading <em>The Capital</em> of Karl Marx, in which the name <em>David Ricardo</em> occurs constantly.</li>
 <li>I learned Go (the chess game, not the programming language) when I was a kid and achieved amateur four-dan. Inspired by recent Livestreams of professional Go players in China, I’m now interested in playing go again. My ID on Fox Weiqi is jiatu1li (6d). I am a member of the MIT Go Club and you could probably catch me in the meetings (check <a href="https://www.meetup.com/massgo/">https://www.meetup.com/massgo/</a> for the schedule). </li>
@@ -583,7 +580,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Basic-information"><span class="nav-number">1.</span> <span class="nav-text">Basic information</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Experience"><span class="nav-number">1.1.</span> <span class="nav-text">Experience</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-contact-me"><span class="nav-number">1.2.</span> <span class="nav-text">How to contact me?</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Publication"><span class="nav-number">2.</span> <span class="nav-text">Publication</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Conference-Papers"><span class="nav-number">2.1.</span> <span class="nav-text">Conference Papers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Manuscripts"><span class="nav-number">2.2.</span> <span class="nav-text">Manuscripts</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Interesting-facts-about-me"><span class="nav-number">3.</span> <span class="nav-text">Interesting facts about me</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Basic-information"><span class="nav-number">1.</span> <span class="nav-text">Basic information</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Experience"><span class="nav-number">1.1.</span> <span class="nav-text">Experience</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Publication"><span class="nav-number">2.</span> <span class="nav-text">Publication</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Conference-Papers"><span class="nav-number">2.1.</span> <span class="nav-text">Conference Papers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Manuscripts"><span class="nav-number">2.2.</span> <span class="nav-text">Manuscripts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-contact-me"><span class="nav-number">2.3.</span> <span class="nav-text">How to contact me?</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Interesting-facts-about-me"><span class="nav-number">3.</span> <span class="nav-text">Interesting facts about me</span></a></li></ol></div>
             
 
           </div>
