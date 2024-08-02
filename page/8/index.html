@@ -263,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ljt12138.github.io/2019/12/01/k-sorter-problem/">
+    <link itemprop="mainEntityOfPage" href="http://ljt12138.github.io/2019/08/13/level-ancestor/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jiatu Li">
@@ -282,7 +282,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/12/01/k-sorter-problem/" itemprop="url">关于 k-sorter 问题</a></h1>
+                <a class="post-title-link" href="/2019/08/13/level-ancestor/" itemprop="url">树上 k 祖先问题</a></h1>
         
 
         <div class="post-meta">
@@ -294,8 +294,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-01T22:06:29-05:00">
-                2019-12-01
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-13T11:11:10-04:00">
+                2019-08-13
               </time>
             
 
@@ -355,15 +355,11 @@
 
       
         
-          <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>k-sorter 问题指如何利用“给 k 个元素排序”这一基本操作，构造高效的排序算法。由于一个 k-sorter 可以由 $k\log k$ 次比较操作构造，而比较排序的时间复杂度下界是 $n\log n$，因此 k-sorter 问题的排序器使用次数下界（下称比较下界）为 $n\log n/k\log k$。我对这个问题的了解来自于清华大学邓俊辉老师的《数据结构》课程中的一道编程练习题（题目对应 $k=3$ 的情景），并将一个简单的做法（$n\log n/k$ 次比较的算法）出做了集训队作业题目<sup><a href="#fn_1" id="reffn_1">1</a></sup>。近期我对此问题又做了一些调查和探索，结论如下：</p>
-<ul>
-<li>存在若干种比较次数在 $O(n\log n/k)$ 的确定性排序算法，包括两个比较简单的基于归并的算法；</li>
-<li>存在期望 $O(n\log n/k\log k)$ 次比较的随机算法，这一算法思路简单，但分析稍加繁琐；</li>
-<li>存在 $(n\log n/k\log k)$ 次比较的确定性算法，这一算法来自<sup><a href="#fn_2" id="reffn_2">2</a></sup>.</li>
-</ul>
+          <h2 id="k-祖先问题"><a href="#k-祖先问题" class="headerlink" title="$k$ 祖先问题"></a>$k$ 祖先问题</h2><p>$k$ 祖先问题（Level Ancestor Problem）是静态树的重要问题之一。给定一棵树和若干个询问 $(u, k)$，要求结点 $u$ 的第 $k​$ 个祖先结点。</p>
+<p>离线情景下的 $k$ 祖先问题存在一个简单的 $O(n+q)$ 的算法：在 dfs 的过程中维护一个记录祖先的栈，然后在每个结点处回答和这个结点有关的所有询问；在线情景下有基于倍增的 $O(n\log n)-O(\log n)$ 算法，基于长链剖分的 $O(n)-O(\log n)$ 算法和 $O(n\log n) - O(1)$ 算法，以及最终的 $O(n) - O(1)$ 算法。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/12/01/k-sorter-problem/#more" rel="contents">
+            <a class="btn" href="/2019/08/13/level-ancestor/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -409,7 +405,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -457,7 +453,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
