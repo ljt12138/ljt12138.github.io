@@ -6,9 +6,10 @@ permalink: /publication/stoc24-hardness
 excerpt: 'This is a follow up work of the STOC 2023 paper with Rahul Ilango and Ryan Williams. We prove stronger hardness results by using more specific cryptographic assumptions.'
 date: 2024-06-28
 venue: 'STOC'
-slidesurl: 
+slidesurl: '/files/slides-Avoid-hardness.pptx'
 paperurl: 'https://eccc.weizmann.ac.il/report/2023/206/'
 bibtexurl: 'https://dblp.org/rec/conf/stoc/ChenL24.html?view=bibtex'
+citation: Yilei Chen, Jiatu Li. Hardness of Range Avoidance and Remote Point for Restricted Circuits via Cryptography. <i>STOC</i>, 2024. 
 ---
 
 **Note:** The main result of this paper has been superseded by two recent papers: [Ren-Wang-Yan](https://eccc.weizmann.ac.il/report/2025/191/) and [Ilango](https://eccc.weizmann.ac.il/report/2025/190/) using different approaches. Both papers are simpler and stronger. If you are not looking for the concept of "witness encryption against **coNP**" in this paper that is still of independent interests, you can directly read their papers.

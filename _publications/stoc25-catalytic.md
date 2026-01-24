@@ -3,12 +3,13 @@ title: "The Structure of Catalytic Space: Capturing Randomness and Time via Comp
 collection: publications
 category: conferences
 permalink: /publication/stoc25-catalytic
-excerpt: 'We prove two unconditional structural results about catalytic computation.'
+excerpt: 'We prove two unconditional structural results about catalytic computation: **CL** $$\cap$$ **P** = **CLP** and **CBPL** = **CL**.'
 date: 2025-6-27
 venue: 'STOC'
-slidesurl: 
+slidesurl:
 paperurl: 'https://eccc.weizmann.ac.il/report/2024/106/'
 bibtexurl: 'https://dblp.org/rec/conf/stoc/CookLMP25.html?view=bibtex'
+citation: 'James Cook, Jiatu Li, Ian Mertz, Edward Pyne. The Structure of Catalytic Space: Capturing Randomness and Time via Compression. <i>STOC</i>, 2025.'
 ---
 
 **Abstract:** In the catalytic logspace ($$CL$$) model of (Buhrman et. al. STOC 2013), we are given a small work tape, and a larger catalytic tape that has an arbitrary initial configuration. We may edit this tape, but it must be exactly restored to its initial configuration at the completion of the computation. This model is of interest from a complexity-theoretic perspective as it gains surprising power over traditional space. However, many fundamental structural questions remain open.

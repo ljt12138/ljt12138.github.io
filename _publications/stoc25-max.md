@@ -6,9 +6,10 @@ permalink: /publication/stoc25-max
 excerpt: 'We prove that Arthur-Merlin protocols with exponential time and a sub-exponential advice requires maximum circuit complexity. Previously, maximum lower bounds are known only for classes in the second level of the polynomial-time hierarchy.'
 date: 2025-6-27
 venue: 'STOC'
-slidesurl: 
+slidesurl: '/files/slides-maximum.pptx'
 paperurl: 'https://eccc.weizmann.ac.il/report/2024/182/'
 bibtexurl: 'https://dblp.org/rec/conf/stoc/0001LL25.html?view=bibtex'
+citation: Lijie Chen, Jiatu Li, Jingxun Liang. Maximum Circuit Lower Bounds for Exponential-Time Arthur Merlin. <i>STOC</i>, 2025.
 ---
 
 **Abstract:** We show that the complexity class of exponential-time Arthur Merlin with sub-exponential advice ($$AMEXP_{/2^{n^{\varepsilon}}}$$) requires circuit complexity at least $$2^n/n$$. Previously, the best known such near-maximum lower bounds were for symmetric exponential time by Chen, Hirahara, and Ren (STOC'24) and Li (STOC'24), or randomized exponential time with MCSP oracle and sub-exponential advice by Hirahara, Lu, and Ren (CCC'23). 

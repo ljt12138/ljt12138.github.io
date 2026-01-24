@@ -6,9 +6,10 @@ permalink: /publication/focs24-d2p
 excerpt: 'This paper discusses connections between common concepts in the theory of pseudorandomness: distinguishers, predictors, and certification. Most interestingly, we obtain a new prBPP-complete problem related to derandomizing a lemma of Yao.'
 date: 2024-10-30
 venue: 'FOCS'
-slidesurl: 
+slidesurl: '/files/slides-Yao.pptx'
 paperurl: 'https://eccc.weizmann.ac.il/report/2024/139/'
 bibtexurl: 'https://dblp.org/rec/conf/focs/LiPT24.html?view=bibtex'
+citation: 'Jiatu Li, Edward Pyne, Roei Tell. Distinguishing, Predicting, and Certifying: On the Long Reach of Partial Notions of Pseudorandomness. <i>FOCS</i>, 2024.'
 ---
 
 **Abstract:** This paper revisits the study of two classical technical tools in theoretical computer science: Yao's transformation of distinguishers to next-bit predictors (FOCS 1982), and the "reconstruction paradigm" in pseudorandomness (e.g., as in Nisan and Wigderson, JCSS 1994). Recent works of Pyne, Raz, and Zhan (FOCS 2023) and Doron, Pyne, and Tell (STOC 2024) showed that both of these tools can be derandomized in the specific context of read-once branching programs (ROBPs), but left open the question of derandomizing them in more general settings.

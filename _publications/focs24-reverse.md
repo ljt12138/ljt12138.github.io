@@ -6,9 +6,10 @@ permalink: /publication/focs24-reverse
 excerpt: 'We show that with respect to the theory **PV**, certain lower bounds about communication complexity and Turing machines are equivalent to basic mathematical principles such as the Pigeonhole Principle.'
 date: 2024-10-30
 venue: 'FOCS'
-slidesurl: 
+slidesurl: '/files/slides-reverse-math.pptx'
 paperurl: 'https://eccc.weizmann.ac.il/report/2024/060/'
 bibtexurl: 'https://dblp.org/rec/conf/focs/0001LO24.html?view=bibtex'
+citation: 'Lijie Chen, Jiatu Li, Igor C. Oliveira. Reverse Mathematics of Complexity Lower Bounds. <i>FOCS</i>, 2024.'
 ---
 
 **Note:** See the [Quanta Magazine article](https://www.quantamagazine.org/reverse-mathematics-illuminates-why-hard-problems-are-hard-20251201/) about the paper!

@@ -8,6 +8,7 @@ date: 2022-06-24
 venue: 'STOC'
 paperurl: 'https://eccc.weizmann.ac.il/report/2021/125/'
 bibtexurl: 'https://dblp.org/rec/conf/stoc/FanL022.html?view=bibtex'
+citation: 'Zhiyuan Fan, Jiatu Li, Tianqi Yang. The Exact Complexity of Pseudorandom Functions and the Black-Box Natural Proof Barrier for Bootstrapping Results in Computational Complexity. <i>STOC</i>, 2022.'
 ---
 
 **Awards:** This paper is the co-winner of the Best Student Paper of STOC 2022. 
