@@ -2,6 +2,7 @@
 title: "Indistinguishability Obfuscation, Range Avoidance, and Bounded Arithmetic"
 collection: publications
 category: conferences
+topics: [CC, CR, PC]
 permalink: /publication/stoc23-hardness
 excerpt: 'We show that the range avoidance problem is hard for deterministic algorithms, assuming **NP** $$\ne$$ **coNP** and the existence of indistinguishability obfuscation. With a similar approach, we also obtain unprovability results in bounded arithmetic.'
 date: 2023-06-23

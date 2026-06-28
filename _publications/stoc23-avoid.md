@@ -2,6 +2,7 @@
 title: "Range Avoidance, Remote Point, and Hard Partial Truth Tables via Satisfying-Pairs Algorithms"
 collection: publications
 category: conferences
+topics: [CC]
 permalink: /publication/stoc23-avoid
 excerpt: 'We provide unconditional NP-oracle algorithms for solving certain Range Avoidance Problem. This can be viewed as a generalization of ACC circuit lower bounds proved by Ryan Williams.'
 date: 2023-06-23

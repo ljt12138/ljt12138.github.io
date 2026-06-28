@@ -2,6 +2,7 @@
 title: "Distinguishing, Predicting, and Certifying: On the Long Reach of Partial Notions of Pseudorandomness"
 collection: publications
 category: conferences
+topics: [CC]
 permalink: /publication/focs24-d2p
 excerpt: 'This paper discusses connections between common concepts in the theory of pseudorandomness: distinguishers, predictors, and certification. Most interestingly, we obtain a new prBPP-complete problem related to derandomizing a lemma of Yao.'
 date: 2024-10-30

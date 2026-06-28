@@ -2,6 +2,7 @@
 title: "Extremely Efficient Constructions of Hash Functions, with Applications to Hardness Magnification and PRFs"
 collection: publications
 category: conferences
+topics: [CC, CR]
 permalink: /publication/ccc22-hash
 excerpt: 'A follow-up work on the STOC 2022 PRF paper, provide an even more efficient hash function construction and use it to show hardness magnification results.'
 date: 2022-07-23

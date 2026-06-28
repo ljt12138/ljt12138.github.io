@@ -14,4 +14,79 @@
 <link rel="icon" href="/images/favicon.ico"/>
 <meta name="theme-color" content="#ffffff"/>
 
+<!-- Research-topic tag badges + filter bar (PC / CC / CR) -->
+<style>
+  /* Inline, compact abbreviation badges on each paper */
+  .paper-topics {
+    margin: 0.25em 0 0.5em;
+    padding: 0;
+    line-height: 1.9;
+  }
+  .topic-tag {
+    display: inline-block;
+    font-size: 0.7em;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    padding: 0.16em 0.55em;
+    margin: 0 0.32em 0.18em 0;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    vertical-align: middle;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: inherit;
+    transition: filter 0.12s ease, box-shadow 0.12s ease;
+  }
+  a.topic-tag:hover, a.topic-tag:focus {
+    text-decoration: none;
+    filter: brightness(0.95);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+  }
+
+  /* Shared topic colors (badges + filter chips) */
+  .topic--pc { background: #efeaf8; color: #5a3e9b; border-color: #d8cbef; }
+  .topic--cc { background: #e6eef9; color: #285fa6; border-color: #c9dbf1; }
+  .topic--cr { background: #e1f1ec; color: #1d7a61; border-color: #c4e5d8; }
+  .topic--default { background: #eeeeee; color: #555555; border-color: #dddddd; }
+
+  /* Legend / filter bar at the top of the publications page */
+  .topic-filter {
+    margin: 0.4em 0 1.4em;
+    padding: 0.65em 0.85em;
+    background: #fafafa;
+    border: 1px solid #ececec;
+    border-radius: 8px;
+  }
+  .topic-filter__label {
+    font-size: 0.78em;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #666;
+    margin-right: 0.45em;
+  }
+  .topic-filter .filter-chip {
+    display: inline-block;
+    font-size: 0.82em;
+    font-weight: 600;
+    padding: 0.3em 0.75em;
+    margin: 0.15em 0.32em 0.15em 0;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: inherit;
+    transition: filter 0.12s ease, box-shadow 0.12s ease;
+  }
+  .topic-filter .filter-chip:hover { text-decoration: none; filter: brightness(0.95); }
+  .filter-chip .chip-abbr { font-weight: 800; margin-right: 0.4em; opacity: 0.9; }
+  .filter-chip--all { background: #efefef; color: #444; border-color: #dcdcdc; }
+  .topic-filter .filter-chip.is-active {
+    box-shadow: 0 0 0 2px currentColor inset;
+    filter: brightness(0.98);
+  }
+  .topic-filter__empty { color: #777; font-style: italic; margin: 0.5em 0 1em; }
+</style>
+
 <!-- end custom head snippets -->

@@ -2,6 +2,7 @@
 title: "Maximum Circuit Lower Bounds for Exponential-Time Arthur Merlin"
 collection: publications
 category: conferences
+topics: [CC]
 permalink: /publication/stoc25-max
 excerpt: 'We prove that Arthur-Merlin protocols with exponential time and a sub-exponential advice requires maximum circuit complexity. Previously, maximum lower bounds are known only for classes in the second level of the polynomial-time hierarchy.'
 date: 2025-6-27

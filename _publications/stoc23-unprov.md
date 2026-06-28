@@ -2,6 +2,7 @@
 title: "Unprovability of Strong Complexity Lower Bounds in Bounded Arithmetic"
 collection: publications
 category: conferences
+topics: [PC, CC]
 permalink: /publication/stoc23-unprov
 excerpt: 'Following a recent breakthrough of Pich and Santhanam (2021), we prove unprovability of strong complexity lower bounds in the the theory **PV** and even stronger theories.'
 date: 2023-06-23

@@ -1,0 +1,24 @@
+{%- comment -%}
+Renders research-topic tag badges for a publication (abbreviation-only, clickable).
+Pass the topics list explicitly, e.g.:
+  {% include paper-topics.html topics=page.topics %}   (single page)
+  {% include paper-topics.html topics=post.topics %}   (listing)
+Codes: PC = Proof Complexity, CC = Computational Complexity, CR = Cryptography.
+Order the list by relevance (most relevant first).
+Each badge links to /publications/?topic=<CODE>; on the publications page that click
+is intercepted and filters the list in place, elsewhere it navigates there pre-filtered.
+{%- endcomment -%}
+{%- assign topic_list = include.topics -%}
+{%- if topic_list and topic_list != empty -%}
+<p class="paper-topics" aria-label="Research topics">
+{%- for t in topic_list -%}
+  {%- case t -%}
+    {%- when 'PC' -%}{%- assign t_label = 'Proof Complexity' -%}{%- assign t_class = 'topic--pc' -%}
+    {%- when 'CC' -%}{%- assign t_label = 'Computational Complexity' -%}{%- assign t_class = 'topic--cc' -%}
+    {%- when 'CR' -%}{%- assign t_label = 'Cryptography' -%}{%- assign t_class = 'topic--cr' -%}
+    {%- else -%}{%- assign t_label = t -%}{%- assign t_class = 'topic--default' -%}
+  {%- endcase -%}
+  <a class="topic-tag {{ t_class }}" href="{{ base_path }}/publications/?topic={{ t }}" data-topic="{{ t }}" title="{{ t_label }}">{{ t }}</a>
+{%- endfor -%}
+</p>
+{%- endif -%}

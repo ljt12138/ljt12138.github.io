@@ -2,6 +2,7 @@
 title: "On the Unprovability of Circuit Size Bounds in Intuitionistic $$S^1_2$$"
 collection: publications
 category: journals
+topics: [PC, CC]
 permalink: /publication/lmcs25-unprov
 excerpt: 'We show unconditional unprovability of complexity upper and lower bounds in intuitionistic bounded arithmetic.'
 date: 2025-09-10

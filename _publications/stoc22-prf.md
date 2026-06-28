@@ -2,6 +2,7 @@
 title: "The Exact Complexity of Pseudorandom Functions and the Black-Box Natural Proof Barrier for Bootstrapping Results in Computational Complexity"
 collection: publications
 category: conferences
+topics: [CC, CR]
 permalink: /publication/2stoc22-prf
 excerpt: 'We obtained the exact circuit complexity of computing pseudorandom functions in various circuit models. We also use these construction to explain the difficulty of proving circuit lower bounds.'
 date: 2022-06-24

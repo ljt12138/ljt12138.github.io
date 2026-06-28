@@ -2,6 +2,7 @@
 title: "Hardness of Range Avoidance and Remote Point for Restricted Circuits via Cryptography"
 collection: publications
 category: conferences
+topics: [CC, CR]
 permalink: /publication/stoc24-hardness
 excerpt: 'This is a follow up work of the STOC 2023 paper with Rahul Ilango and Ryan Williams. We prove stronger hardness results by using more specific cryptographic assumptions.'
 date: 2024-06-28

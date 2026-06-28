@@ -2,6 +2,7 @@
 title: "3.1n-o(n) Circuit Lower Bounds for Explicit Functions"
 collection: publications
 category: conferences
+topics: [CC]
 permalink: /publication/stoc22-clb
 excerpt: 'We prove that an explicit function in **P** requires $$3.1n-o(n)$$ size to compute by general circuits. This improves an earlier $$(3+1/86)n-o(n)$$ lower bound for the same function.'
 date: 2022-06-24

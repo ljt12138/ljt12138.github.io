@@ -11,6 +11,16 @@ author_profile: true
 
 {% include base_path %}
 
+<!-- Topic legend + filter bar (click a topic to filter; click again / "All" to reset) -->
+<div class="topic-filter" id="topic-filter">
+  <span class="topic-filter__label">Filter by topic:</span>
+  <a href="{{ base_path }}/publications/" class="filter-chip filter-chip--all is-active" data-topic="all">All</a>
+  <a href="{{ base_path }}/publications/?topic=PC" class="filter-chip topic--pc" data-topic="PC"><span class="chip-abbr">PC</span>Proof Complexity</a>
+  <a href="{{ base_path }}/publications/?topic=CC" class="filter-chip topic--cc" data-topic="CC"><span class="chip-abbr">CC</span>Computational Complexity</a>
+  <a href="{{ base_path }}/publications/?topic=CR" class="filter-chip topic--cr" data-topic="CR"><span class="chip-abbr">CR</span>Cryptography</a>
+</div>
+
+<div id="publication-list">
 <!-- New style rendering if publication categories are defined -->
 {% if site.publication_category %}
   {% for category in site.publication_category  %}
@@ -20,7 +30,7 @@ author_profile: true
         {% continue %}
       {% endif %}
       {% unless title_shown %}
-        <h2>{{ category[1].title }}</h2><hr />
+        <h2 class="pub-section">{{ category[1].title }}</h2><hr />
         {% assign title_shown = true %}
       {% endunless %}
       {% include archive-single.html %}
@@ -31,6 +41,67 @@ author_profile: true
     {% include archive-single.html %}
   {% endfor %}
 {% endif %}
+</div>
+
+<p class="topic-filter__empty" id="topic-filter-empty" hidden>No publications with this topic.</p>
+
+<script>
+(function () {
+  var bar  = document.getElementById('topic-filter');
+  var list = document.getElementById('publication-list');
+  var empty = document.getElementById('topic-filter-empty');
+  if (!bar || !list) return;
+
+  var items = Array.prototype.slice.call(list.querySelectorAll('[data-topics]'));
+  var chips = Array.prototype.slice.call(bar.querySelectorAll('.filter-chip'));
+
+  function apply(topic) {
+    topic = topic || 'all';
+    var anyVisible = false;
+
+    items.forEach(function (el) {
+      var topics = (el.getAttribute('data-topics') || '').split(/\s+/);
+      var show = topic === 'all' || topics.indexOf(topic) !== -1;
+      el.style.display = show ? '' : 'none';
+      if (show) anyVisible = true;
+    });
+
+    // Hide a section header (and its <hr>) when its group has no visible entries.
+    // Scope to the section headers only — NOT the per-paper <h2> titles.
+    Array.prototype.forEach.call(list.querySelectorAll('h2.pub-section'), function (h) {
+      var hr = (h.nextElementSibling && h.nextElementSibling.tagName === 'HR') ? h.nextElementSibling : null;
+      var n = (hr || h).nextElementSibling, visible = false;
+      while (n && n.tagName !== 'H2') {
+        if (n.hasAttribute && n.hasAttribute('data-topics') && n.style.display !== 'none') { visible = true; break; }
+        n = n.nextElementSibling;
+      }
+      h.style.display = visible ? '' : 'none';
+      if (hr) hr.style.display = visible ? '' : 'none';
+    });
+
+    chips.forEach(function (c) { c.classList.toggle('is-active', c.getAttribute('data-topic') === topic); });
+    if (empty) empty.hidden = anyVisible;
+  }
+
+  function setTopic(topic) {
+    apply(topic);
+    history.replaceState(null, '', topic === 'all' ? location.pathname : location.pathname + '?topic=' + topic);
+  }
+
+  // Intercept clicks on filter chips and on inline topic badges within the list.
+  document.addEventListener('click', function (e) {
+    var t = e.target.closest('.filter-chip, .topic-tag');
+    if (!t) return;
+    var topic = t.getAttribute('data-topic');
+    if (!topic) return;
+    e.preventDefault();
+    setTopic(topic);
+  });
+
+  var initial = new URLSearchParams(location.search).get('topic') || 'all';
+  apply(initial);
+})();
+</script>
 
 
 

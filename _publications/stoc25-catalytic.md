@@ -2,6 +2,7 @@
 title: "The Structure of Catalytic Space: Capturing Randomness and Time via Compression"
 collection: publications
 category: conferences
+topics: [CC]
 permalink: /publication/stoc25-catalytic
 excerpt: 'We prove two unconditional structural results about catalytic computation: **CL** $$\cap$$ **P** = **CLP** and **CBPL** = **CL**.'
 date: 2025-6-27
