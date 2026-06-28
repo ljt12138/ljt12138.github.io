@@ -37,7 +37,7 @@ layout: default
         {% if page.collection == 'teaching' %}
           <p> {{ page.type }}, <i>{{ page.venue }}</i>, {{ page.date | default: "1900-01-01" | date: "%Y" }} </p>
         {% elsif page.venue and page.date %}
-          {% if page.authors %}<p class="pub-authors">{{ page.authors | replace: 'Jiatu Li', '<strong>Jiatu Li</strong>' }}</p>{% endif %}
+          {% if page.authors %}<p class="pub-authors">{% include author-line.html authors=page.authors %}</p>{% endif %}
           <div class="pub-meta">
             <span class="pub-venue">{{ page.venue }} {{ page.date | default: "1900-01-01" | date: "%Y" }}</span>
             {% if page.topics %}{% include paper-topics.html topics=page.topics %}{% endif %}

@@ -1,0 +1,34 @@
+# Collaborator homepages — maps a co-author's full name to their website.
+#
+# Used by _includes/author-line.html to auto-link author names in publication
+# entries (and anywhere else that include is used). To add a new collaborator,
+# just add one line here — no template changes needed. A name not listed here
+# (or with a blank URL) simply renders as plain text.
+#
+# MAINTENANCE — routinely re-check availability:
+#   Academic / personal pages move or go offline over time (link rot). Periodically
+#   verify each URL still returns HTTP 200 and still points to the right person, and
+#   update or remove any that have rotted. A quick check:
+#     while read -r u; do echo "$(curl -s -o /dev/null -w '%{http_code}' "$u")  $u"; done \
+#       < <(grep -oE 'https?://[^ ]+' _data/collaborators.yml)
+#   Last verified live: 2026-06-28.
+
+"Lijie Chen": https://chen-lijie.github.io/
+"Tianqi Yang": https://tianqiyang.org/
+"Edward Pyne": https://sites.google.com/view/tedpyne/
+"Roei Tell": https://sites.google.com/site/roeitell/
+"Igor C. Oliveira": https://www.dcs.warwick.ac.uk/~igorcarb/
+"Mengdi Wu": https://wmdi.github.io/
+"Zhiyuan Fan": https://fan-zhiyuan.org/
+"Yeyuan Chen": https://yeyuanch.github.io/
+"Yizhi Huang": https://yizhihuang.org/
+"Hanlin Ren": https://hanlin-ren.github.io/
+"Rahul Ilango": https://www.rahulilango.com/
+"Ryan Williams": https://people.csail.mit.edu/rrw/
+"Yilei Chen": http://www.chenyilei.net/
+"James Cook": http://www.falsifian.org/
+"Ian Mertz": https://iuuk.mff.cuni.cz/~iwmertz/
+"Jingxun Liang": https://sites.google.com/view/jingxun/home
+"Yao-Ching Hsieh": https://sites.google.com/view/ychsieh
+"Abhishek Jain": https://www.cs.jhu.edu/~abhishek/
+"Surya Mathialagan": https://suryamathialagan.com/

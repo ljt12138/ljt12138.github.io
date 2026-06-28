@@ -1,0 +1,23 @@
+{%- comment -%}
+  Renders a publication author line.
+  - Bolds "Jiatu Li" (the site owner).
+  - Auto-links any collaborator listed in _data/collaborators.yml to their homepage.
+  Usage: {% include author-line.html authors=post.authors %}
+  To add/update a collaborator link, edit _data/collaborators.yml only — no template
+  changes needed. Names without an entry (or with a blank URL) render as plain text.
+{%- endcomment -%}
+{%- assign s = include.authors -%}
+{%- if s -%}
+  {%- assign s = s | replace: 'Jiatu Li', '<strong>Jiatu Li</strong>' -%}
+  {%- if site.data.collaborators -%}
+    {%- for c in site.data.collaborators -%}
+      {%- assign name = c[0] -%}
+      {%- assign url = c[1] -%}
+      {%- if url and url != '' -%}
+        {%- capture linked -%}<a class="collab" href="{{ url }}">{{ name }}</a>{%- endcapture -%}
+        {%- assign s = s | replace: name, linked -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endif -%}
+  {{- s -}}
+{%- endif -%}
