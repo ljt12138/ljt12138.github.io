@@ -1,0 +1,30 @@
+---
+layout: archive
+title: "Surveys and Notes"
+permalink: /surveys/
+author_profile: true
+---
+
+{% include base_path %}
+
+{% if site.data.notes.intro %}<p class="notes-intro">{{ site.data.notes.intro | markdownify | remove: '<p>' | remove: '</p>' | replace: '%mine%', '<span class="kind-badge kind--mine">Mine</span>' }}</p>{% endif %}
+
+{% for topic in site.data.notes.topics %}
+  <section class="note-topic">
+    <h2 class="note-topic__name">{{ topic.name }}</h2>
+    {% if topic.blurb %}<p class="note-topic__blurb">{{ topic.blurb | markdownify | remove: '<p>' | remove: '</p>' }}</p>{% endif %}
+    <hr class="note-topic__rule" />
+
+    {% for it in topic.items %}
+      <article class="note-item{% if it.mine %} note-item--mine{% endif %}">
+        <div class="note-item__tags">
+          {% if it.mine %}<span class="kind-badge kind--mine">Mine</span>{% endif %}
+          <span class="kind-badge kind--{{ it.kind }}">{{ it.kind | replace: '-', ' ' }}</span>
+        </div>
+        <h3 class="note-item__title"><a href="{{ it.url }}">{{ it.title }}</a></h3>
+        <p class="note-item__meta">{{ it.authors | replace: 'Jiatu Li', '<strong>Jiatu Li</strong>' }} &middot; {{ it.venue }}</p>
+        {% if it.note %}<p class="note-item__note">{{ it.note | markdownify | remove: '<p>' | remove: '</p>' }}</p>{% endif %}
+      </article>
+    {% endfor %}
+  </section>
+{% endfor %}

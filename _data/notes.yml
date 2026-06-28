@@ -1,0 +1,52 @@
+# Content for the "Surveys and Notes" page (/surveys/).
+#
+# Add a topic block under `topics:`, then list `items`. For your OWN writing set
+# `mine: true` (it gets a highlighted "Mine" badge + accent rule). `kind` controls
+# the badge color: survey | textbook | notes | lecture-notes | paper.
+#
+# `intro` (below), `blurb` (per topic) and `note` (per item) support inline Markdown
+# — e.g. you can write [links](https://...), *emphasis*, `code`. Everything here is
+# editable by hand; the page (_pages/surveys.html) just renders this file. No HTML.
+# In `intro`, the token {mine} is replaced by the small "Mine" badge (delete it to
+# drop the badge).
+#
+# MAINTENANCE: these are external links too — re-check availability periodically
+# (same spirit as _data/collaborators.yml). Links last verified live: 2026-06-28.
+
+# Intro paragraph shown at the top of the page (edit freely):
+intro: >-
+  A growing collection of my own surveys and notes, alongside
+  recommendations of other writing I've found valuable. Entries marked %mine%
+  are my own.
+
+topics:
+  - name: Bounded Arithmetic
+    blurb: >-
+      Bounded arithmetic (or feasible mathematics) corresponds to mathematical theories relying on
+      concepts only from a complexity class, ranging from **AC⁰**, **P**, **PSPACE**, and even beyond.  
+    items:
+      - kind: survey
+        mine: true
+        title: "An Introduction to Feasible Mathematics and Bounded Arithmetic for Computer Scientists"
+        authors: "Jiatu Li"
+        venue: "ECCC TR25-086 · 2025"
+        url: "https://eccc.weizmann.ac.il/report/2025/086/"
+        note: >-
+          A gentle introduction to Cook's theory PV targeting to computer scientists. Compared to existing textbooks, it features an informal definition of PV based on three postulates, which captures the high-level intuition, as well as a careful roadmap from axioms to formalizations of complicated mathematics. 
+
+      - kind: survey
+        title: "Meta-Mathematics of Computational Complexity Theory"
+        authors: "Igor Carboni Oliveira"
+        venue: "ECCC TR25-041 · 2025"
+        url: "https://eccc.weizmann.ac.il/report/2025/041/"
+        note: >-
+          A recent comprehensive survey on unprovability results in bounded arithmetic. 
+
+      - kind: textbook
+        title: "Proof Complexity"
+        authors: "Jan Krajíček"
+        venue: "Cambridge University Press · 2019"
+        url: "https://doi.org/10.1017/9781108242066"
+        note: >-
+          The comprehensive reference for proof complexity and bounded arithmetic —
+          a standard textbook to reach for when you want a full picture of the field.
