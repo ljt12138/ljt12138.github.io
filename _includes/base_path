@@ -1,5 +1,8 @@
-{% if site.url %}
-  {% assign base_path = site.url | append: site.baseurl %}
-{% else %}
-  {% assign base_path = site.github.url %}
-{% endif %}
+{%- comment -%}
+  Internal links and assets use a ROOT-RELATIVE base_path (just the baseurl), so the
+  site behaves identically on localhost and in production instead of jumping to the
+  live domain during local preview. Fully-qualified URLs that genuinely need the host
+  (SEO/canonical/Open Graph, the RSS feed, the sitemap) are produced separately via
+  the `absolute_url` filter and `site.url`, so those remain absolute.
+{%- endcomment -%}
+{% assign base_path = site.baseurl %}
