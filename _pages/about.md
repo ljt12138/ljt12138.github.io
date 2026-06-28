@@ -7,7 +7,7 @@ redirect_from:
   - /about.html
 ---
 
-I am Jiatu Li (李嘉图), a third-year graduate student at [MIT theory group](https://toc.csail.mit.edu/), advised by Prof. [Ryan Williams](https://people.csail.mit.edu/rrw/). 
+I am Jiatu Li (李嘉图), a fourth-year graduate student at the fantastic [MIT theory group](https://toc.csail.mit.edu/), where I'm fortunate to be advised by Prof. [Ryan Williams](https://people.csail.mit.edu/rrw/). 
 
 I obtained my Bachelor's degree from the "Yao Class", Institute for Interdisciplinary Information Science (IIIS), Tsinghua University.
 
