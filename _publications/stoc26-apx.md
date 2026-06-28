@@ -11,6 +11,7 @@ slidesurl: '/files/APX-stoc-final.pptx'
 paperurl: 'https://arxiv.org/abs/2602.09302'
 bibtexurl: 'https://dblp.org/rec/conf/stoc/ChenLOW26.html?view=bibtex'
 citation: 'Lijie Chen, Jiatu Li, Igor C. Oliveira, Ryan Williams. A Theory for Probabilistic Polynomial-Time Reasoning. <i>STOC</i>, 2026.'
+authors: 'Lijie Chen, Jiatu Li, Igor C. Oliveira, Ryan Williams'
 ---
 
 **Published version:** [STOC 2026 (ACM Digital Library)](https://dl.acm.org/doi/10.1145/3798129.3800842) &middot; **Full version:** [arXiv](https://arxiv.org/abs/2602.09302)

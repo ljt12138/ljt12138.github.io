@@ -11,6 +11,7 @@ slidesurl: '/files/slides-Avoid-hardness.pptx'
 paperurl: 'https://eccc.weizmann.ac.il/report/2023/038'
 bibtexurl: 'https://dblp.org/rec/conf/stoc/IlangoLW23.html?view=bibtex'
 citation: Rahul Ilango, Jiatu Li, Ryan Williams. Indistinguishability Obfuscation, Range Avoidance, and Bounded Arithmetic. <i>STOC</i>, 2023. 
+authors: 'Rahul Ilango, Jiatu Li, Ryan Williams'
 ---
 
 **Abstract:** The range avoidance problem (denoted by Avoid) asks to find a string outside of the range of a given circuit $$C:\{0,1\}^n\to\{0,1\}^m$$, where $$m>n$$. Although at least half of the strings of length $$m$$ are correct answers, it is not clear how to deterministically find one. Recent results of Korten (FOCS'21) and Ren, Wang, and Santhanam (FOCS' 22) show that efficient deterministic algorithms for Avoid would have far-reaching consequences, including strong circuit lower bounds and explicit constructions of combinatorial objects (e.g., Ramsey graphs, extractors, rigid matrices). This strongly motivates the question: does an efficient deterministic algorithm for Avoid actually exist?

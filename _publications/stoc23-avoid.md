@@ -11,6 +11,7 @@ slidesurl: '/files/slides-Avoid-algo.pptx'
 paperurl: 'https://eccc.weizmann.ac.il/report/2023/072'
 bibtexurl: 'https://dblp.org/rec/conf/stoc/ChenHLR23.html?view=bibtex'
 citation: Yeyuan Chen, Yizhi Huang, Jiatu Li, Hanlin Ren. Range Avoidance, Remote Point, and Hard Partial Truth Tables via Satisfying-Pairs Algorithms. <i>STOC</i>, 2023. 
+authors: 'Yeyuan Chen, Yizhi Huang, Jiatu Li, Hanlin Ren'
 ---
 
 **Abstract:** The *range avoidance problem*, denoted as $$\mathcal{C}$$-$$\rm Avoid$$, asks to find a non-output of a given $$\mathcal{C}$$-circuit $$C:\{0,1\}^n\to\{0,1\}^\ell$$ with stretch $$\ell>n$$. This problem has recently received much attention in complexity theory for its connections with circuit lower bounds and other explicit construction problems. Inspired by the Algorithmic Method for circuit lower bounds, Ren, Santhanam, and Wang (FOCS'22) established a framework to design $$\rm FP^{NP}$$ algorithms for $$\mathcal{C}$$-$$\rm Avoid$$ via *slightly non-trivial* data structures related to $$\mathcal{C}$$. However, a major drawback of their approach is the lack of unconditional results even for $$\mathcal{C}={\rm AC}^0$$.

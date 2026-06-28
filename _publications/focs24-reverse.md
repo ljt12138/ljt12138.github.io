@@ -11,6 +11,7 @@ slidesurl: '/files/slides-reverse-math.pptx'
 paperurl: 'https://eccc.weizmann.ac.il/report/2024/060/'
 bibtexurl: 'https://dblp.org/rec/conf/focs/0001LO24.html?view=bibtex'
 citation: 'Lijie Chen, Jiatu Li, Igor C. Oliveira. Reverse Mathematics of Complexity Lower Bounds. <i>SIAM Journal on Computing</i>, 2026. Special section on FOCS 2024.'
+authors: 'Lijie Chen, Jiatu Li, Igor C. Oliveira'
 ---
 
 **Published version:** [SIAM Journal on Computing](https://doi.org/10.1137/24M1717865) (FOCS 2024 special section) &middot; preliminary version in [FOCS 2024](https://dblp.org/rec/conf/focs/0001LO24.html?view=bibtex)

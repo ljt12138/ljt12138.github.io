@@ -11,6 +11,7 @@ slidesurl: '/files/SNARG-talk.key'
 paperurl: 'https://eprint.iacr.org/2026/1180'
 bibtexurl: 'https://dblp.org/rec/conf/stoc/HsiehJLM26.html?view=bibtex'
 citation: 'Yao-Ching Hsieh, Abhishek Jain, Jiatu Li, Surya Mathialagan. SNARGs for NP from Unprovability of Mathematical Theorems (Or: How to Use the Simplicity of Cryptographic Reasoning). <i>STOC</i>, 2026.'
+authors: 'Yao-Ching Hsieh, Abhishek Jain, Jiatu Li, Surya Mathialagan'
 ---
 
 **Published version:** [STOC 2026 (ACM Digital Library)](https://dl.acm.org/doi/10.1145/3798129.3800724) &middot; **Full version:** [ePrint](https://eprint.iacr.org/2026/1180) &middot; [ECCC](https://eccc.weizmann.ac.il/report/2026/098/)

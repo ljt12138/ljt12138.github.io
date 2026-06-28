@@ -11,6 +11,7 @@ slidesurl: '/files/slides-unprov.pptx'
 paperurl: 'https://eccc.weizmann.ac.il/report/2023/022'
 bibtexurl: 'https://dblp.org/rec/conf/stoc/LiO23.html?view=bibtex'
 citation: Jiatu Li, Igor C. Oliveira. Unprovability of Strong Complexity Lower Bounds in Bounded Arithmetic. <i>STOC</i>, 2023.
+authors: 'Jiatu Li, Igor C. Oliveira'
 ---
 
 **Abstract:** While there has been progress in establishing the unprovability of complexity statements in lower fragments of bounded arithmetic, understanding the limits of Jerabek's theory $$\textbf{APC}_1$$ (2007) and of higher levels of Buss's hierarchy $$\textbf{S}^i_2$$ (1986) has been a more elusive task. Even in the more restricted setting of Cook's theory $$\textbf{PV}$$ (1975), known results often rely on a less natural formalization that encodes a complexity statement using a collection of sentences instead of a single sentence. This is done to reduce the quantifier complexity of the resulting sentences so that standard witnessing results can be invoked. 

@@ -10,6 +10,7 @@ venue: 'CCC'
 paperurl: 'https://eccc.weizmann.ac.il/report/2022/086/'
 bibtexurl: 'https://dblp.org/rec/conf/coco/0001L022.html?view=bibtex'
 citation: 'Lijie Chen, Jiatu Li, Tianqi Yang. Extremely Efficient Constructions of Hash Functions, with Applications to Hardness Magnification and PRFs. <i>CCC</i>, 2022.'
+authors: 'Lijie Chen, Jiatu Li, Tianqi Yang'
 ---
 
 **Abstract:** In a recent work, Fan, Li, and Yang (STOC 2022) constructed a family of almost-universal hash functions such that each function in the family is computable by $$(2n+ o(n))$$-gate circuits of fan-in 2 over the $$B_2$$ basis. Applying this family, they established the existence of pseudorandom functions computable by circuits of the same complexity, under the standard assumption that OWFs exist. However, a major disadvantage of the hash family construction by Fan, Li, and Yang (STOC 2022) is that it requires a seed length of poly(n), which limits its potential applications.

@@ -11,6 +11,7 @@ slidesurl:
 paperurl: 'https://arxiv.org/abs/2506.04529v1'
 bibtexurl: 
 citation: 'Jiatu Li, Mengdi Wu. Identity Testing for Circuits with Exponentiation Gates. <i>ITCS</i>, 2026.'
+authors: 'Jiatu Li, Mengdi Wu'
 ---
 
 **Abstract:** Motivated by practical applications in the design of optimization compilers for neural networks, we initiated the study of identity testing problems for arithmetic circuits augmented with *exponentiation gates* that compute the real function $$x\mapsto e^x$$. These circuits compute real functions of form $$P(\vec x)/P'(\vec x)$$, where both $$P(\vec x)$$ and $$P'(\vec x)$$ are exponential polynomials

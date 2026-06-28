@@ -11,6 +11,7 @@ slidesurl:
 paperurl: 'https://eccc.weizmann.ac.il/report/2021/023/'
 bibtexurl: 'https://dblp.org/rec/conf/stoc/Li022.html?view=bibtex'
 citation: 'Jiatu Li, Tianqi Yang. 3.1n-o(n) Circuit Lower Bounds for Explicit Functions. <i>STOC</i>, 2022.'
+authors: 'Jiatu Li, Tianqi Yang'
 ---
 
 **Abstract:** Proving circuit lower bounds has been an important but extremely hard problem for decades. Although one may show that almost every function $$f:\mathbb{F}^n_2\to\mathbb{F}_2$$ requires circuit of size $$\Omega(2^n/n)$$ by a simple counting argument, it remains unknown whether there is an explicit function (for example, a function in **NP**) not computable by circuits of size 10n. In fact, a $$3n−o(n)$$ explicit lower bound by Blum (TCS, 1984) was unbeaten for over 30 years until a recent breakthrough by Find et al. (FOCS, 2016), which proved a $$(3+1/86)n−o(n)$$ lower bound for affine dispersers, a class of functions known to be constructible in **P**.
