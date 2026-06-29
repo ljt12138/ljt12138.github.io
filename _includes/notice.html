@@ -1,0 +1,30 @@
+{%- comment -%}
+  Reusable notice / callout box.
+  ---------------------------------------------------------------------------
+  Renders a styled callout box. Styles live in _sass/layout/_callout.scss.
+
+  USAGE — short inline content:
+    {% include notice.html content="Your **markdown** text with a [link](url)." %}
+
+  USAGE — longer / multi-line content (capture a block first):
+    {% capture my_note %}
+    Your **markdown** text. Can span multiple lines and paragraphs.
+    {% endcapture %}
+    {% include notice.html content=my_note %}
+
+  OPTIONAL PARAMETERS:
+    type   : info (default) | tip | success | warning | danger
+    title  : optional heading shown above the body (plain text)
+    icon   : optional Font Awesome class, e.g. "fa-solid fa-pills"
+
+  Notes:
+    - `content` is rendered as Markdown (links, emphasis, code, math all work).
+    - All colors come from theme CSS variables, so it adapts to light/dark mode.
+{%- endcomment -%}
+{%- assign notice_type = include.type | default: "info" -%}
+<div class="callout callout--{{ notice_type }}">
+  {%- if include.title or include.icon %}
+  <p class="callout__title">{% if include.icon %}<i class="{{ include.icon }}" aria-hidden="true"></i> {% endif %}{{ include.title }}</p>
+  {%- endif %}
+  <div class="callout__body">{{ include.content | markdownify }}</div>
+</div>

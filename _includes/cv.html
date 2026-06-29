@@ -1,0 +1,26 @@
+{%- comment -%}
+  Renders the CV page from _data/cv_page.yml. Usage: {% include cv.html %}
+  Edit CONTENT in _data/cv_page.yml; edit the LOOK in the ".cv-*" rules in
+  _includes/head/custom.html. Conference & journal papers come from the
+  _publications collection; manuscripts come from the data file.
+{%- endcomment -%}
+{%- include base_path -%}
+{%- assign cv = site.data.cv_page -%}
+{%- if cv.download_pdf %}
+<p style="margin:.2em 0 1.7em;"><a class="cv-download" href="{{ cv.download_pdf }}"><i class="fa-solid fa-file-arrow-down" aria-hidden="true"></i> Download CV (PDF)</a></p>
+{%- endif -%}
+{%- for section in cv.sections %}
+<h2 class="cv-heading">{{ section.name }}</h2>
+{%- if section.note %}
+<p class="cv-note">{{ section.note | markdownify | remove: '<p>' | remove: '</p>' }}</p>
+{%- endif -%}
+{%- if section.bullets %}
+<ul class="cv-list">{% for b in section.bullets %}<li>{{ b | markdownify | remove: '<p>' | remove: '</p>' }}</li>{% endfor %}</ul>
+{%- endif -%}
+{%- if section.from_publications %}
+<div class="cv-pubs">{% for category in site.publication_category %}{% assign shown = false %}{% for post in site.publications reversed %}{% if post.category != category[0] %}{% continue %}{% endif %}{% unless shown %}<p class="cv-subhead">{{ category[1].title }}</p>{% assign shown = true %}{% endunless %}{% include cv-pub.html post=post %}{% endfor %}{% endfor %}{% if section.manuscripts %}<p class="cv-subhead">Manuscripts</p>{% for m in section.manuscripts %}{% include cv-entry.html entry=m %}{% endfor %}{% endif %}</div>
+{%- endif -%}
+{%- if section.entries %}
+{% for e in section.entries %}{% include cv-entry.html entry=e %}{% endfor %}
+{%- endif -%}
+{%- endfor -%}

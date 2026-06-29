@@ -1,0 +1,21 @@
+{%- comment -%}
+  Renders the "Research Interests" section from _data/research.yml.
+  Used on the homepage: {% include research-interests.html %}
+  Edit the CONTENT in _data/research.yml; edit the LOOK in the ".research" rules
+  inside _includes/head/custom.html.
+{%- endcomment -%}
+{%- assign research = site.data.research -%}
+{%- if research.intro %}
+<p class="research-intro">{{ research.intro | markdownify | remove: '<p>' | remove: '</p>' }}</p>
+{%- endif %}
+<div class="research-list">
+{%- for d in research.directions %}
+  <div class="research-direction">
+    <p class="research-direction__title">{{ d.title }}</p>
+    <p class="research-direction__body">{{ d.body | markdownify | remove: '<p>' | remove: '</p>' }}</p>
+    {%- if d.results and d.results != empty %}
+    <p class="research-direction__results"><span class="rd-label">Our results</span>{% for r in d.results %}<a class="rd-chip" href="{{ r.url }}">{{ r.label }}</a>{% endfor %}</p>
+    {%- endif %}
+  </div>
+{%- endfor %}
+</div>

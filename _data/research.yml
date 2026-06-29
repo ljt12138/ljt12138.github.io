@@ -1,0 +1,63 @@
+# Drives the "Research Interests" section on the homepage (_pages/about.md),
+# rendered by _includes/research-interests.html. Same spirit as _data/notes.yml.
+#
+# To add / edit / reorder a direction, just edit the list under `directions:`.
+# Fields per direction:
+#   title    : short bold name of the direction (no trailing period)
+#   body     : framing sentence + open questions. Inline Markdown works —
+#              [links](url), *emphasis*, **bold**, and $$math$$ all render.
+#   results  : optional list of your own papers / partial results; each is
+#              { label: "...", url: "..." }. Omit or leave empty for none.
+#
+# Links last verified live: 2026-06-28.
+
+# Sentence shown above the list of directions:
+intro: >-
+  My research is in *circuit complexity*, *meta-complexity*, and *proof
+  complexity*. A few concrete directions I'm currently excited about:
+
+directions:
+  - title: "The strength of bounded arithmetic"
+    body: >-
+      The fragments of Peano arithmetic that capture the *complexity of reasoning*
+      (see, e.g., the [talk by Sam Buss](https://www.youtube.com/watch?v=cD9lnxr9aJI)).
+      Can we prove strong lower bounds in
+      [Cook's theory **PV$$_1$$**](https://dl.acm.org/doi/10.1145/800116.803756) or
+      [Buss's theory $$S^1_2$$](https://dl.acm.org/doi/10.1145/22145.22177)?
+      Can we separate
+      [Jeřábek's theory **APC$$_1$$**](https://www.cambridge.org/core/journals/journal-of-symbolic-logic/article/abs/approximate-counting-in-bounded-arithmetic/A7B01D53C883261836B93CD036B1FE9D)
+      from Cook's **PV$$_1$$**? Can we rank combinatorial principles by the strength
+      needed to prove them, as a feasible analogue of
+      [Reverse Mathematics](https://en.wikipedia.org/wiki/Reverse_mathematics)?
+    results:
+      - { label: "the APX₁ theory",      url: "https://arxiv.org/abs/2602.09302" }
+      - { label: "APC vs PV",            url: "https://eccc.weizmann.ac.il/report/2023/038/" }
+      - { label: "reverse mathematics",  url: "https://eccc.weizmann.ac.il/report/2024/060/" }
+      - { label: "unprovability",        url: "https://eccc.weizmann.ac.il/report/2023/022/" }
+      - { label: "unprovability'",       url: "https://eccc.weizmann.ac.il/report/2024/083/" }
+
+  - title: "The complexity of range avoidance"
+    body: >-
+      The Range Avoidance Problem (see
+      [Kor21](https://www.dcs.warwick.ac.uk/~igorcarb/complexity-meetings-files/OliverKorten-Talk.pdf),
+      [RSW22](https://www.icms.org.uk/sites/default/files/downloads/Workshops/2022/Jul-2022/Tzameret/Hanlin%20Ren.pdf)):
+      what is the computational complexity of finding a non-output of an
+      $$n$$-input, $$(n+1)$$-output circuit? And what changes when the circuit is
+      restricted — say, to **AC$$_0$$**?
+    results:
+      - { label: "upper bound",   url: "https://eccc.weizmann.ac.il/report/2023/072/" }
+      - { label: "lower bound 1", url: "https://eccc.weizmann.ac.il/report/2023/038/" }
+      - { label: "lower bound 2", url: "https://eccc.weizmann.ac.il/report/2023/206/" }
+
+  - title: "Unconditional lower bounds and derandomization"
+    body: >-
+      Proving unconditional complexity lower bounds (e.g.
+      [MW18](https://eccc.weizmann.ac.il/report/2017/188/),
+      [Chen23](https://eccc.weizmann.ac.il/report/2022/183/),
+      [CHR23](https://arxiv.org/pdf/2309.12912.pdf),
+      [Li23](https://arxiv.org/abs/2310.17762)) and derandomization results (e.g.
+      [CLORS23](https://arxiv.org/abs/2305.15140)).
+    results:
+      - { label: "catalytic", url: "https://eccc.weizmann.ac.il/report/2024/106/" }
+      - { label: "general",   url: "https://eccc.weizmann.ac.il/report/2021/023/" }
+      - { label: "PRFs",      url: "https://eccc.weizmann.ac.il/report/2021/125/" }

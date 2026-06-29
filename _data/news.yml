@@ -1,0 +1,30 @@
+# Recent news shown on the homepage (_pages/about.md), rendered by
+# _includes/news.html. Newest first. To add an item, copy a block:
+#   date : short label shown in the left column (e.g. "Jun 2026")
+#   text : the news line. Inline Markdown works — [links](url), **bold**, $$math$$.
+#          Internal links use root-relative paths (e.g. /publication/...).
+#
+# Keep the list short (newest ~5–6); prune older items as new ones arrive.
+
+items:
+  - date: "Jun 2026"
+    text: >-
+      Two papers at **STOC 2026**:
+      [SNARGs for NP from unprovability of mathematical theorems](/publication/stoc26-snarg)
+      and [a theory for probabilistic polynomial-time reasoning](/publication/stoc26-apx).
+
+  - date: "Jan 2026"
+    text: >-
+      [Identity Testing for Circuits with Exponentiation Gates](/publication/itcs26-identity)
+      was accepted to **ITCS 2026**.
+
+  - date: "Dec 2025"
+    text: >-
+      Our work on the [reverse mathematics of complexity lower bounds](/publication/focs24-reverse)
+      was featured in
+      [Quanta Magazine](https://www.quantamagazine.org/reverse-mathematics-illuminates-why-hard-problems-are-hard-20251201/).
+
+  - date: "2025"
+    text: >-
+      Released a survey,
+      [An Introduction to Feasible Mathematics and Bounded Arithmetic for Computer Scientists](/surveys/).

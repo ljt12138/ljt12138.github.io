@@ -1,0 +1,14 @@
+{%- comment -%}
+  Renders the homepage "Selected Publications" list from the _publications
+  collection — every paper with `selected: true` in its front matter, newest first.
+  To feature a paper, add `selected: true` (and an optional `highlight:` line) to
+  its file in _publications/. Uses the same .cv-entry visual style as the CV.
+{%- endcomment -%}
+{%- include base_path -%}
+{%- assign selected = site.publications | where: 'selected', true -%}
+<div class="selpubs">
+{%- for post in selected reversed -%}
+<div class="cv-entry"><div class="cv-entry__main"><p class="cv-entry__title"><a href="{{ base_path }}{{ post.url }}">{{ post.title | markdownify | remove: '<p>' | remove: '</p>' }}</a></p>{% if post.authors %}<p class="cv-entry__sub">{% include author-line.html authors=post.authors %}</p>{% endif %}{% if post.highlight %}<p class="cv-entry__highlight">{{ post.highlight | markdownify | remove: '<p>' | remove: '</p>' }}</p>{% endif %}</div><div class="cv-entry__meta">{{ post.venue }} {{ post.date | default: "1900-01-01" | date: "%Y" }}</div></div>
+{%- endfor -%}
+<p class="selpub-all"><a href="{{ base_path }}/publications/">See all publications <span aria-hidden="true">&rarr;</span></a></p>
+</div>

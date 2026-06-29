@@ -1,0 +1,52 @@
+/* ==========================================================================
+   CALLOUT / NOTICE BOXES  (reusable)
+   Rendered via _includes/notice.html  ->  {% include notice.html ... %}
+   Colors use theme CSS variables so the box adapts to light & dark mode.
+   ========================================================================== */
+
+.callout {
+  --callout-accent: var(--global-link-color);
+
+  margin: 2em 0;
+  padding: 1em 1.25em;
+  background-color: var(--global-code-background-color);
+  border: 1px solid var(--global-border-color);
+  border-left: 4px solid var(--callout-accent);
+  border-radius: $border-radius;
+  font-size: $type-size-6;
+  line-height: 1.6;
+
+  .callout__title {
+    margin: 0 0 0.45em;
+    font-family: $header-font-family;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    color: var(--callout-accent);
+
+    i {
+      margin-right: 0.4em;
+    }
+  }
+
+  .callout__body {
+    > :first-child { margin-top: 0; }
+    > :last-child  { margin-bottom: 0; }
+  }
+
+  /* Tint links to the accent color so they read as part of the box */
+  a {
+    color: var(--callout-accent);
+    text-decoration: underline;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+/* Variants — each just swaps the accent color (border + title + links). */
+.callout--info    { --callout-accent: #2f7f93; }  /* teal (theme primary) */
+.callout--tip     { --callout-accent: #5a8f3c; }  /* green */
+.callout--success { --callout-accent: #5a8f3c; }  /* green */
+.callout--warning { --callout-accent: #c2730a; }  /* amber */
+.callout--danger  { --callout-accent: #c0392b; }  /* red */

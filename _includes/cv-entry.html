@@ -1,0 +1,8 @@
+{%- comment -%}
+  One CV entry card in the .cv-entry style. Usage:
+    {% include cv-entry.html entry=e %}
+  where `e` has { title, sub | authors, meta } (see _data/cv_page.yml).
+  Title/sub support inline Markdown; `authors` is run through author-line.html.
+{%- endcomment -%}
+{%- assign e = include.entry -%}
+<div class="cv-entry"><div class="cv-entry__main"><p class="cv-entry__title">{{ e.title | markdownify | remove: '<p>' | remove: '</p>' }}</p>{% if e.authors %}<p class="cv-entry__sub">{% include author-line.html authors=e.authors %}</p>{% elsif e.sub %}<p class="cv-entry__sub">{{ e.sub | markdownify | remove: '<p>' | remove: '</p>' }}</p>{% endif %}</div>{% if e.meta %}<div class="cv-entry__meta">{{ e.meta }}</div>{% endif %}</div>

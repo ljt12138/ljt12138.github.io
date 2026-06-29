@@ -14,8 +14,11 @@ main:
   - title: "Surveys & Notes"
     url: /surveys/
 
+  - title: "CV"
+    url: /cv/
+
   # - title: "Talks"
-  #   url: /talks/    
+  #   url: /talks/
 
   # - title: "Teaching"
   #   url: /teaching/    

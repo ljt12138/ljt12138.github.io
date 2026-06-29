@@ -4,6 +4,8 @@ collection: publications
 category: journals
 topics: [PC, CC]
 permalink: /publication/focs24-reverse
+selected: true
+highlight: "FOCS 2024 · invited to the *SICOMP* special issue · featured in [Quanta Magazine](https://www.quantamagazine.org/reverse-mathematics-illuminates-why-hard-problems-are-hard-20251201/)"
 excerpt: 'We show that with respect to the theory **PV**, certain lower bounds about communication complexity and Turing machines are equivalent to basic mathematical principles such as the Pigeonhole Principle.'
 date: 2026-04-29
 venue: 'SICOMP'

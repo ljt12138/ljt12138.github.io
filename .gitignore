@@ -19,5 +19,8 @@ package-lock.json
 # Ignore folders related to IDEs
 .vscode/
 
+# Ignore the local Cowork/agent session cache
+.claude/
+
 # Ignore files created by MacOS
 .DS_Store

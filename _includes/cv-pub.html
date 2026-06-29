@@ -1,0 +1,8 @@
+{%- comment -%}
+  One publication rendered in the CV's own entry style (.cv-entry):
+  serif title (links to the paper page) + author line on the left,
+  venue + year right-aligned. Usage: {% include cv-pub.html post=post %}
+{%- endcomment -%}
+{%- include base_path -%}
+{%- capture year %}{{ include.post.date | default: "1900-01-01" | date: "%Y" }}{% endcapture -%}
+<div class="cv-entry"><div class="cv-entry__main"><p class="cv-entry__title"><a href="{{ base_path }}{{ include.post.url }}">{{ include.post.title | markdownify | remove: '<p>' | remove: '</p>' }}</a></p>{% if include.post.authors %}<p class="cv-entry__sub">{% include author-line.html authors=include.post.authors %}</p>{% endif %}{% if include.post.paperurl or include.post.slidesurl or include.post.bibtexurl %}<p class="cv-entry__links">{% if include.post.paperurl %}<a href="{{ include.post.paperurl }}">Paper</a>{% endif %}{% if include.post.slidesurl %}<a href="{{ include.post.slidesurl }}">Slides</a>{% endif %}{% if include.post.bibtexurl %}<a href="{{ include.post.bibtexurl }}">BibTeX</a>{% endif %}</p>{% endif %}</div><div class="cv-entry__meta">{{ include.post.venue }} {{ year | strip }}</div></div>

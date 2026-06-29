@@ -1,0 +1,100 @@
+# Drives the CV page (_pages/cv.md), rendered by _includes/cv.html.
+# Same spirit as _data/research.yml and _data/news.yml — edit content here,
+# never touch HTML. Conference & journal PUBLICATIONS are pulled automatically
+# from the _publications collection; only the manuscripts live in this file.
+#
+# Each section has a `name` and ONE of:
+#   entries:  list of { title, sub, meta } cards (see fields below)
+#   bullets:  list of plain Markdown strings (rendered as a dash list)
+#   from_publications: true  (special — renders the collection + `manuscripts`)
+#
+# Entry fields (all optional except title; all support inline Markdown —
+# [links](url), **bold**, *italic*, and $$math$$):
+#   title    : bold serif heading. Put a [link](url) inside to make it clickable.
+#   sub      : muted detail line under the title.
+#   authors  : author string (use instead of `sub` for papers) — "Jiatu Li" is
+#              auto-bolded and known co-authors auto-link (see _data/collaborators.yml).
+#   meta     : right-aligned mono label (date, venue, year).
+
+download_pdf: /files/cv.pdf
+
+sections:
+  - name: Education and Research Experience
+    entries:
+      - title: MIT CSAIL
+        sub: "Graduate student &middot; Advisor: Prof. [Richard Ryan Williams](https://people.csail.mit.edu/rrw/) &middot; Cambridge, MA, USA"
+        meta: "Sep 2023 – now"
+      - title: Tsinghua University
+        sub: "B.Eng. &middot; Institute for Interdisciplinary Information Sciences (Yao Class) &middot; Beijing, China"
+        meta: "Sep 2019 – Jul 2023"
+      - title: NTT Research
+        sub: "Research intern &middot; Advisor: [Abhishek Jain](https://www.cs.jhu.edu/~abhishek/) &middot; Sunnyvale, CA, USA"
+        meta: "Jun – Aug 2025"
+      - title: Shanghai Qi Zhi Institute
+        sub: "Research intern &middot; Advisor: [Yilei Chen](http://www.chenyilei.net/) &middot; Computational complexity of explicit constructions"
+        meta: "Aug – Sep 2022"
+      - title: University of Warwick
+        sub: "Research intern &middot; Advisor: [Igor C. Oliveira](https://www.dcs.warwick.ac.uk/~igorcarb/) &middot; Unprovability of complexity lower bounds"
+        meta: "Mar – Jul 2022"
+
+  - name: Research Interests
+    bullets:
+      - "**Computational complexity** — with an emphasis on circuit lower bounds."
+      - "**Proof complexity** — and the meta-mathematics of complexity theory."
+      - "**Cryptography** — and its connections to complexity theory."
+
+  - name: Publications
+    from_publications: true
+    note: "By default, all authors contribute equally and are listed alphabetically; co-author names link to their homepages."
+    manuscripts:
+      - title: "On the Time Complexity of Feasible Proofs"
+        authors: "Jiatu Li"
+        meta: "In submission"
+      - title: "Overcoming Padding in Cryptography via the Hardness of Certifying Random Strings"
+        authors: "Yao-Ching Hsieh, Abhishek Jain, Jiatu Li, Surya Mathialagan"
+        meta: "In submission"
+
+  - name: Awards and Fellowships
+    entries:
+      - title: "[Jane Street Graduate Research Fellowship](https://www.janestreet.com/join-jane-street/programs-and-events/grf-profiles-2025/)"
+        sub: "Honorable Mention"
+        meta: "2025 & 2026"
+      - title: "[MIT Akamai Presidential Fellowship](https://web.mit.edu/provost/presfellow/)"
+        meta: "2023"
+      - title: "[Danny Lewin Best Student Paper Award](https://sigact.org/prizes/student.html)"
+        sub: "STOC 2022"
+        meta: "2022"
+      - title: "[Yao Award](https://iiis.tsinghua.edu.cn/en/list-673-1.html), 1st Prize (1/62)"
+        sub: "IIIS, Tsinghua University"
+        meta: "2022"
+
+  - name: Selected Academic Talks
+    entries:
+      - title: "[Bounded Arithmetic Meets Probability, and Applications in Cryptography](https://www.youtube.com/watch?v=wRMWJVcdWII)"
+        sub: "CSDM Seminar, IAS"
+      - title: "[Yao's Lemma Is All You Need (for Derandomization)](https://www.youtube.com/watch?v=Cuhc85uOcso)"
+        sub: "CMU Theory Lunch"
+      - title: "[Can We Find an Empty Pigeonhole Efficiently?](https://www.youtube.com/watch?v=Bu5BLwxuQ9o)"
+        sub: "CMU Crypto Seminar"
+      - title: "[The Exact Complexity of Pseudorandom Functions and the Black-Box Natural Proof Barrier](https://www.youtube.com/watch?v=QcBypyG6oMU&t=452s)"
+        sub: "STOC 2022"
+
+  - name: Teaching
+    entries:
+      - title: "[18.405 Advanced Complexity Theory](https://people.csail.mit.edu/rrw/18.405-2026/index.html)"
+        sub: "Teaching Assistant &middot; MIT"
+        meta: "Spring 2026"
+      - title: "[6.1400 Automata, Computability, and Complexity Theory](https://people.csail.mit.edu/rrw/6.1400-2025/index.html)"
+        sub: "Teaching Assistant &middot; MIT"
+        meta: "Spring 2025"
+      - title: "[Reading Group on Bounded Arithmetic](https://github.com/ljt12138/Bounded-Arithmetic-Reading-Group)"
+        sub: "Organizer &middot; MIT"
+        meta: "Fall 2024"
+      - title: "[Fundamentals of Cryptography](http://www.chenyilei.net/cryptography-s2023.html)"
+        sub: "Teaching Assistant &middot; Tsinghua University"
+        meta: "Spring 2023"
+
+  - name: Professional Service
+    bullets:
+      - "Conference reviewing: CCC (2022, 2024, 2025), STOC (2024, 2025), FOCS (2024, 2025, 2026), ITCS (2025, 2026)."
+      - "Journal reviewing: *Forum of Mathematics, Sigma*."

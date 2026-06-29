@@ -50,3 +50,31 @@ topics:
         note: >-
           The comprehensive reference for proof complexity and bounded arithmetic —
           a standard textbook to reach for when you want a full picture of the field.
+
+  - name: Range Avoidance
+    blurb: >-
+      The Range Avoidance problem asks for a string *outside* the range of a given
+      stretching circuit, like finding water in the ocean. Apparently, it is not an easy task. 
+    items:
+      - kind: survey
+        title: "Range Avoidance and the Complexity of Explicit Constructions"
+        authors: "Oliver Korten"
+        venue: "Bulletin of the EATCS, No. 145 · 2025"
+        url: "http://bulletin.eatcs.org/index.php/beatcs/article/view/825"
+        note: >-
+          An overview of this research direction and its connections to
+           fundamental questions in derandomization and circuit complexity.
+
+  - name: Catalytic Computation
+    blurb: >-
+      Catalytic computing studies space-bounded computation that may borrow a large,
+      *full* memory, provided its contents are restored by the end. How can it be useful? 
+    items:
+      - kind: survey
+        title: "Reusing Space: Techniques and Open Problems"
+        authors: "Ian Mertz"
+        venue: "Bulletin of the EATCS · 2023"
+        url: "https://iuuk.mff.cuni.cz/~iwmertz/papers/m23.reusing_space.pdf"
+        note: >-
+          An accessible survey of catalytic computing, 
+          with a great collection of open problems.

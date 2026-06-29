@@ -1,0 +1,465 @@
+%-------------------------
+% Resume in Latex
+% Author : Jake Gutierrez
+% Based off of: https://github.com/sb2nov/resume
+% License : MIT
+%------------------------
+
+\documentclass[a4paper, 11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage{complexity}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[colorlinks]{hyperref}
+\usepackage{url}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{fontawesome5}
+\usepackage{multicol}
+\usepackage{comment}
+\setlength{\multicolsep}{-3.0pt}
+\setlength{\columnsep}{-1pt}
+\input{glyphtounicode}
+
+%----------COLOR PALETTE----------
+\definecolor{accent}{rgb}{0.106,0.227,0.412}    % deep academic navy (structural accent)
+\definecolor{venuegray}{rgb}{0.235,0.255,0.286} % neutral charcoal for venue chips
+\definecolor{topicCC}{rgb}{0.165,0.365,0.690}   % Computational Complexity
+\definecolor{topicPF}{rgb}{0.118,0.557,0.353}   % Proof Complexity & Meta-Complexity
+\definecolor{topicCR}{rgb}{0.698,0.251,0.231}   % Cryptography
+\hypersetup{
+  colorlinks=true,
+  linkcolor=accent,
+  urlcolor=accent,
+  citecolor=accent,
+}
+
+%----------FONT OPTIONS----------
+% sans-serif
+% \usepackage[sfdefault]{FiraSans}
+% \usepackage[sfdefault]{roboto}
+% \usepackage[sfdefault]{noto-sans}
+\usepackage[default]{sourcesanspro}
+
+% serif
+% \usepackage{CormorantGaramond}
+% \usepackage{charter}
+
+\newcounter{visa}
+\setcounter{visa}{0}
+
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.6in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1.19in}
+\addtolength{\topmargin}{-.7in}
+\addtolength{\textheight}{1.4in}
+
+% \urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\raggedright\Large\bfseries\color{accent}
+}{}{0em}{}[{\color{accent}\titlerule[0.8pt]}\vspace{-5pt}]
+
+% Ensure that generate pdf is machine readable/ATS parsable
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\classesList}[4]{
+    \item\small{
+        {#1 #2 #3 #4 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & \textbf{\small #2} \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{1.001\textwidth}{l@{\extracolsep{\fill}}r}
+      #1 & \textbf{\small #2}\\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemi{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+%----------HEADING----------
+% \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
+%   \textbf{\href{http://sourabhbajaj.com/}{\Large Sourabh Bajaj}} & Email : \href{mailto:sourabh@sourabhbajaj.com}{sourabh@sourabhbajaj.com}\\
+%   \href{http://sourabhbajaj.com/}{http://www.sourabhbajaj.com} & Mobile : +1-123-456-7890 \\
+% \end{tabular*}
+
+\begin{center}
+    {\Huge \bfseries \scshape \textcolor{accent}{Jiatu Li}} \\ \vspace{4pt}
+    {\small \faEnvelope\ \href{mailto:jiatuli@mit.edu}{jiatuli@mit.edu} \ \ {\color{accent}\textbullet}\ \  \faGlobe\ \href{https://ljt12138.github.io/}{ljt12138.github.io}}
+    \vspace{-6pt}
+\end{center}
+
+\section{Education and Research Experiences}
+%-----------EDUCATION-----------
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Graduate: MIT CSAIL}{Sep 2023 - }
+      {Advisor: Prof. Richard Ryan Williams}{Cambridge, Massachusetts, USA}
+    \resumeSubheading
+      {Undergraduate: Tsinghua University}{Sep 2019 - Jul 2023}
+      {Institute for Interdisciplinary Information Sciences (Yao Class)}{Beijing, China}
+
+    \resumeSubheading
+      {Research Internship: NTT Research}{Jun 2025 - Aug 2025}
+      {Advisor: Abhishek Jain, Senior Scientist}{Sunnyvale, California, USA}
+    
+%  \resumeSubHeadingListEnd
+  
+% \section{Research Experiences}
+% \resumeSubHeadingListStart
+    \resumeSubheading
+      {Research Internship: Shanghai Qi Zhi Institute}{Aug 2022 - Sep 2022}
+      {Advisor: Prof. Yilei Chen. Research Project: Computational Complexity of Explicit Constructions.}{Shanghai, China}
+    \resumeSubheading
+      {Research Internship: The University of Warwick}{Mar 2022 - Jul 2022}
+      {Advisor: Prof. Igor Carboni Oliveira. Research Project: Unprovability of Complexity Lower Bounds.}{Coventry, UK}
+\resumeSubHeadingListEnd
+
+%------RELEVANT COURSEWORK-------
+
+\section{Research Interests}
+    %\resumeSubHeadingListStart
+    \begin{itemize}[itemsep=-3pt, parsep=3pt,topsep=-1pt]
+        \item \textbf{Computational Complexity} (with an emphasis on circuit lower bounds)
+        \item \textbf{Proof complexity} (and meta-mathematics of complexity theory)
+        \item \textbf{Cryptography} (and its connection to complexity theory)
+    \end{itemize}
+    \vspace{-10pt}
+    
+    
+\newcommand{\pubskip}{0.8em}
+
+%----------TOPIC & VENUE CHIPS----------
+\newcommand{\topicchip}[2]{{\setlength{\fboxsep}{1.6pt}\raisebox{0.3pt}{\colorbox{#1}{\textcolor{white}{\scriptsize\textsf{\textbf{#2}}}}}}}
+\newcommand{\tagcc}{\topicchip{topicCC}{CC}}
+\newcommand{\tagpf}{\topicchip{topicPF}{PF}}
+\newcommand{\tagcr}{\topicchip{topicCR}{CR}}
+\newcommand{\venue}[1]{{\setlength{\fboxsep}{2.3pt}\colorbox{venuegray}{\textcolor{white}{\footnotesize\textsf{\textbf{#1}}}}}}
+
+%-----------PROJECTS-----------
+
+\section{Publications} 
+    
+    (\emph{All authors are with equal contribution and listed in the alphabetic order by default})
+
+    \vspace{3pt}
+
+    \noindent{\footnotesize\textsf{\textbf{Topics:}}\ \ \tagcc\ Computational Complexity \quad \tagpf\ Proof \& Meta-Complexity \quad \tagcr\ Cryptography}
+
+    \vspace{-3pt}
+
+    \subsection*{Conferences}
+
+    \venue{STOC 2026} \tagcr\,\tagpf\ SNARGs for NP from Unprovability of Mathematical Theorems (Or: How to use the simplicity of cryptographic reasoning). 
+    
+    \ Yao-Ching Hsieh (University of Washington), Abhishek Jain (NTT Research and John Hopkins), \underline{Jiatu Li}, Surya Mathialagan (NTT Research)
+
+    \vspace{\pubskip}
+
+    \venue{STOC 2026} \tagpf\,\tagcc\ A Theory for Probabilistic Polynomial-Time Reasoning. 
+
+    \ Lijie Chen (UC Berkeley), \underline{Jiatu Li}, Igor C. Oliveira (University of Warwick), Ryan Williams (MIT)
+
+    \vspace{\pubskip}
+
+    \venue{ITCS 2026} \tagcc\ Identity Testing for Circuits with Exponentiation Gates. \href{https://arxiv.org/abs/2506.04529}{[Manuscript]}
+    
+    \ \underline{Jiatu Li}, Mengdi Wu (CMU) 
+
+    \vspace{\pubskip}
+
+    \venue{STOC 2025} \tagcc\ Maximum Circuit Lower Bounds for Exponential-time Arthur Merlin. \href{https://dl.acm.org/doi/10.1145/3717823.3718224}{[Conference Version]} \href{https://eccc.weizmann.ac.il/report/2024/182/}{[Full Version]}
+
+    \ Lijie Chen (UC Berkeley), \underline{Jiatu Li}, Jingxun Liang (CMU)
+
+    \vspace{\pubskip}
+
+    \venue{STOC 2025} \tagcc\ The Structure of Catalytic Space: Capturing Randomness and Time via Compression.
+    
+    \ \href{https://dl.acm.org/doi/10.1145/3717823.3718112}{[Conference Version]} \href{https://eccc.weizmann.ac.il/report/2024/106/}{[Full Version]}
+
+    \ James Cook, \underline{Jiatu Li}, Ian Mertz (University of Warwick), Edward Pyne (MIT)
+
+    \vspace{\pubskip}
+
+    \venue{FOCS 2024} \tagpf\ Reverse Mathematics of Complexity Lower Bounds. \href{https://ieeexplore.ieee.org/document/10756049}{[Conference Version]} \href{https://eccc.weizmann.ac.il/report/2024/060/}{[Full Version]}
+    
+    \ Lijie Chen (UC Berkeley), \underline{Jiatu Li}, Igor C. Oliveira (University of Warwick)
+
+    \ Invited to \textbf{Special Issue of SICOMP}; see \href{https://epubs.siam.org/doi/abs/10.1137/24M1717865?journalCode=smjcat}{[Journal Version]}. Also see \href{https://www.quantamagazine.org/reverse-mathematics-illuminates-why-hard-problems-are-hard-20251201/}{Quanta Magazine Coverage}.
+    \vspace{\pubskip}
+
+    \venue{FOCS 2024} \tagcc\ Distinguishing, Predicting, and Certifying: On the Long Reach of Partial Notions of Pseudorandomness. 
+    
+    \ \href{https://ieeexplore.ieee.org/document/10756069}{Conference Version} \href{https://eccc.weizmann.ac.il/report/2024/139/}{[Full Version]}
+    
+    \ \underline{Jiatu Li}, Edward Pyne (MIT), Roei Tell (University of Toronto) 
+    \vspace{\pubskip}
+    
+    \venue{STOC 2024} \tagcc\,\tagcr\ Hardness of Range Avoidance and Remote Point for Restricted Circuits via Cryptography. 
+    
+    \ \href{https://dl.acm.org/doi/10.1145/3618260.3649602}{[Conference Version]} \href{https://eccc.weizmann.ac.il/report/2023/206/}{[Full Version]}
+    
+    \ Yilei Chen (Tsinghua University), \underline{Jiatu Li}
+    \vspace{\pubskip}
+
+    \venue{STOC 2023}  \tagpf\ Unprovability of Strong Complexity Lower Bounds in Bounded Arithmetic. 
+    
+    \ \href{https://dl.acm.org/doi/10.1145/3564246.3585144}{[Conference Version]} \href{https://eccc.weizmann.ac.il/report/2023/022/}{[Full Version]}
+    
+    \ \underline{Jiatu Li}, Igor C.~Oliveira (University of Warwick).
+
+    \vspace{\pubskip}
+    
+    \venue{STOC 2023}  \tagcc\,\tagpf\,\tagcr\ Indistinguishability Obfuscation, Range Avoidance, and Bounded Arithmetic. 
+    
+    \ \href{https://dl.acm.org/doi/abs/10.1145/3564246.3585187}{[Conference Version]} \href{https://eccc.weizmann.ac.il/report/2023/038/}{[Full Version]}
+    
+    \ Rahul Ilango (MIT), \underline{Jiatu Li}, Ryan Williams (MIT).
+    
+    \vspace{\pubskip}
+    
+    \venue{STOC 2023} \tagcc\ Range Avoidance, Remote Point, and Hard Partial Truth Table via Satisfying-Pairs Algorithms. 
+    
+    \ \href{https://dl.acm.org/doi/10.1145/3564246.3585147}{[Conference Version]} \href{https://eccc.weizmann.ac.il/report/2023/072/}{[Full Version]}
+    
+    \ Yeyuan Chen (Xi'an Jiaotong University), Yizhi Huang (Tsinghua University), \underline{Jiatu Li}, Hanlin Ren (University of Oxford).
+
+    \vspace{\pubskip}
+    
+    \venue{CCC 2022}  \tagcc\,\tagcr\ Extremely Efficient Constructions of Hash Functions, with Applications to Hardness Magnification and PRFs. \href{https://drops.dagstuhl.de/opus/volltexte/2022/16585/}{[Conference Version]} \href{https://eccc.weizmann.ac.il/report/2022/086/}{[Full Version]}
+    
+    \ Lijie Chen (MIT), \underline{Jiatu Li}, Tianqi Yang (Tsinghua University) 
+    
+    \vspace{\pubskip}
+    
+    \venue{STOC 2022} \tagcc\,\tagcr\ The Exact Complexity of Pseudorandom Functions and the Black-Box Natural Proof Barrier for Bootstrapping Results in Computational Complexity. \href{https://dl.acm.org/doi/10.1145/3519935.3520010}{[Conference Version]} \href{https://eccc.weizmann.ac.il/report/2021/125/}{[Full Version]}
+    
+    \ Zhiyuan Fan (Tsinghua University), \underline{Jiatu Li}, Tianqi Yang (Tsinghua University)
+    
+    \ \textbf{Best Student Paper} co-winner. Invited to \textbf{Special Issue of SICOMP}.
+    
+    \vspace{\pubskip}
+    
+    \venue{STOC 2022}  \tagcc\ 3.1n-o(n) Circuit Lower Bounds for Explicit Functions.
+    \href{https://dl.acm.org/doi/10.1145/3519935.3519976}{[Conference Version]} \href{https://eccc.weizmann.ac.il/report/2021/023/}{[Full Version]}
+    
+    \ \underline{Jiatu Li}, Tianqi Yang (Tsinghua University).
+
+\vspace{-5pt}
+
+\subsection*{Journals}
+
+\venue{LMCS 2025} \tagpf\ On the Unprovability of Circuit Size Bounds in Intuitionistic $\mathsf{S}^1_2$. \href{https://lmcs.episciences.org/16491}{[Journal Version]}
+
+\ Lijie Chen (UC Berkeley), \underline{Jiatu Li}, Igor C.~Oliveira (University of Warwick)
+
+\vspace{-5pt}
+
+\subsection*{Manuscripts}
+
+
+\venue{In Submission} \tagpf\ On the Time Complexity of Feasible Proofs. 
+
+\ \underline{Jiatu Li} 
+
+\vspace{\pubskip}
+
+\venue{In Submission} \tagcr\,\tagpf\ Overcoming Padding in Cryptography via the Hardness of Certifying Random Strings.
+    
+\ Yao-Ching Hsieh (University of Washington), Abhishek Jain (NTT Research and John Hopkins), \underline{Jiatu Li}, Surya Mathialagan (NTT Research)
+
+
+
+
+
+\section{Professional Service}
+\begin{itemize}[itemsep=-3pt,parsep=3pt,topsep=-5pt]
+    \item Conference Review: \textsf{CCC} (2022, 2024, 2025), \textsf{STOC} (2024, 2025), \textsf{FOCS} (2024, 2025, 2026), \textsf{ITCS} (2025, 2026)
+    \item Journal Review: Forum Math.~Sigma
+\end{itemize}
+
+\vspace{-5pt}
+
+\section{Selected Awards and Fellowships}
+\begin{itemize}[itemsep=-3pt,parsep=3pt,topsep=-5pt]
+    \item \href{https://www.janestreet.com/join-jane-street/programs-and-events/grf-profiles-2025/}{Jane Street Graduate Fellowship Honorable Mentions}, 2025 and 2026.
+     \item \href{https://web.mit.edu/provost/presfellow/}{MIT Akamai Presidential Fellowship}, 2023
+        \item \textsf{STOC 2022} \href{https://sigact.org/prizes/student.html}{Danny Lewin Best Student Paper Award}
+        \item \href{https://iiis.tsinghua.edu.cn/en/list-673-1.html}{Yao Award} 1st Prize (1/62), IIIS, Tsinghua University, 2022 
+        % \item National Olympiad in Informatics Gold Medal (National Training Team Member), 2018
+\end{itemize}
+
+\vspace{-5pt}
+
+
+\section{Selected Academic Talks}
+    \begin{itemize}[itemsep=-3pt,parsep=3pt,topsep=-5pt]
+        \item Bounded Arithmetic Meets Probability, and Applications in Cryptography. \href{https://www.youtube.com/watch?v=wRMWJVcdWII}{CSDM Seminar at IAS}.
+        \item Yao's lemma is all you need (for derandomization). \href{https://www.youtube.com/watch?v=Cuhc85uOcso}{CMU Theory Lunch}. 
+        \item Can we find an empty pigeonhole efficiently? \href{https://www.youtube.com/watch?v=Bu5BLwxuQ9o}{CMU Crypto Seminar}.
+        \item The Exact Complexity of Pseudorandom Functions and the Black-Box Natural Proof Barrier. STOC 2022 (\href{https://www.youtube.com/watch?v=QcBypyG6oMU&t=452s}{recorded full version talk on Youtube}).
+    \end{itemize}
+    \vspace{-5pt}
+
+\section{Teaching Experiences}
+
+\begin{itemize}[itemsep=-3pt,parsep=3pt,topsep=-5pt]
+    \item Teaching Assistant: Spring 2023, \href{http://www.chenyilei.net/cryptography-s2023.html}{\emph{Fundamentals of Cryptography}} at Tsinghua Universeity. 
+    \item Teaching Assistant: Spring 2025, \href{https://people.csail.mit.edu/rrw/6.1400-2025/index.html}{\emph{6.1400 Automata, Computability, and Complexity Theory}} at MIT. 
+    \item Teaching Assistant: Spring 2026, \href{https://people.csail.mit.edu/rrw/18.405-2026/index.html}{\emph{18.405 Advanced Complexity Theory}} at MIT.
+    \item Organizer: Fall 2024, \href{https://github.com/ljt12138/Bounded-Arithmetic-Reading-Group}{\emph{Reading Group on Bounded Arithmetic}} at MIT. 
+\end{itemize}
+\vspace{-5pt}
+
+\begin{comment}
+\section{Relevant Coursework}
+    %\resumeSubHeadingListStart
+        \begin{multicols}{2}
+            \begin{itemize}[itemsep=-5pt, parsep=3pt]\small
+                \item Math for Computer Science
+                \item Logic, Game and Computation
+                \item Proof Theory (Graduate Level)
+                \item Design and Analysis of Algorithms (Graduate Level)
+                \item Theory of Computation
+                \item Foundation of Cryptography
+                \item Quantum Computer Science
+                \item Algorithm Design
+                \item Quantum Information and Cryptography
+                \item Principles and Practice of Compiler Construction
+            \end{itemize}
+        \end{multicols}
+        \vspace*{2.0\multicolsep} 
+\end{comment} 
+
+\ifnum\value{visa}=0
+
+\begin{comment}
+%-----------PROJECTS-----------
+\section{Social Service}
+    \vspace{-5pt}
+    \resumeSubHeadingListStart
+      \resumeProjectHeading
+          {\textbf{Problem-Setting for Olympiad in Informatics in China}}{}
+          \begin{itemize}[itemsep=-3pt,parsep=3pt]
+            \item Joint Provincial Selection Contest of 12 Provinces (2019), National Olympiad in Informatics (2020) and Informatics Winter Camp of Tsinghua University (2020).
+            % \item Technical Reports (in Chinese): \url{https://ljt12138.github.io/2020/08/28/problem-setting/}
+          \end{itemize}
+          \vspace{-20pt}
+      \resumeProjectHeading
+          {\textbf{Tutorials for Olympiad in Informatics}}{}
+          \begin{itemize}[itemsep=-3pt,parsep=3pt]
+            \item Paging and Caching (in Chinese). In the tutorial session of Asia-Pacific Informatics Olympiad 2019, China.
+            \item Logic, Program and Formal Verification (in Chinese). In the tutorial session of NOI Winter Camp 2021.
+          \end{itemize}
+    \resumeSubHeadingListEnd
+\vspace{-15pt}
+
+%-----------PROJECTS-----------
+
+\section{Other Projects}
+    \vspace{-5pt}
+    \resumeSubHeadingListStart
+        \resumeProjectHeading 
+          {\textbf{Formalization of PAL$\cdot$S5 in Theorem Prover}}{Course Project: Logic, Game and Computation (2020 Fall)}
+          \begin{itemize}[itemsep=-3pt,parsep=3pt]
+            \item Technical Report: \url{https://arxiv.org/abs/2012.09388}. 
+            % \resumeItem{Talk in LIRa seminar: \url{https://projects.illc.uva.nl/lgc/seminar/2021/03/lira-session-jiatu-li/}}
+            % \resumeItem{Abstract: \emph{We formalize public announcement logic (a special kind of dynamic epistemic logic) in Lean theorem prover as an experiment to apply formal tools in logic research. We present formal proof of its soundness, completeness and reduction (i.e. elimination of dynamic modalities) theorem.}}
+          \end{itemize}
+          \vspace{-20pt}
+      \resumeProjectHeading
+          {\textbf{A Quick Introduction to Mathematical Logic}}{Scribe Note: Foundation of Logic (2020 Spring)}
+          \begin{itemize}[itemsep=-3pt,parsep=3pt]
+            \item Note: \url{https://ljt12138.github.io/files/logic/logic.pdf}
+            %\resumeItem{Abstract: \emph{A note on classical results about propositional logic, first-order logic, proof system and (basic) model theory. It covers completeness theorem of first-order logic, compactness theorem and Gödel’s incompleteness theorem.}}
+          \end{itemize}
+          \vspace{-20pt}
+      \resumeProjectHeading
+          {\textbf{Cutepiler: A Compiler for a C-like Language}}{June 2020 - Aug. 2020}
+          \begin{itemize}[itemsep=-3pt,parsep=3pt]
+            \item In National Student Computer System Capability Challenge (Compiler track).
+            \item A joint work with Runda Liu, Zhidong Wang and Mengdi Wu.
+            \item Github: \url{https://github.com/Cutepiler/Cutepiler-Sysy2020}
+          \end{itemize}
+          \vspace{-20pt}
+      \resumeProjectHeading
+      %% MUA mua mua
+          {\textbf{Hyper OS: An Operating System Simulator in C++}}{Course Project: Operating System (2019 Spring)}
+           \begin{itemize}[itemsep=-3pt,parsep=3pt]
+            \item A joint work with Tianqi Yang. Github: \url{https://github.com/tqyaaaaang/Hyper-OS}
+          \end{itemize}
+    \resumeSubHeadingListEnd
+\vspace{-15pt}
+\end{comment}
+
+\begin{comment}
+%
+%-----------PROGRAMMING SKILLS-----------
+\section{Miscellaneous Skills}
+\begin{itemize}[itemsep=-3pt,parsep=3pt,topsep=-5pt]
+\item Programming Languages: C, C++, Python, Go
+\item Interactive Theorem Prover: Coq, Lean (see \href{https://arxiv.org/abs/2012.09388}{Technical Report of Previous Project})
+\item Go (Weiqi) amateur 4 dan in China, AGA $\approx$ 5 dan. 
+\end{itemize}
+\fi
+% \vspace{-16pt}
+\end{comment}
+\end{document}

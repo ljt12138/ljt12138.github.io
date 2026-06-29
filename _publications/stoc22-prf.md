@@ -4,6 +4,8 @@ collection: publications
 category: conferences
 topics: [CC, CR]
 permalink: /publication/2stoc22-prf
+selected: true
+highlight: "STOC 2022 · Danny Lewin Best Student Paper (co-winner)"
 excerpt: 'We obtained the exact circuit complexity of computing pseudorandom functions in various circuit models. We also use these construction to explain the difficulty of proving circuit lower bounds.'
 date: 2022-06-24
 venue: 'STOC'
