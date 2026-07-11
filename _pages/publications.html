@@ -46,6 +46,10 @@ author_profile: true
 <p class="topic-filter__empty" id="topic-filter-empty" hidden>No publications with this topic.</p>
 
 <script>
+/* NOTE: production builds run the HTML compressor (compress_html in _config.yml),
+   which collapses this entire block onto a single line. Use ONLY block comments
+   in here — a `//` line comment would swallow the rest of the script once the
+   newlines are gone, silently disabling the filter on the live site. */
 (function () {
   var bar  = document.getElementById('topic-filter');
   var list = document.getElementById('publication-list');
@@ -66,8 +70,8 @@ author_profile: true
       if (show) anyVisible = true;
     });
 
-    // Hide a section header (and its <hr>) when its group has no visible entries.
-    // Scope to the section headers only — NOT the per-paper <h2> titles.
+    /* Hide a section header (and its <hr>) when its group has no visible entries.
+       Scope to the section headers only — NOT the per-paper <h2> titles. */
     Array.prototype.forEach.call(list.querySelectorAll('h2.pub-section'), function (h) {
       var hr = (h.nextElementSibling && h.nextElementSibling.tagName === 'HR') ? h.nextElementSibling : null;
       var n = (hr || h).nextElementSibling, visible = false;
@@ -88,7 +92,7 @@ author_profile: true
     history.replaceState(null, '', topic === 'all' ? location.pathname : location.pathname + '?topic=' + topic);
   }
 
-  // Intercept clicks on filter chips and on inline topic badges within the list.
+  /* Intercept clicks on filter chips and on inline topic badges within the list. */
   document.addEventListener('click', function (e) {
     var t = e.target.closest('.filter-chip, .topic-tag');
     if (!t) return;

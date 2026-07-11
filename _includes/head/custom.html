@@ -249,6 +249,17 @@
   .archive__item-excerpt{ color: #3c3a34; }
   .archive__item-excerpt em, .page__content em{ color: inherit; }
 
+  /* The stock theme force-underlines every <a> inside .archive (main.css:
+     `.archive a{text-decoration:underline}`), which underlines the paper
+     titles, the Paper/Slides/BibTeX buttons, and the topic badges. The
+     editorial design signals links by color and per-component affordances
+     instead, so neutralize the blanket underline and keep a hover underline
+     only for genuine in-prose links inside excerpts. */
+  .archive a,
+  .archive a:hover{ text-decoration: none; }
+  .archive__item:hover .archive__item-title{ text-decoration: none; }
+  .archive__item-excerpt a:hover{ text-decoration: underline; text-underline-offset: 2px; }
+
   /* section kickers: "Conference Papers" / "Journal Articles" */
   h2.pub-section{
     font-family: var(--mono);
