@@ -29,7 +29,7 @@ sections:
         meta: "Sep 2019 – Jul 2023"
       - title: NTT Research
         sub: "Research intern &middot; Advisor: [Abhishek Jain](https://www.cs.jhu.edu/~abhishek/) &middot; Sunnyvale, CA, USA"
-        meta: "Jun – Aug 2025"
+        meta: "Jun – Aug 2025 & 2026"
       - title: Shanghai Qi Zhi Institute
         sub: "Research intern &middot; Advisor: [Yilei Chen](http://www.chenyilei.net/) &middot; Computational complexity of explicit constructions"
         meta: "Aug – Sep 2022"
@@ -56,6 +56,8 @@ sections:
 
   - name: Awards and Fellowships
     entries:
+      - title: "[MIT Schwarzman College of Computing PhD Fellowship](https://computing.mit.edu/scc-phd-fellowships/)"
+        meta: "2026 – 2027"
       - title: "[Jane Street Graduate Research Fellowship](https://www.janestreet.com/join-jane-street/programs-and-events/grf-profiles-2025/)"
         sub: "Honorable Mention"
         meta: "2025 & 2026"
@@ -64,7 +66,7 @@ sections:
       - title: "[Danny Lewin Best Student Paper Award](https://sigact.org/prizes/student.html)"
         sub: "STOC 2022"
         meta: "2022"
-      - title: "[Yao Award](https://iiis.tsinghua.edu.cn/en/list-673-1.html), 1st Prize (1/62)"
+      - title: "[Yao Award](https://iiis.tsinghua.edu.cn/en/Yao_Class/About_Yao_Class.htm), 1st Prize (1/62)"
         sub: "IIIS, Tsinghua University"
         meta: "2022"
 
